@@ -8,11 +8,12 @@ const Freatured = () => {
             <div className="row">
                 <div className="col-md-4">
                     <p className="h4">Freatured</p>
-                    <ProductCard productInfo={PRODUCT_INFO[3] } />
+                    <ProductCard bigCard={true} productInfo={PRODUCT_INFO[3] } />
+                    
                 </div>
 
                 <div className="col-md">
-                    <div className="w-100 d-lg-none mt-4"></div>
+                    <div className="w-100 d-lg-none mt-5"></div>
                     <p className="h4">New Arrivals</p>
                     <div className="row gy-2">
                         <div className="col">
@@ -32,6 +33,12 @@ const Freatured = () => {
                         </div>
                     </div>
 
+                    <div className="d-flex justify-content-between align-items-center my-3">
+                        <div></div>
+                        <button type="button" class="btn btn-outline-primary ">More New Arrivals &gt; </button>
+                    </div>
+
+
                     <p className="h4 mt-4">Best Sellers</p>
                     <div className="row gy-2">
                         <div className="col">
@@ -49,9 +56,23 @@ const Freatured = () => {
                             <ProductCard productInfo={PRODUCT_INFO[2] } />
                         </div>
                     </div>
+
+                    <div className="d-flex justify-content-between align-items-center my-3">
+                        <div></div>
+                        <button type="button" class="btn btn-outline-primary ">More Best Sellers &gt; </button>
+                    </div>
                 </div>
             </div>
-            
+
+            <div className="row my-5">
+                <div className="col-md-4"></div>
+                <div className="col-md d-flex justify-content-end">
+                    <button type="button" class="btn btn-outline-primary mx-2">View by Brand</button>
+                    <button type="button" class="btn btn-outline-primary mx-2">View Samplers</button>
+                    <button type="button" class="btn btn-outline-primary mx-2">View All</button>
+                </div>
+            </div>
+
         </div>
     )
 }
