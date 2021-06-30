@@ -1,12 +1,13 @@
 import React from 'react'
+import logo from '../img/logo.png'
 
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3">
         <div className="container">
-            <a href="#" className="navbar-brand">Cigars Bay</a>
-
-            
+            <a href="#" className="navbar-brand ">
+               CigarsBay
+            </a>
 
             <div className="collapse navbar-collapse" id="navmenu">
                 <ul className="navbar-nav me-auto">

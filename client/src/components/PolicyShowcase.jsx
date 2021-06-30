@@ -45,6 +45,9 @@ const PolicyShowcaseContainer = styled.div`
 
     @media only screen and (max-width: 768px) {
         max-height: 90vh;
+        .policy.card{
+            margin: auto 1em;
+        }
     }
 
     .policy-cards{
@@ -59,7 +62,6 @@ const PolicyShowcaseContainer = styled.div`
         background-color:white;
         height: 100%;
         text-align: center;
-        margin: auto 1em;
         img{
             width: 100px;
         }
