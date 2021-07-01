@@ -5,8 +5,8 @@ import logo from '../img/logo.png'
 const AboutComponent = () => {
     return (
         <div className="container py-5">
-            <div className="row gx-5">
-                <div className="col-lg-4">
+            <div className="row g-5">
+                <div className="col-lg-4 ">
                     <h3>About Cigars Bay</h3>
                     <img src={logo} className="w-100 my-3 mx-auto" alt="" />
                     <p style={{textAlign: 'justify'}}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad animi dolorum laudantium tempore, soluta veniam cupiditate, exercitationem dolores dolor fuga obcaecati, minima accusantium minus quibusdam sapiente suscipit unde est vitae eaque omnis. Animi earum sunt numquam commodi aliquam laborum ipsa.</p>

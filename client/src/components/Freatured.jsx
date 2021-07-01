@@ -38,7 +38,7 @@ const Freatured = () => {
                         <div className="col"></div>
                         <div className="col"></div>
                         <div className="col-lg-6">
-                            <button type="button" class="btn btn-secondary w-100">More New Arrivals &gt; </button>
+                            <button type="button" class="btn btn-primary w-100">Shop New Arrivals &gt; </button>
                         </div>
                     </div>
 
@@ -66,7 +66,7 @@ const Freatured = () => {
                         <div className="col"></div>
                         <div className="col"></div>
                         <div className="col-lg-6">
-                            <button type="button" class="btn btn-secondary w-100">More Best Sellers &gt; </button>
+                            <button type="button" class="btn btn-primary w-100">Shop Best Sellers &gt; </button>
                         </div>
                     </div>
 
