@@ -33,9 +33,13 @@ const Freatured = () => {
                         </div>
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center my-3">
-                        <div></div>
-                        <button type="button" class="btn btn-outline-primary ">More New Arrivals &gt; </button>
+                    <div className="row gy-2 mt-3">
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col-lg-6">
+                            <button type="button" class="btn btn-secondary w-100">More New Arrivals &gt; </button>
+                        </div>
                     </div>
 
 
@@ -57,21 +61,31 @@ const Freatured = () => {
                         </div>
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center my-3">
-                        <div></div>
-                        <button type="button" class="btn btn-outline-primary ">More Best Sellers &gt; </button>
+                    <div className="row gy-2 mt-3">
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col"></div>
+                        <div className="col-lg-6">
+                            <button type="button" class="btn btn-secondary w-100">More Best Sellers &gt; </button>
+                        </div>
                     </div>
+
+                    
                 </div>
             </div>
 
-            <div className="row my-5">
-                <div className="col-md-4"></div>
-                <div className="col-md d-flex justify-content-end">
+            {/* <div className="row my-5">
+                <div className="col">
+
                     <button type="button" class="btn btn-outline-primary mx-2">View by Brand</button>
+                </div>
+                <div className="col">
                     <button type="button" class="btn btn-outline-primary mx-2">View Samplers</button>
+                </div>
+                <div className="col">
                     <button type="button" class="btn btn-outline-primary mx-2">View All</button>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

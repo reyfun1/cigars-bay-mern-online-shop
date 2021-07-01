@@ -8,7 +8,7 @@ import SocialMediaFreatured from '../components/SocialMediaFreatured'
 const Home = () => {
     return (
         <>
-        <Carousel/>
+        <Carousel carouselName="home-page-freatured"/>
         <Freatured/>
         <PolicyShowcase/>
         <AboutComponent/>

@@ -32,7 +32,7 @@ const ProductCard = ({productInfo, bigCard}) => {
 
                 {bigCard && 
                     <div className="text-end">
-                        <button type="button" class="btn btn-primary m-3">View Collection</button>
+                        <button type="button" class="btn btn-outline-primary m-3">View Collection</button>
                     </div>}
             </div>
         </DivStyled>
@@ -44,6 +44,9 @@ export default ProductCard
 
 const DivStyled = styled.div`
     cursor: pointer;
+    box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
+    border-radius: 15px;
+
     &:not(.bigCard){
         :hover {
             background-color: #e0e0e0
@@ -54,6 +57,12 @@ const DivStyled = styled.div`
         transition: transform .2s ease;
         :hover{
             transform: scale(1.1)
+        }
+    }
+
+    &:hover{
+        img{
+            transform: scale(1.1) 
         }
     }
 

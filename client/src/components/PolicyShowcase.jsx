@@ -41,7 +41,7 @@ export default PolicyShowcase
 const PolicyShowcaseContainer = styled.div`
     overflow: hidden;
     position: relative;
-    max-height: 35vh; 
+    max-height: 500px; 
 
     @media only screen and (max-width: 768px) {
         max-height: 90vh;
