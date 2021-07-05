@@ -43,29 +43,19 @@ export default ProductCard
 
 
 const DivStyled = styled.div`
+    border-radius: 0 !important;
     cursor: pointer;
     box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
-    border-radius: 15px;
+
+    width: 200px;
 
     &:not(.bigCard){
         :hover {
             background-color: #e0e0e0
         }
     }
-    
-    img{
-        transition: transform .2s ease;
-        border-radius: 15px;
-        :hover{
-            transform: scale(1.1)
-        }
-    }
 
-    &:hover{
-        img{
-            transform: scale(1.1) 
-        }
-    }
+    
 
     .card-body .badge{
         position: absolute;

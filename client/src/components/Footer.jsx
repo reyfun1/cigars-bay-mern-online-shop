@@ -1,5 +1,6 @@
 import React from 'react'
 import ContactUs from './ContactUs'
+import ContactUsForm from './ContactUsForm'
 import styled from 'styled-components'
 import amex from '../img/svg/amex.svg'
 import applepay from '../img/svg/applepay.svg'
@@ -7,25 +8,37 @@ import discover from '../img/svg/discover.svg'
 
 const Footer = () => {
     return (
-        <div className="position-relative">
-        <FooterStyled className="container text-center text-md-start mb-4">
+        <div className="position-relative mt-4">
+        <FooterStyled className="container text-md-start mb-4">
             <div className="row g-5">
                 <div className="col-md">                  
-                    <ContactUs/>
+                    <ContactUsForm/>
                 </div>
-                <div className="col-md ">
+                <div className="col-md text-center text-md-start">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="" className="text-muted">Brands</a></li>
+                        <li><a href="" className="text-muted">On Sale Now</a></li>
+                        <li><a href="" className="text-muted">Cigars</a></li>
+                        <li><a href="" className="text-muted">Samplers</a></li>
+                        <li><a href="" className="text-muted">New Arrivals</a></li>
+                    </ul>
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><a href="" className="text-muted">Privacy Policy</a></li>
                         <li><a href="" className="text-muted">Terms &amp; Conditions</a></li>
-                        <li><a href="" className="text-muted">Returns</a></li>
+                        <li><a href="" className="text-muted">Privacy Policy</a></li>
+                        <li><a href="" className="text-muted">Return Policy</a></li>
+                        <li><a href="" className="text-muted">Shipping Policy</a></li>
+                        <li><a href="" className="text-muted">Return Policy</a></li>
                     </ul>
                 </div>
-                <div className="col-md">
+                <div className="col-md text-center text-md-start">
                     <h4>Join Our Newsletter!</h4>
                     <p className="text-muted">Sign up for our newsletter recevie updates an exlusive offers.</p>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Enter your email" aria-label="Enter your email"/>
+                    <div class="form-group mb-3">
+                        <label className="mb-1" for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                         <button class="btn btn-primary py-2 px-5" type="button">Subscribe</button>
                 </div>
