@@ -35,18 +35,18 @@ const Footer = () => {
                 <div className="col-md text-center text-md-start">
                     <h4>Join Our Newsletter!</h4>
                     <p className="text-muted">Sign up for our newsletter recevie updates an exlusive offers.</p>
-                    <div class="form-group mb-3">
-                        <label className="mb-1" for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <div className="form-group mb-3">
+                        <label className="mb-1" htmlFor="exampleInputEmail1">Email address</label>
+                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
-                        <button class="btn btn-primary py-2 px-5" type="button">Subscribe</button>
+                        <button className="btn btn-primary py-2 px-5" type="button">Subscribe</button>
                 </div>
             </div>
 
         </FooterStyled>
-        <a href="#" class="position-absolute bottom-0 end-0 p-3">
-                    <i class="bi bi-arrow-up-circle h1"></i>
+        <a href="#" className="position-absolute bottom-0 end-0 p-3">
+                    <i className="bi bi-arrow-up-circle h1"></i>
         </a>
         <BarStyled>
             <div className="text-center container py-4">

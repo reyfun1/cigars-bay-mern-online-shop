@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {  formatMoney } from 'accounting-js'
  
 
-const ProductCard = ({productInfo, bigCard}) => {
+const ProductSearchResult = ({productInfo, bigCard}) => {
     const {id, company_name, brand_name, product_name, price, price_before, discount, imgSRC, freatured_text, isFreatured} = productInfo
 
     let extraClasses = bigCard ?  'bigCard ': '';
@@ -32,14 +32,14 @@ const ProductCard = ({productInfo, bigCard}) => {
 
                 {bigCard && 
                     <div className="text-end">
-                        <button type="button" class="btn btn-outline-primary m-3">View Collection</button>
+                        <button type="button" className="btn btn-outline-primary m-3">View Collection</button>
                     </div>}
             </div>
         </DivStyled>
     )
 }
 
-export default ProductCard
+export default ProductSearchResult
 
 
 const DivStyled = styled.div`
@@ -47,7 +47,6 @@ const DivStyled = styled.div`
     cursor: pointer;
     box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
 
-    width: 200px;
 
     &:not(.bigCard){
         :hover {

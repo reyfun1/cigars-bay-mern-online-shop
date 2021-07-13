@@ -1,10 +1,11 @@
-import React from 'react'
+import React , {useState} from 'react'
 import styled from 'styled-components'
 import ProductSearchResult from '../components/ProductSearchResult'
 import SortFilter from '../components/SortFilter'
 
-
 const SearchResults = () => {
+
+    const [showFilterTab,setShowFilterTab] = useState(false)
     return (
         <SearchResultStyled className="container">
             <div className="row my-3">
@@ -17,9 +18,19 @@ const SearchResults = () => {
                     <p>Search results for term: <span>Alma Fuerte</span></p>
                 </div>
             </div>
+            <div className="row d-lg-none d-sm-block my-3 w-100 text-center">
+                <div className="col">
+                <button 
+                    type="button" 
+                    className="btn btn-outline-primary" 
+                    onClick={()=>setShowFilterTab(!showFilterTab)}>
+                        {showFilterTab ? "Hide" : "Show"} Filters
+                </button>
+                </div>
+            </div>
             <div className="row">
-                <div className="col-2">
-                    <SortFilter/>
+                <div className="col-md-3">
+                    {showFilterTab && <SortFilter/>}
                 </div>
                 <div className="col d-flex flex-wrap">
                     <ProductSearchResult productInfo={PRODUCT_INFO[0] } />
