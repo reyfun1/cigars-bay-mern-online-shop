@@ -9,7 +9,7 @@ const ProductSearchResult = ({productInfo, bigCard}) => {
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses}`}>
+        <DivStyled className={`card ${extraClasses} p-2`}>
             <div className="overflow-hidden">
                 <img src={imgSRC} className="card-img-top" alt="..."/>
             </div>
@@ -44,18 +44,15 @@ export default ProductSearchResult
 
 const DivStyled = styled.div`
     border-radius: 0 !important;
+    border: none;
     cursor: pointer;
     box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
-
 
     &:not(.bigCard){
         :hover {
             background-color: #e0e0e0
         }
     }
-
-    
-
     .card-body .badge{
         position: absolute;
         top: 0;
@@ -63,5 +60,13 @@ const DivStyled = styled.div`
         border-radius: 0;
         border-bottom-left-radius: 5px
     }
+    @media screen and (min-width: 768px) {
+        max-width: 50%;    
+    }
+    @media screen and (min-width: 992px) {
+        max-width: 25%;    
+    }
+
+
 `
 

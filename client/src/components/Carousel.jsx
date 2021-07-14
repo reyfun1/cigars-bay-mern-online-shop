@@ -12,13 +12,13 @@ const Carousel = ({ carouselName }) => {
             </div>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <ImgStyled src="https://source.unsplash.com/1920x350" className="d-block img-fluid" alt="..."/>
+                    <ImgStyled src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1080": "350"}`} className="d-block img-fluid" alt="..."/>
                 </div>
                 <div className="carousel-item">
-                    <ImgStyled src="https://source.unsplash.com/1920x351" className="d-block img-fluid" alt="..."/>
+                    <ImgStyled src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1081": "351"}`} className="d-block img-fluid" alt="..."/>
                 </div>
                 <div className="carousel-item">
-                    <ImgStyled src="https://source.unsplash.com/1920x352" className="d-block img-fluid" alt="..."/>
+                    <ImgStyled src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1082": "352"}`} className="d-block img-fluid" alt="..."/>
                 </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target={`#${carouselName}`} data-bs-slide="prev">

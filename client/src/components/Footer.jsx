@@ -8,11 +8,19 @@ import discover from '../img/svg/discover.svg'
 
 const Footer = () => {
     return (
-        <div className="position-relative mt-4">
+        <DivStyled className="position-relative mt-5 py-4">
         <FooterStyled className="container text-md-start mb-4">
             <div className="row g-5">
                 <div className="col-md">                  
-                    <ContactUsForm/>
+                    {/* <ContactUsForm/> */}
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="" className="text-muted">Terms &amp; Conditions</a></li>
+                        <li><a href="" className="text-muted">Privacy Policy</a></li>
+                        <li><a href="" className="text-muted">Return Policy</a></li>
+                        <li><a href="" className="text-muted">Shipping Policy</a></li>
+                        <li><a href="" className="text-muted">Return Policy</a></li>
+                    </ul>
                 </div>
                 <div className="col-md text-center text-md-start">
                     <h4>Shop</h4>
@@ -23,14 +31,14 @@ const Footer = () => {
                         <li><a href="" className="text-muted">Samplers</a></li>
                         <li><a href="" className="text-muted">New Arrivals</a></li>
                     </ul>
-                    <h4>Useful Links</h4>
+                    {/* <h4>Useful Links</h4>
                     <ul>
                         <li><a href="" className="text-muted">Terms &amp; Conditions</a></li>
                         <li><a href="" className="text-muted">Privacy Policy</a></li>
                         <li><a href="" className="text-muted">Return Policy</a></li>
                         <li><a href="" className="text-muted">Shipping Policy</a></li>
                         <li><a href="" className="text-muted">Return Policy</a></li>
-                    </ul>
+                    </ul> */}
                 </div>
                 <div className="col-md text-center text-md-start">
                     <h4>Join Our Newsletter!</h4>
@@ -69,11 +77,16 @@ const Footer = () => {
                 </div>
             </div>
         </BarStyled>
-        </div>
+        </DivStyled>
     )
 }
 
 export default Footer
+
+const DivStyled = styled.div`
+// -webkit-box-shadow: 0px 1px 38px 10px rgba(128, 0, 255, 0.14); 
+// box-shadow: 0px 1px 38px 10px rgba(128, 0, 255, 0.14);
+`
 
 const BarStyled = styled.div`
     background-color: #222;

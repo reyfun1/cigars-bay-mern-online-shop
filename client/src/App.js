@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import AnnouncementBar from './components/AnnouncementBar';
 import Footer from './components/Footer'
 import SearchResults from './pages/SearchResults';
+import NotFound from './pages/NotFound';
+import ProductPage from './pages/ProductPage';
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
     <AnnouncementBar/>
     <Navbar/>
       {/* <Home/> */}
-      <SearchResults/>
+      {/* <SearchResults/> */}
+      {/* <NotFound/> */}
+      <ProductPage/>
     <Footer/>
     </>
   );

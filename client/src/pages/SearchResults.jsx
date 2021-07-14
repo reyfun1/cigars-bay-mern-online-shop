@@ -1,14 +1,17 @@
-import React , {useState} from 'react'
+import React , {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import ProductSearchResult from '../components/ProductSearchResult'
 import SortFilter from '../components/SortFilter'
 
 const SearchResults = () => {
 
-    const [showFilterTab,setShowFilterTab] = useState(false)
+    const windowWidth = window.innerWidth
+
+    const [showFilterTab,setShowFilterTab] = useState(windowWidth >= 992)
+
     return (
-        <SearchResultStyled className="container">
-            <div className="row my-3">
+        <SearchResultStyled className="container mb-5">
+            <div className="row my-4">
                 <div className="col-md">
                     <a href=""> Home </a>&gt;<a href=""> Products </a></div>
                 <div className="col-md"></div>
@@ -18,31 +21,55 @@ const SearchResults = () => {
                     <p>Search results for term: <span>Alma Fuerte</span></p>
                 </div>
             </div>
-            <div className="row d-lg-none d-sm-block my-3 w-100 text-center">
+            <div className="row  d-sm-block text-center">
                 <div className="col">
-                <button 
-                    type="button" 
-                    className="btn btn-outline-primary" 
-                    onClick={()=>setShowFilterTab(!showFilterTab)}>
-                        {showFilterTab ? "Hide" : "Show"} Filters
-                </button>
+                    <button 
+                        type="button" 
+                        className="btn btn-outline-primary my-2  d-lg-none" 
+                        onClick={()=>setShowFilterTab(!showFilterTab)}>
+                            {showFilterTab ? "Hide" : "Show"} Filters
+                    </button>
+                    <p className="text-muted mb-2">Showing 1 - 60 of 5563 items </p>
                 </div>
             </div>
             <div className="row">
+                {showFilterTab && 
                 <div className="col-md-3">
-                    {showFilterTab && <SortFilter/>}
-                </div>
+                    <SortFilter/>
+                </div>}
                 <div className="col d-flex flex-wrap">
-                    <ProductSearchResult productInfo={PRODUCT_INFO[0] } />
+                    <ProductSearchResult  productInfo={PRODUCT_INFO[0] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[0] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[0] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                 </div>
             </div>
+
+                <nav className="mt-5" aria-label="Page navigation example">
+                    <ul className="pagination justify-content-end">
+                        <li className="page-item disabled">
+                        <a className="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        <li className="page-item active"><a className="page-link" href="#">1</a></li>
+                        <li className="page-item"><a className="page-link" href="#">2</a></li>
+                        <li className="page-item"><a className="page-link" href="#">3</a></li>
+                        <li className="page-item">
+                        <a className="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
         </SearchResultStyled>
     )
 }
@@ -96,4 +123,5 @@ const PRODUCT_INFO = [
         isFreatured : true,
         freatured_text : `Oliva Serie 'G' is a good-looking Nicaraguan premium cigar made with an authentic African Cameroon wrapper. This leaf imparts a pleasant, nutty flavor, adding to the rich bouquet presented by the Nicaraguan Habano long-fillers inside.`
     },
+    
 ]
