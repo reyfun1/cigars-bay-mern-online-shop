@@ -4,9 +4,9 @@ import styled from 'styled-components'
 const SortFilter = () => {
     return (
         <SortFilteredStyled>
-            <div class="p-3 bg-light border rounded-3">
+            <div className="p-3 bg-light border rounded-3">
                 <h5 className="mb-3">Sort</h5>
-                <select class="form-select" aria-label="Default select example">
+                <select className="form-select" aria-label="Default select example">
                     <option value="featured" selected="">Product A - Z</option>
                     <option value="trending">Trending</option>
                     <option value="bestSelling30d">Best Selling</option>
@@ -17,11 +17,11 @@ const SortFilter = () => {
                     <option value="highestprice">Price High - Low</option>
                     </select>
             </div>
-            <div class="p-3 bg-light border rounded-3">
+            <div className="p-3 bg-light border rounded-3">
                 <h5 className="mb-3">Filter</h5>
                 <div className="mb-3">
                     <label className="mb-1">Brand</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choose Brand</option>
                         <option value="featured" >Alma Fuerte</option>
                         <option value="trending">Alma del Fuego</option>
@@ -29,7 +29,7 @@ const SortFilter = () => {
                 </div>
                 <div className="mb-3">
                     <label className="mb-1">Strength</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example">
                         <option value=""disabled selected>Choose Strength</option>
                         <option value="featured" selected="">Alma Fuerte</option>
                         <option value="trending">Alma del Fuego</option>
@@ -37,7 +37,7 @@ const SortFilter = () => {
                 </div>
                 <div className="mb-3">
                     <label className="mb-1">Length</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choose Length</option>
                         <option value="featured" selected="">Alma Fuerte</option>
                         <option value="trending">Alma del Fuego</option>
@@ -45,7 +45,7 @@ const SortFilter = () => {
                 </div>
                 <div className="mb-3">
                     <label className="mb-1">Packaging</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choose Length</option>
                         <option value="featured" selected="">Alma Fuerte</option>
                         <option value="trending">Alma del Fuego</option>
@@ -53,7 +53,7 @@ const SortFilter = () => {
                 </div>
                 <div className="mb-3">
                     <label className="mb-1">Wrapper</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choose Length</option>
                         <option value="featured" selected="">Alma Fuerte</option>
                         <option value="trending">Alma del Fuego</option>
@@ -61,8 +61,8 @@ const SortFilter = () => {
                 </div>
 
                 <div className="d-flex justify-content-between">
-                    <button type="button" class="btn btn-danger">Reset</button>
-                    <button type="button" class="btn btn-success">Apply</button>
+                    <button type="button" className="btn btn-danger">Reset</button>
+                    <button type="button" className="btn btn-success">Apply</button>
                 </div>
 
             </div>

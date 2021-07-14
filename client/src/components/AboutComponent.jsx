@@ -14,17 +14,17 @@ const AboutComponent = () => {
                 <div className="col-lg-8">
                     <h3>Follow us on Instagram!</h3>
                     <div className="d-flex justify-content-evenly">
-                    <figure class="figure">
-                        <img src="https://source.unsplash.com/250x250" class="figure-img img-fluid rounded" alt="..."/>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                    <figure className="figure">
+                        <img src="https://source.unsplash.com/250x250" className="figure-img img-fluid rounded" alt="..."/>
+                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
                     </figure>
-                    <figure class="figure">
-                        <img src="https://source.unsplash.com/250x251" class="figure-img img-fluid rounded" alt="..."/>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                    <figure className="figure">
+                        <img src="https://source.unsplash.com/250x251" className="figure-img img-fluid rounded" alt="..."/>
+                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
                     </figure>
-                    <figure class="figure">
-                        <img src="https://source.unsplash.com/250x252" class="figure-img img-fluid rounded" alt="..."/>
-                        <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                    <figure className="figure">
+                        <img src="https://source.unsplash.com/250x252" className="figure-img img-fluid rounded" alt="..."/>
+                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
                     </figure>
 
                     </div>

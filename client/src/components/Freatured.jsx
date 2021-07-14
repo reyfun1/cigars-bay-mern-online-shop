@@ -2,22 +2,29 @@ import React from 'react'
 import ProductCard from './ProductCard'
 import styled from 'styled-components'
 
+import { useHistory } from "react-router-dom";
+
+
 const Freatured = () => {
+    const history = useHistory()
+
+    const handleProductCard = () => {
+        history.push('/product/1')
+    }
+
     return (
         <div className="container my-4">
             <div className="row">
                 <div className="col-md-4">
                     <p className="h4">Freatured</p>
-                    <ProductCard bigCard={true} productInfo={PRODUCT_INFO[3] } />
-                    
+                    <ProductCard bigCard={true} productInfo={PRODUCT_INFO[3] } />                   
                 </div>
-
                 <div className="col-md">
-                    <div className="w-100 d-lg-none mt-5"></div>
+                    <div className="w-100 d-md-none mt-5"></div>
                     <p className="h4">New Arrivals</p>
                     <div className="row gy-2">
                         <div className="col">
-                            <ProductCard productInfo={PRODUCT_INFO[0] } />
+                            <ProductCard productInfo={PRODUCT_INFO[0] } clickMethod={handleProductCard} />
                         </div>
                         <div className="col">
                             <ProductCard productInfo={PRODUCT_INFO[1] } />
@@ -38,7 +45,7 @@ const Freatured = () => {
                         <div className="col"></div>
                         <div className="col"></div>
                         <div className="col-lg-6">
-                            <button type="button" class="btn btn-primary w-100">Shop New Arrivals &gt; </button>
+                            <button type="button" className="btn btn-primary w-100">Shop New Arrivals &gt; </button>
                         </div>
                     </div>
 
@@ -66,7 +73,7 @@ const Freatured = () => {
                         <div className="col"></div>
                         <div className="col"></div>
                         <div className="col-lg-6">
-                            <button type="button" class="btn btn-primary w-100">Shop Best Sellers &gt; </button>
+                            <button type="button" className="btn btn-primary w-100">Shop Best Sellers &gt; </button>
                         </div>
                     </div>
 
@@ -77,13 +84,13 @@ const Freatured = () => {
             {/* <div className="row my-5">
                 <div className="col">
 
-                    <button type="button" class="btn btn-outline-primary mx-2">View by Brand</button>
+                    <button type="button" className="btn btn-outline-primary mx-2">View by Brand</button>
                 </div>
                 <div className="col">
-                    <button type="button" class="btn btn-outline-primary mx-2">View Samplers</button>
+                    <button type="button" className="btn btn-outline-primary mx-2">View Samplers</button>
                 </div>
                 <div className="col">
-                    <button type="button" class="btn btn-outline-primary mx-2">View All</button>
+                    <button type="button" className="btn btn-outline-primary mx-2">View All</button>
                 </div>
             </div> */}
 

@@ -1,24 +1,27 @@
 import React from 'react'
 import logo from '../img/logo.png'
 
+import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
+
 const Navbar = () => {
+    const history = useHistory()
+
     return (
         <nav className="navbar navbar-expand-lg bg-dark navbar-dark py-3">
         <div className="container">
-            <a href="#" className="navbar-brand ">
-               CigarsBay
-            </a>
+            <Link to="/" className="navbar-brand">CigarsBay</Link>
 
             <div className="collapse navbar-collapse" id="navmenu">
                 <ul className="navbar-nav me-auto">
                     <li className="nav-item ms-2 me-2">
-                        <a href="#learn" className="nav-link">Cigars</a>
+                        <Link to="/search/all" className="nav-link">Cigars</Link>
                     </li>
                     <li className="nav-item ms-2 me-2">
                         <a href="#questions" className="nav-link">Samplers</a>
                     </li>
                     <li className="nav-item ms-2 me-2">
-                        <a href="#instructors" className="nav-link">Shop</a>
+                        <Link to="/search/all" className="nav-link">Shop</Link>
                     </li>
                 </ul>  
             </div>
@@ -42,7 +45,7 @@ const Navbar = () => {
                         <a href="#questions" className="nav-link ms-1 me-1">Sign Up</a>
                     </li>
                     <li className="nav-item">
-                    <button type="button" className="btn btn-outline-primary position-relative">
+                    <button type="button" className="btn btn-outline-primary position-relative" onClick={()=> history.push('/cart')}>
                     <i className="bi bi-bag"></i>
                         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             3

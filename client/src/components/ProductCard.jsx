@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import {  formatMoney } from 'accounting-js'
  
 
-const ProductCard = ({productInfo, bigCard}) => {
+const ProductCard = ({productInfo, bigCard, clickMethod}) => {
     const {id, company_name, brand_name, product_name, price, price_before, discount, imgSRC, freatured_text, isFreatured} = productInfo
 
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses}`}>
+        <DivStyled className={`card ${extraClasses}`} onClick={clickMethod}>
             <div className="overflow-hidden">
                 <img src={imgSRC} className="card-img-top" alt="..."/>
             </div>
@@ -32,7 +32,7 @@ const ProductCard = ({productInfo, bigCard}) => {
 
                 {bigCard && 
                     <div className="text-end">
-                        <button type="button" class="btn btn-outline-primary m-3">View Collection</button>
+                        <button type="button" className="btn btn-outline-primary m-3">View Collection</button>
                     </div>}
             </div>
         </DivStyled>
