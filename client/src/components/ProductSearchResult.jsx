@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import {  formatMoney } from 'accounting-js'
  
 
-const ProductSearchResult = ({productInfo, bigCard}) => {
+const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
     const {id, company_name, brand_name, product_name, price, price_before, discount, imgSRC, freatured_text, isFreatured} = productInfo
 
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses} p-2`}>
+        <DivStyled className={`card ${extraClasses} p-2`} onClick={clickMethod}>
             <div className="overflow-hidden">
                 <img src={imgSRC} className="card-img-top" alt="..."/>
             </div>

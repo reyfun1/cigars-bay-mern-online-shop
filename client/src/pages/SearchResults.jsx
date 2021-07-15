@@ -1,13 +1,21 @@
 import React , {useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import ProductSearchResult from '../components/ProductSearchResult'
 import SortFilter from '../components/SortFilter'
 
+
 const SearchResults = () => {
+    const history = useHistory()
 
     const windowWidth = window.innerWidth
 
     const [showFilterTab,setShowFilterTab] = useState(windowWidth >= 992)
+
+    const handleProductCardClick = () => {
+        console.log('trrrr')
+        history.push("/product/1")
+    }
 
     return (
         <SearchResultStyled className="container mb-5">
@@ -38,7 +46,7 @@ const SearchResults = () => {
                     <SortFilter/>
                 </div>}
                 <div className="col d-flex flex-wrap">
-                    <ProductSearchResult  productInfo={PRODUCT_INFO[0] } />
+                    <ProductSearchResult productInfo={PRODUCT_INFO[0] } clickMethod={handleProductCardClick}/>
                     <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
                     <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
@@ -60,7 +68,7 @@ const SearchResults = () => {
                 <nav className="mt-5" aria-label="Page navigation example">
                     <ul className="pagination justify-content-end">
                         <li className="page-item disabled">
-                        <a className="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        <a className="page-link" href="#" tabIndex="-1" aria-disabled="true">Previous</a>
                         </li>
                         <li className="page-item active"><a className="page-link" href="#">1</a></li>
                         <li className="page-item"><a className="page-link" href="#">2</a></li>
