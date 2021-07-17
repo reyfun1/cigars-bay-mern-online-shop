@@ -56,7 +56,7 @@ const ProductPage = () => {
                     </div>       
                 </div>
                 {/* Cigar Details */}
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <div className="bg-dark">
                         <h5 className="text-center text-white p-2 m-0">Details</h5>
                     </div>
@@ -156,8 +156,8 @@ const ProductPage = () => {
             <div className="row my-5">
                 <div className="col">
                     <div>
-                        <h6 className="card-header">Similar products</h6>
-                        <div className="card-body d-flex flex-wrap">
+                        <h6 className="">Similar products</h6>
+                        <div className="d-flex flex-wrap">
                             <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
                             <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                             <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
