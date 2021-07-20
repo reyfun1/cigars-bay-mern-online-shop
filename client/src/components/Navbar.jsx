@@ -3,6 +3,7 @@ import logo from '../img/logo.png'
 
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Navbar = () => {
     const history = useHistory()
@@ -15,7 +16,7 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3">
+        <NavBarStyled className="navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3">
         <div className="container">
             <Link to="/" className="navbar-brand">CigarsBay</Link>
 
@@ -80,8 +81,14 @@ const Navbar = () => {
             </button>
 
         </div>
-    </  nav>
+    </ NavBarStyled>
     )
 }
 
 export default Navbar
+
+const NavBarStyled = styled.nav`
+    .bi{
+        vertical-align: .250em;
+    }
+`
