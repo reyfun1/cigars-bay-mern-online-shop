@@ -7,8 +7,8 @@ const ContactUsForm = () => {
             <h4 className="mb-3">Contact Us</h4>
             <form>
                 <div className="form-group mb-3">
-                        <label className="mb-1" htmlFor="exampleInputEmail1">Name</label>
-                        <input type="input" className="form-control" id="exampleInputEmail1" aria-describedby="contact-us-name-help" placeholder="Enter your Name"/>                
+                    <label className="mb-1" htmlFor="exampleInputEmail1">Name</label>
+                    <input type="input" className="form-control" id="exampleInputEmail1" aria-describedby="contact-us-name-help" placeholder="Enter your Name"/>                
                 </div>
                 <div className="form-group mb-3">
                     <label className="mb-1" htmlFor="exampleInputEmail1">Email address</label>

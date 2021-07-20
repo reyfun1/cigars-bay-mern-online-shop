@@ -4,14 +4,22 @@ import styled from 'styled-components'
 import CartItem from '../components/CartItem'
 import Freatured from '../components/Freatured'
 import ProductCard from '../components/ProductCard'
+import { useHistory } from 'react-router'
+
 
 const Cart = () => {
+
+    const history = useHistory()
 
     const handleProductCardClick = () => {
 
     }
+    
+    const handleProceedToCheckout = () => {
+        history.push('/checkout/')
+    }
     return (
-        <CartStyled className="container">
+        <CartStyled className="container ">
            <div className="row mt-5">
                <div className="col">
                    <h3>Shopping Cart</h3>
@@ -28,8 +36,8 @@ const Cart = () => {
                     
                </div>
                <div className="col-md-3">
-                <button type="button" class="btn btn-primary w-100">Proceed to Checkout</button>
-                <button type="button" class="btn btn-outline-secondary mt-2 w-100">Continue Shopping</button>
+                <button type="button" className="btn btn-primary w-100" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
+                <button type="button" className="btn btn-outline-secondary mt-2 w-100">Continue Shopping</button>
                </div>
            </div>
 
