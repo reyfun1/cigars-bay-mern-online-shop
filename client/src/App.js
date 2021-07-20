@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <Router>
-        <AnnouncementBar/>
+        {/* <AnnouncementBar/> */}
         <Navbar/>
           <Switch>
           <Route exact path='/' component={Home} />
@@ -33,7 +33,6 @@ function App() {
           <Route exact path='/product/:id' component={ProductPage} />
           <Route exact path='/search/:keyword' component={SearchResults} />
           <Route component={NotFound}/>
-
           </Switch>
       </Router>
     <Footer/>

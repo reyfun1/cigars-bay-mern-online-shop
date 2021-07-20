@@ -8,7 +8,7 @@ const CartItem = ({productInfo, type}) => {
     switch (type) {
         case 'item':
             return (
-                <CartItemStyled className="border-bottom border-dark" >
+                <CartItemStyled className="border-bottom border-2" >
                     <div className="row my-3 py-2">
                         <div className="col">
                             <img src={imgSRC} alt="" />

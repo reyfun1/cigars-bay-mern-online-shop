@@ -1,6 +1,7 @@
 import React , {useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import BreadCrumb from '../components/BreadCrumb'
 import ProductSearchResult from '../components/ProductSearchResult'
 import SortFilter from '../components/SortFilter'
 
@@ -18,15 +19,11 @@ const SearchResults = () => {
     }
 
     return (
-        <SearchResultStyled className="container mb-5">
-            <div className="row my-4">
-                <div className="col-md">
-                    <a href=""> Home </a>&gt;<a href=""> Products </a></div>
-                <div className="col-md"></div>
-            </div>
+        <SearchResultStyled className="container py-4">
+            <BreadCrumb/>
             <div className="row">
                 <div className="col">
-                    <p>Search results for term: <span>Alma Fuerte</span></p>
+                    <p className="fs-5">3 results for: <span className="fst-italic">"Alma Fuerte"</span></p>
                 </div>
             </div>
             <div className="row  d-sm-block text-center">
@@ -42,7 +39,7 @@ const SearchResults = () => {
             </div>
             <div className="row">
                 {showFilterTab && 
-                <div className="col-md-3">
+                <div className="col-md-4 col-lg-3 col-xxl-2">
                     <SortFilter/>
                 </div>}
                 <div className="col d-flex flex-wrap">

@@ -1,20 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import BreadCrumb from '../components/BreadCrumb'
 import Carousel from '../components/Carousel'
+import ProductDetailsTable from '../components/ProductDetailsTable'
 import ProductSearchResult from '../components/ProductSearchResult'
 
 const ProductPage = () => {
     return (
-        <ProductPageStyled className="container">
-            <div className="row my-4">
-                <div className="col-md">
-                    <a href=""> Home </a>&gt;
-                    <a href=""> Products </a>&gt;
-                    <a href=""> Plasencia Cigars</a>&gt;
-                    <a href=""> Alma Fuerte</a>
-                </div>
-                <div className="col-md"></div>
-            </div>
+        <ProductPageStyled className="container py-4">
+            <BreadCrumb/>
 
             <div className="row">
                 {/* Carousel Images */}
@@ -53,71 +47,15 @@ const ProductPage = () => {
                                     <p className="m-0">In Stock</p>
                                 </button>
                         </div>
+
+                        
                     </div>       
                 </div>
-                {/* Cigar Details */}
-                <div className="col-md-2">
-                    <div className="bg-dark">
-                        <h5 className="text-center text-white p-2 m-0">Details</h5>
-                    </div>
-                    <table className="table table-bordered">
-                        <tbody>
-                            <tr>
-                            <td className="attribute-key">
-                            Count
-                            </td>
-                            <td className="attribute-value">10 Cigars</td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Diameter </td>
-                            <td className="attribute-value">
-                            58 Ring </td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Length </td>
-                            <td className="attribute-value">
-                            7 Inches </td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Origin </td>
-                            <td className="attribute-value">
-                            Nicaragua </td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Packaging </td>
-                            <td className="attribute-value">
-                            Box </td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Shape </td>
-                            <td className="attribute-value">
-                            Regular </td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Strength </td>
-                            <td className="attribute-value">
-                            Full Bodied </td>
-                            </tr>
-                            <tr>
-                            <td className="attribute-key">
-                            Wrapper </td>
-                            <td className="attribute-value">
-                            Maduro </td>
-                            </tr>
-                            </tbody>
-                    </table>
-                </div>             
+           
             </div>
 
-            <div className="row">
+            <div className="row mt-3">
                 {/* Description */}
-            
                 <div className="col-md-6 mb-3">
                     <nav>
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
@@ -144,12 +82,13 @@ const ProductPage = () => {
                     </div>
                     </nav>
                     <div className="tab-content d-flex flex-wrap" id="nav-tabContent">
-                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
-                    <ProductSearchResult productInfo={PRODUCT_INFO[1]} />
-                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
-                    <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                        <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                        <ProductSearchResult productInfo={PRODUCT_INFO[1]} />
+                        <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+                        <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     </div>
                 </div>
+                  
             </div>
 
             {/* Similar Products */}

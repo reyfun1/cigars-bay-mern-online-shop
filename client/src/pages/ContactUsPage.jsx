@@ -1,13 +1,10 @@
 import React from 'react'
+import BreadCrumb from '../components/BreadCrumb'
 
 const ContactUsPage = () => {
     return (
-        <div className="container pt-3 pb-5">
-            <div className="row my-4">
-                <div className="col-md">
-                    <a href=""> Home </a>&gt;<a href=""> Contact </a></div>
-                <div className="col-md"></div>
-            </div>
+        <div className="container py-4">
+            <BreadCrumb/>
             <h4 className="mb-3">Contact Us</h4>
             <form className="row">
                 <div className="col-md-6">
@@ -27,7 +24,7 @@ const ContactUsPage = () => {
                 <div className="col-md-6">
                     <div className="form-group mb-3">
                         <label className="mb-1" htmlFor="exampleFormControlTextarea1">Message</label>
-                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary float-end">Submit</button>
                 </div>

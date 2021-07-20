@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router'
+import BreadCrumb from '../components/BreadCrumb'
 
 const CheckoutPage = () => {
 
@@ -9,15 +10,8 @@ const CheckoutPage = () => {
     history.push('/cart/')
   }
     return (
-        <div className="container">
-          <div className="row py-3">
-                <div className="col-md">
-                    <a href=""> Cart </a>&gt;
-                    <a href=""> Shipping </a>&gt;
-                    <a href=""> Payment </a>
-                </div>
-                <div className="col-md"></div>
-            </div>
+        <div className="container p-4">
+        <BreadCrumb/>
         <div className="row py-2">
           <div className="col-md-4 order-md-2 mb-4">
             <h4 className="d-flex justify-content-between align-items-center mb-3">

@@ -5,11 +5,14 @@ import CartItem from '../components/CartItem'
 import Freatured from '../components/Freatured'
 import ProductCard from '../components/ProductCard'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
+import BreadCrumb from '../components/BreadCrumb'
 
 
 const Cart = () => {
-
+    const pagePathName = 'cart'
     const history = useHistory()
+
 
     const handleProductCardClick = () => {
 
@@ -19,12 +22,12 @@ const Cart = () => {
         history.push('/checkout/')
     }
     return (
-        <CartStyled className="container ">
-           <div className="row mt-5">
+        <CartStyled className="container py-4">
+           <BreadCrumb/>
+           <div className="row">
                <div className="col">
                    <h3>Shopping Cart</h3>
                    <p>(3) items in your cart</p>
-                   
                </div>
            </div>
 

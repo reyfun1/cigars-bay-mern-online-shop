@@ -9,13 +9,13 @@ const ProductCard = ({productInfo, bigCard, clickMethod}) => {
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses} h-100`} onClick={clickMethod}>
+        <DivStyled className={`card ${extraClasses} `} onClick={clickMethod}>
             <div className="overflow-hidden">
                 <img src={imgSRC} className="card-img-top" alt="..."/>
             </div>
             <div className="card-body">
                 {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>}
-                {isFreatured && <span className="badge bg-warning">Freatured</span>}
+                {isFreatured && <span className="badge bg-warning fw-light"><span class="bi bi-star-fill"></span> Freatured</span>}
                 <p className="card-title mb-3 h6">
                     {brand_name} - {product_name}
                 </p>
@@ -74,5 +74,9 @@ const DivStyled = styled.div`
         border-radius: 0;
         border-bottom-left-radius: 5px
     }
+
+    .bi{
+        vertical-align: .225em;
+      }
 `
 
