@@ -52,7 +52,7 @@ const CheckoutPage = () => {
                 <strong>$20</strong>
               </li>
             </ul>
-            <form className="card p-2">
+            <form className="p-0">
               <div className="input-group">
                 <input type="text" className="form-control" placeholder="Promo code" />
                 <div className="input-group-append">

@@ -11,7 +11,7 @@ const Footer = () => {
         <FooterStyled>
             <div className="container text-md-start mb-4">
                 <div className="row">
-                    <div className="col-md">                  
+                    <div className="col-md text-center text-md-start mb-3">                  
                         {/* <ContactUsForm/> */}
                         <h4>Useful Links</h4>
                         <ul>
@@ -22,7 +22,7 @@ const Footer = () => {
                             <li><a href="" className="text-muted">Return Policy</a></li>
                         </ul>
                     </div>
-                    <div className="col-md text-center text-md-start">
+                    <div className="col-md text-center text-md-start mb-3">
                         <h4>Shop</h4>
                         <ul>
                             <li><a href="" className="text-muted">Brands</a></li>
@@ -32,7 +32,7 @@ const Footer = () => {
                             <li><a href="" className="text-muted">New Arrivals</a></li>
                         </ul>
                     </div>
-                    <div className="col-md text-center text-md-start">
+                    <div className="col-md text-center text-md-start mb-3">
                         <h4>Join Our Newsletter!</h4>
                         <p className="text-muted">Sign up for our newsletter recevie updates an exlusive offers.</p>
                         <div className="form-group mb-3">
