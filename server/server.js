@@ -7,15 +7,16 @@ import connectDB from './config/db.js'
 import products from './data/products.js'
 import { errorHandler, notFound } from './middleware/errorMiddleWare.js';
 
-
 // Import route files 
 import productRoutes from './routes/orderRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 
-// Start dotenv, connect db , declare app and port
+// Start dotenv, connect db , declare app , port and accept json
 dotenv.config()
 connectDB()
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.use(express.json())
 
 
 // Testing API 
@@ -25,7 +26,7 @@ app.get('/', (req,res) => {
 
 // Routes
 app.use('/api/products', productRoutes)
-// app.use('/api/', userRoutes)
+app.use('/api/users', userRoutes)
 // app.use('/api/', orderRoutes)
 // app.use('/api/', uploadRoutes)
 // app.use('/api/', )
