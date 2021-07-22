@@ -15,7 +15,7 @@ const ProductCard = ({productInfo, bigCard, clickMethod}) => {
             </div>
             <div className="card-body">
                 {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>}
-                {isFreatured && <span className="badge bg-warning fw-light"><span class="bi bi-star-fill"></span> Freatured</span>}
+                {isFreatured && <span className="badge bg-warning fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
                 <p className="card-title mb-3 h6">
                     {brand_name} - {product_name}
                 </p>
