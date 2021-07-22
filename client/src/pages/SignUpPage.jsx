@@ -38,7 +38,7 @@ const SignUpPage = () => {
     <SignUpPageStyled className="container mt-5 mb-5">
       
       {loading && <div className="row">
-        <div className="col-6">
+        <div className="col">
           Loading...
         </div>
       </div>}
@@ -50,7 +50,7 @@ const SignUpPage = () => {
       </>}
 
       <div className="row d-flex align-items-center justify-content-center">
-        <div className="col-6">
+        <div className="col">
           <div className="card p-5"> <span className="circle"><i className="fa fa-check" /></span>
             <h5>Sign up </h5> <small className="mt-2 text-muted">Join the latest and greatest online cigar store!</small>
             <div className="form-input my-3"> <i className="fa fa-envelope" /> 

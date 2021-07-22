@@ -6,9 +6,9 @@ import styled from 'styled-components'
 const BreadCrumb = () => {
     return (
         <BreadCrumbStyled aria-label="breadcrumb row">
-            <ol class="breadcrumb mb-4 fw-light">
+            <ol className="breadcrumb mb-4 fw-light">
                 <Link to="/" className="breadcrumb-item">Home</Link>
-                <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                <li className="breadcrumb-item active" aria-current="page">Cart</li>
             </ol>
         </BreadCrumbStyled>
     )

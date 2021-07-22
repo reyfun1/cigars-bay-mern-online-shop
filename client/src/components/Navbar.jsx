@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import logo from '../img/logo.png'
 
 import { useHistory } from 'react-router'
@@ -7,7 +7,10 @@ import styled from 'styled-components'
 
 const Navbar = () => {
     const history = useHistory()
+    const togglerBtn = useRef()
 
+
+    const [expanded, setExpanded] = useState(false);
     const [searchText, setSearchText] = useState('')
 
     const handleSearchClick = () => {
@@ -15,10 +18,16 @@ const Navbar = () => {
         history.push('/search/all')
     }
 
+    // Close nav when links are clicked
+    const handleLinkClicked = () => {
+        if(window.innerWidth >= 992 ) return
+        togglerBtn.current.click()
+    }
+
     return (
         <NavBarStyled className="navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3">
         <div className="container">
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
@@ -36,19 +45,19 @@ const Navbar = () => {
             <div className="collapse navbar-collapse" id="navmenu" >
                 <ul className="navbar-nav d-flex justify-content-between w-100 mt-3 mt-lg-0">
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/search/all" className="nav-link">Cigars</Link>
+                            <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Cigars</Link>
                         </li>
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/search/all" className="nav-link">Samplers</Link>
+                            <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Samplers</Link>
                         </li>
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/search/all" className="nav-link">Shop</Link>
+                            <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Shop</Link>
                         </li>
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/about/" className="nav-link">About</Link>
+                            <Link to="/about/" className="nav-link" onClick={handleLinkClicked} >About</Link>
                         </li>
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/contactus" className="nav-link">Contact</Link>
+                            <Link to="/contactus" className="nav-link" onClick={handleLinkClicked} >Contact</Link>
                         </li>
                         <li className="nav-item mx-5"></li>
                         <li className="me-2 order-1 my-3 my-lg-0">
@@ -61,15 +70,15 @@ const Navbar = () => {
                                         aria-label="Search" 
                                         aria-describedby="button-addon2" 
                                         value={searchText} onChange={e => setSearchText(e.target.value)}/>
-                                    <button className="btn btn-secondary" type="button" id="button-addon2" onClick={handleSearchClick}><i className="bi bi-search"></i></button>
+                                    <button className="btn btn-secondary" type="button" id="button-addon2" onClick={() => {handleSearchClick();handleLinkClicked() }}><i className="bi bi-search"></i></button>
                                 </div>
                             </form>
                         </li>
                         <li className="nav-item">
-                            <Link to="/login/" className="nav-link ms-1 me-1">Login</Link>
+                            <Link to="/login/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >Login</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/signup/" className="nav-link ms-1 me-1">SignUp</Link>
+                            <Link to="/signup/" className="nav-link ms-1 me-1" onClick={handleLinkClicked}>SignUp</Link>
                         </li>
                 </ul>  
             </div>

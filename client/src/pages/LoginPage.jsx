@@ -21,7 +21,7 @@ const LoginPage = () => {
             <button className="btn btn-primary mt-4 signup">Login</button>
             <div className="text-center mt-3"> <span>Or login with these social profile</span> </div>
             <div className="d-flex justify-content-center mt-4"> 
-            <button type="button" class="btn btn-outline-danger">
+            <button type="button" className="btn btn-outline-danger">
               <span className="bi bi-google"></span> Google
             </button> 
               <span className="social"><i className="fa fa-facebook" /></span>

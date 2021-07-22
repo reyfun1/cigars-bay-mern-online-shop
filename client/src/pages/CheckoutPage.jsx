@@ -141,36 +141,36 @@ const CheckoutPage = () => {
                 </div>
               </div>
               <hr className="mb-4" />
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="same-address"/>
-                <label class="form-check-label" for="same-address">
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="same-address"/>
+                <label className="form-check-label" for="same-address">
                 Shipping address is the same as my billing address
                 </label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="save-info"/>
-                <label class="form-check-label" for="save-info">
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="save-info"/>
+                <label className="form-check-label" for="save-info">
                 Save this information for next time
                 </label>
               </div>
               <hr className="mb-4" />
               <h4 className="mb-3">Payment</h4>
               <div className="d-block my-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="credit-card"/>
-                  <label class="form-check-label" for="credit-card">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" value="" id="credit-card"/>
+                  <label className="form-check-label" for="credit-card">
                   Credit Card
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="debit-card"/>
-                  <label class="form-check-label" for="debit-card">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" value="" id="debit-card"/>
+                  <label className="form-check-label" for="debit-card">
                   Debit Card
                   </label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="paypal"/>
-                  <label class="form-check-label" for="paypal">
+                <div className="form-check">
+                  <input className="form-check-input" type="checkbox" value="" id="paypal"/>
+                  <label className="form-check-label" for="paypal">
                   Paypal
                   </label>
                 </div>
