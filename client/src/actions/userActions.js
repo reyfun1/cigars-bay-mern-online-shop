@@ -4,7 +4,8 @@ import {
     USER_REGISTER_FAIL,
 } from '../constants/userConstants'
 
-import axios from 'axios'
+// import axios from 'axios'
+const axios = ''
 
 export const registerUser = (name,email,password) => async(dispatch) => {
     try {
