@@ -8,9 +8,9 @@ import products from './data/products.js'
 import { errorHandler, notFound } from './middleware/errorMiddleWare.js';
 
 // Import route files 
-import productRoutes from './router/prodctRoutes'
+import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import orderRoutes from './routes/orderRoutes'
+import orderRoutes from './routes/orderRoutes.js'
 
 // Start dotenv, connect db , declare app , port and accept json
 dotenv.config()
