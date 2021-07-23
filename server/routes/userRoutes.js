@@ -21,4 +21,5 @@ Router.route('/:id')
       .delete(protect,isAdmin, deleteUser)
       .get(protect, isAdmin, getUserById)
       .put(protect,isAdmin, updateUser)
+
 export default Router;

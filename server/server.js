@@ -8,8 +8,9 @@ import products from './data/products.js'
 import { errorHandler, notFound } from './middleware/errorMiddleWare.js';
 
 // Import route files 
-import productRoutes from './routes/orderRoutes.js'
+import productRoutes from './router/prodctRoutes'
 import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes'
 
 // Start dotenv, connect db , declare app , port and accept json
 dotenv.config()
@@ -27,10 +28,7 @@ app.get('/', (req,res) => {
 // Routes
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
-// app.use('/api/', orderRoutes)
-// app.use('/api/', uploadRoutes)
-// app.use('/api/', )
-// app.use('/api/', )
+app.use('/api/order', orderRoutes )
 
 
 // Handle Errors Middlewaraes to handle errors 

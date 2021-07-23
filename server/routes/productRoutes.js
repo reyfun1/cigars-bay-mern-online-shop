@@ -13,3 +13,5 @@ Router.route('/:id')
       .get(getProductById)
       .delete(protect,isAdmin, deleteProduct)
       .put(protect,isAdmin, updateProduct)
+
+export default Router;
