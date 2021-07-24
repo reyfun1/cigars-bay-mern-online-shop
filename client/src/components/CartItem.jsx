@@ -18,18 +18,17 @@ const CartItem = ({productInfo, type}) => {
                             <p className="fw-bold">{brand_name}</p>
                             <small>{product_name}</small>
                         </div>
-        
-                        <div className="col mt-3 mt-sm-0">
-                            <div className="mb-3 px-2 d-flex justify-content-between ">
-                                    <div className="px-md-5 px-sm-3 px-2">
-                                        <input type="number" className="form-control w-100 text-center mb-2" aria-label="1" min="1" value={qty} onChange={(e) => setQty(e.target.value)}/>
-                                        <button type="button" className="btn w-100 btn-outline-secondary btn-sm text-nowrap"><small>Remove</small></button>
-                                    </div>
-                                    <div className="text-end">
-                                        <p className="fw-bold m-0 fs-5">$197.99</p>
-                                        <p className="text-muted text-decoration-line-through"><small>$220.00</small></p>
-                                    </div>
+
+                        <div className="col mt-3">
+                            <div className="qty-input">
+                                <input type="number" className="form-control text-center mb-2" aria-label="1" min="1" value={qty} onChange={(e) => setQty(e.target.value)}/>
+                                <button type="button" className="btn btn-outline-secondary  w-100 btn-sm text-nowrap"><small>Remove</small></button>
                             </div>
+                        </div>
+
+                        <div className="col text-end mt-3">
+                            <p className="fw-bold m-0 fs-5">$197.99</p>
+                            <p className="text-muted text-decoration-line-through"><small>$220.00</small></p>
                         </div>
         
                     </div>
@@ -65,8 +64,9 @@ const CartItemStyled = styled.div`
 }
 
 .qty-input{
-    
+    max-width : 120px
 }
+
 img{
     max-width: 120px
 }

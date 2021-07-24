@@ -32,7 +32,7 @@ const Cart = () => {
            </div>
 
            <div className="row">
-               <div className="col-md-9 card px-5 py-1">
+               <div className="col-md-9 card px-5">
                     <CartItem productInfo={PRODUCT_INFO[0]} type="item"/>
                     <CartItem productInfo={PRODUCT_INFO[0]} type="item"/>
                     <CartItem productInfo={PRODUCT_INFO[0]} type="summary"/>

@@ -27,7 +27,7 @@ const SignUpPage = () => {
     if(success){
       setTimeout(() => {
         history.push('/myaccount')
-      }, 5000)
+      }, 1500)
     }
   }, [success])
 
