@@ -1,14 +1,23 @@
 import React, {useState, useRef} from 'react'
 import logo from '../img/logo.png'
+import { useSelector } from 'react-redux'
 
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+
 const Navbar = () => {
     const history = useHistory()
     const togglerBtn = useRef()
+    const navBarCollapsable = useRef()
 
+    // Grab the user register info 
+    const userRegister = useSelector(state => state.userRegister)
+    const { success : successRegister } = userRegister 
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { success : successLogin } = userLogin 
 
     const [expanded, setExpanded] = useState(false);
     const [searchText, setSearchText] = useState('')
@@ -21,7 +30,8 @@ const Navbar = () => {
     // Close nav when links are clicked
     const handleLinkClicked = () => {
         if(window.innerWidth >= 992 ) return
-        togglerBtn.current.click()
+        const isShowingCollapsable = navBarCollapsable.current.classList.contains('show')
+        if(isShowingCollapsable) togglerBtn.current.click()
     }
 
     return (
@@ -31,7 +41,7 @@ const Navbar = () => {
                 <span className="navbar-toggler-icon"></span>
             </button>
 
-            <Link to="/" className="navbar-brand">CigarsBay</Link>
+            <Link to="/" className="navbar-brand" onClick={handleLinkClicked}>CigarsBay</Link>
 
             <button type="button" className="btn btn-outline-primary position-relative my-2 my-lg-0 order-lg-last" onClick={()=> history.push('/cart')}>
                 <i className="bi bi-cart"></i>
@@ -42,7 +52,7 @@ const Navbar = () => {
                 </span>
             </button>
 
-            <div className="collapse navbar-collapse" id="navmenu" >
+            <div ref={navBarCollapsable} className="collapse navbar-collapse" id="navmenu" >
                 <ul className="navbar-nav d-flex justify-content-between w-100 mt-3 mt-lg-0">
                         <li className="nav-item ms-1 me-1">
                             <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Cigars</Link>
@@ -74,16 +84,22 @@ const Navbar = () => {
                                 </div>
                             </form>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/login/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/signup/" className="nav-link ms-1 me-1" onClick={handleLinkClicked}>SignUp</Link>
-                        </li>
+                        {successRegister || successLogin ? (
+                            <li className="nav-item">
+                                <Link to="/myaccount/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >My Account</Link>
+                            </li>    
+                        ) : (
+                            <>
+                            <li className="nav-item">
+                                <Link to="/login/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >Login</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/signup/" className="nav-link ms-1 me-1" onClick={handleLinkClicked}>SignUp</Link>
+                            </li>
+                            </>
+                        ) }
                 </ul>  
             </div>
-
-            
         </div>
     </ NavBarStyled>
     )

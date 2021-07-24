@@ -15,6 +15,7 @@ import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import ContactUsPage from './pages/ContactUsPage';
 import AboutPage from './pages/AboutPage';
+import AccountPage from './pages/AccountPage';
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/cart' component={Cart} />
           <Route exact path='/signup' component={SignUpPage} />
-          <Route exact path='/login' component={LoginPage} />s
+          <Route exact path='/login' component={LoginPage} />
+          <Route exact path='/myaccount' component={AccountPage} />
           <Route exact path='/checkout' component={CheckoutPage} />
           <Route exact path='/contactus' component={ContactUsPage} />
           <Route exact path='/about' component={AboutPage} />

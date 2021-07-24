@@ -3,11 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 // Import reducers
-import { userRegisterReducer } from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 // Combine Reducers
 const reducer = combineReducers({
-    userRegister: userRegisterReducer
+    userRegister: userRegisterReducer,
+    userLogin: userLoginReducer
 })
 // Define global initial states
 const initialState = {

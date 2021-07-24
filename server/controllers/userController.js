@@ -46,15 +46,14 @@ const registerUser = asyncHandler(async(req,res) => {
 // @access  Public
 const loginUser = asyncHandler(async(req,res) => {
 
-    const {email, password} = req.body
-    // find the user in the database 
+    const { email,password } = req.body
+
+    // find the user
     const user = await User.findOne({email})
 
-    // check if the user exists and if the password matches 
     // if the user eists and if the password matches using the method from the user 
-    if(user && await user.matchPassword(password)){
-        // reply back with the logged user info 
-        req.json({
+    if(user && await user.matchPasswords(password)){
+        res.json({
             _id: user._id,
             name: user.name,
             email: user.email,
@@ -62,9 +61,9 @@ const loginUser = asyncHandler(async(req,res) => {
             token: generateToken(user._id)
         })
     } else{
-        // user is not found or password ws wrong, send error back
-        res.send(401)
-        throw new Error('Invalid email or password')
+        // the user email is either not found or the password was invalid
+        res.status(401)
+        throw new Error('Invalid email or Password')
     }
 })
 
