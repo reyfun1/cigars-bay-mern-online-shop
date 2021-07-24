@@ -37,6 +37,12 @@ const AccountPage = () => {
                         aria-selected="false">
                             Orders <i class="bi bi-cart-check"></i>
                     </button>
+                    <button className="nav-link fs-5" id="nav-payment" 
+                        data-bs-toggle="tab" data-bs-target="#nav-payment" 
+                        type="button" role="tab" aria-controls="nav-payment" 
+                        aria-selected="false">
+                            Payment Info <i class="bi bi-credit-card"></i>
+                    </button>
                 </div>
             </nav>
 
@@ -68,6 +74,9 @@ const AccountPage = () => {
             </div>
             <div className="tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 orders
+            </div>
+            <div className="tab-pane fade p-2" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+                pyment
             </div>
             </div>
 

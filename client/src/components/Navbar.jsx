@@ -27,6 +27,10 @@ const Navbar = () => {
         history.push('/search/all')
     }
 
+    const handleCartClick = () => {
+        history.push('/cart')
+    }
+
     // Close nav when links are clicked
     const handleLinkClicked = () => {
         if(window.innerWidth >= 992 ) return
@@ -40,10 +44,10 @@ const Navbar = () => {
             <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span className="navbar-toggler-icon"></span>
             </button>
-
+(
             <Link to="/" className="navbar-brand" onClick={handleLinkClicked}>CigarsBay</Link>
 
-            <button type="button" className="btn btn-outline-primary position-relative my-2 my-lg-0 order-lg-last" onClick={()=> history.push('/cart')}>
+            <button type="button" className="btn btn-outline-primary position-relative my-2 my-lg-0 order-lg-last" onClick={()=>{handleLinkClicked();handleCartClick()}}>
                 <i className="bi bi-cart"></i>
                 <span className="d-lg-none"> Cart</span>
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
