@@ -10,8 +10,8 @@ const CartItem = ({productInfo, type}) => {
             return (
                 <CartItemStyled className="border-bottom border-2" >
                     <div className="row my-3 py-2">
-                        <div className="col">
-                            <img src={imgSRC} alt="" />
+                        <div className="col-2">
+                            <img src={imgSRC} className="img-fluid" alt="" />
                         </div>
         
                         <div className="col">
@@ -65,9 +65,5 @@ const CartItemStyled = styled.div`
 
 .qty-input{
     max-width : 120px
-}
-
-img{
-    max-width: 120px
 }
 `
