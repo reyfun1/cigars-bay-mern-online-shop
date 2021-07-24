@@ -10,9 +10,19 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer
 })
+
+// check if there is avaible user info in storage 
+const userInfoFromStorage = localStorage.getItem('userInfo') 
+    ? JSON.parse(localStorage.getItem('userInfo')) 
+    : null
+
+
 // Define global initial states
 const initialState = {
-
+    userLogin : {
+        userInfo : userInfoFromStorage,
+        success : userInfoFromStorage ? true : false
+    } 
 }
 
 const middleware = [thunk]

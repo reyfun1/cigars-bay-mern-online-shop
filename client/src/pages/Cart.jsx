@@ -38,7 +38,7 @@ const Cart = () => {
                     <CartItem productInfo={PRODUCT_INFO[0]} type="summary"/>
                     
                </div>
-               <div className="col-md-3">
+               <div className="col-md-3  my-3 my-lg-0">
                 <button type="button" className="btn btn-primary w-100" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
                 <button type="button" className="btn btn-outline-secondary mt-2 w-100">Continue Shopping</button>
                </div>

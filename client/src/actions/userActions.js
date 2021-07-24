@@ -33,6 +33,9 @@ export const registerUser = (name,email,password) => async(dispatch) => {
             payload: data
         })
 
+        // save user data to localStorage
+        localStorage.setItem('userInfo', JSON.stringify(data))
+
         // TODO: LOG THE USER HERE
 
     } catch(error) {
@@ -63,6 +66,9 @@ export const loginUser = (email, password) => async(dispatch) => {
             type: USER_LOGIN_SUCCESS,
             payload: data
         })
+
+        // save user data to localStorage
+        localStorage.setItem('userInfo', JSON.stringify(data))
 
     } catch (error) {
         dispatch({
