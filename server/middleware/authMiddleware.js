@@ -42,7 +42,7 @@ const isAdmin = (req,res,next) => {
         next();
     } else{
         res.status(401)
-        throw new Error('Not authorized')
+        throw new Error('Not authorized, ADMIN ONLY')
     }
 }
 

@@ -12,6 +12,9 @@ const Navbar = () => {
     const togglerBtn = useRef()
     const navBarCollapsable = useRef()
 
+    //TNP TO CHANGE LATER
+    const isAdmin = true
+
     // Grab the user register info 
     const userRegister = useSelector(state => state.userRegister)
     const { success : successRegister } = userRegister 
@@ -44,7 +47,6 @@ const Navbar = () => {
             <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span className="navbar-toggler-icon"></span>
             </button>
-(
             <Link to="/" className="navbar-brand" onClick={handleLinkClicked}>CigarsBay</Link>
 
             <button type="button" className="btn btn-outline-primary position-relative my-2 my-lg-0 order-lg-last" onClick={()=>{handleLinkClicked();handleCartClick()}}>
@@ -90,7 +92,11 @@ const Navbar = () => {
                         </li>
                         {successRegister || successLogin ? (
                             <li className="nav-item">
-                                <Link to="/myaccount/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >My Account</Link>
+                                {isAdmin ? (
+                                    <Link to="/admin/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >Admin</Link>
+                                ) : (
+                                    <Link to="/myaccount/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >My Account</Link>
+                                )}
                             </li>    
                         ) : (
                             <>

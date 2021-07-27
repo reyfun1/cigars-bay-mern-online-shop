@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const SortFilter = () => {
     return (
-        <SortFilteredStyled>
+        <SortFilteredStyled className="mb-3">
             <div className="p-3 bg-light border rounded-3">
                 <h5 className="mb-3">Sort</h5>
                 <select className="form-select" aria-label="Default select example">

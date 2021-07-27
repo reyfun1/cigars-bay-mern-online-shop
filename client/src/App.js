@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 import ContactUsPage from './pages/ContactUsPage';
 import AboutPage from './pages/AboutPage';
 import AccountPage from './pages/AccountPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route exact path='/checkout' component={CheckoutPage} />
           <Route exact path='/contactus' component={ContactUsPage} />
           <Route exact path='/about' component={AboutPage} />
+          <Route exact path='/admin' component={AdminPage} />
           <Route exact path='/product/:id' component={ProductPage} />
           <Route exact path='/search/:keyword' component={SearchResults} />
           <Route component={NotFound}/>

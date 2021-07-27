@@ -4,18 +4,20 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 // Import reducers
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
+import { productCreateReducer, productUploadImagesReducer } from './reducers/productReducers'
 
 // Combine Reducers
 const reducer = combineReducers({
     userRegister: userRegisterReducer,
-    userLogin: userLoginReducer
+    userLogin: userLoginReducer,
+    adminProductCreate: productCreateReducer,
+    adminImageUpload : productUploadImagesReducer
 })
 
 // check if there is avaible user info in storage 
 const userInfoFromStorage = localStorage.getItem('userInfo') 
     ? JSON.parse(localStorage.getItem('userInfo')) 
     : null
-
 
 // Define global initial states
 const initialState = {

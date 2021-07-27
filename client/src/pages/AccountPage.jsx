@@ -53,7 +53,7 @@ const AccountPage = () => {
                 <div className="row">
                     {/* Basic Account Info */}
                     <div className="col border-right border-end border-2">
-                    <p className="fs-5 fw-bold">Customer Info <button type="button" class="btn btn-sm btn-primary">Edit</button></p>
+                    <p className="fs-5 fw-bold">Customer Info <button type="button" className="btn btn-sm btn-primary">Edit</button></p>
                         <div className="my-3">
                             <span className="d-block text-muted">Customer #</span>
                             <span>{data._id}</span>
@@ -75,7 +75,7 @@ const AccountPage = () => {
                     </div>
                     {/* Shipping Info */}
                     <div className="col">
-                        <p className="fs-5 fw-bold">Default Shipping Address <button type="button" class="btn btn-sm btn-primary">Edit</button></p>
+                        <p className="fs-5 fw-bold">Default Shipping Address <button type="button" className="btn btn-sm btn-primary">Edit</button></p>
                         <div className="my-3">
                             <span className="d-block text-muted">Att</span>
                             <span>Reinaldo Fundora</span>
@@ -107,9 +107,9 @@ const AccountPage = () => {
                     <div className="col border-right border-end border-2">
                     <div className="fs-5 fw-bold d-flex justify-content-between flex-wrap">
                         <span>Saved Card </span>
-                        <button type="button" class="btn btn-sm btn-primary">Edit Card</button>
+                        <button type="button" className="btn btn-sm btn-primary">Edit Card</button>
                     </div>
-                        <i class="bi bi-credit-card fs-4 d-block"></i>
+                        <i className="bi bi-credit-card fs-4 d-block"></i>
                         <span>Amazon Rewards Visa Signature Card</span>
                         <p>Ending on <span className="text-muted">7175</span></p>
                     </div>
@@ -117,7 +117,7 @@ const AccountPage = () => {
                     <div className="col">
                         <div className="fs-5 fw-bold d-flex justify-content-between flex-wrap">
                             <span>Billing Address </span>
-                            <button type="button" class="btn btn-sm btn-primary">Edit Billing</button>
+                            <button type="button" className="btn btn-sm btn-primary">Edit Billing</button>
                         </div>
                         <div className="my-3" >
                             <span className="d-block text-muted">Street Address</span>
