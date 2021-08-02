@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BreadCrumb from '../components/BreadCrumb'
 
 
@@ -6,25 +6,27 @@ import styled from 'styled-components'
 import EditProduct from '../components/EditProduct'
 
 const AdminPage = () => {
+
+    const [showAddNewProduct,setShowAddNewProduct] = useState(false)
     return (
         <StyledAdminPage className="container py-4">
            <BreadCrumb/>
             <h4>Admin Control</h4>
 
-            <div className="d-flex align-items-start my-3 border rounded">
-                <div className="nav flex-column nav-pills mx-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button className="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
-                        <i className="bi bi-box fs-4"></i><br /> Orders
-                    </button>
-                    <button className="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
-                        <i className="bi bi-people-fill fs-4"></i><br />Users
-                    </button>
-                    <button className="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
-                        <i className="bi bi-diagram-2-fill fs-4"></i><br />Products
-                    </button>
-                </div>
-                <div className="tab-content" id="v-pills-tabContent">
-                    <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <nav className="nav nav-pills flex-column flex-sm-row mb-3">
+                <button className="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                    <i className="bi bi-box fs-5 "></i><br /> Orders
+                </button>
+                <button className="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                    <i className="bi bi-people-fill fs-5"></i><br />Users
+                </button>
+                <button className="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                    <i className="bi bi-diagram-2-fill fs-5"></i><br />Products
+                </button>
+            </nav>
+
+            <div className="tab-content row" id="v-pills-tabContent">
+                    <div className="tab-pane fade show active col-12 col-md-8 mx-auto" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <table className="table text-center border">
                             <thead className="table">
                                 <tr>
@@ -48,7 +50,7 @@ const AdminPage = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                    <div className="tab-pane fade col-12 col-md-8 mx-auto" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                     <table className="table">
                         <thead className="table">
                             <tr>
@@ -65,29 +67,19 @@ const AdminPage = () => {
                         </tbody>
                     </table>
                     </div>
-                    <div className="tab-pane fade p-4 ps-0" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div className="tab-pane fade col-12 col-lg-10 mx-auto" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                         <h5>Products</h5>
 
-                        <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Add new product
-                        </button>
-
-                        <div class="modal" id="exampleModal" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add new product</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <EditProduct/>
-                                </div>
-                                
-                                </div>
-                            </div>
-                        </div>
+                        {/* Add New Product section */}
                         
-                        <table className="table text-center">
+                        {showAddNewProduct ? (
+                            <EditProduct setShowAddNewProduct={setShowAddNewProduct} />
+                        ) : (
+                            <>
+                            <button type="button" onClick={e => setShowAddNewProduct(!showAddNewProduct)} className="btn btn-primary my-4">
+                            Add new product
+                            </button>
+                            <table className="table text-center">
                                 <thead className="table">
                                     <tr>
                                         <th>ID</th>
@@ -95,7 +87,8 @@ const AdminPage = () => {
                                         <th>PRICE</th>
                                         <th>CATEGORY</th>
                                         <th>BRAND</th>
-                                        <th>EDIT | DELETE</th>
+                                        <th>EDIT</th>
+                                        <th>DELETE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,15 +99,21 @@ const AdminPage = () => {
                                         <td>Cigars</td>
                                         <td>Alma Fuerte</td>
                                         <td>
-                                            <button className="btn btn-secondary btn-sm me-1">Edit</button>
+                                            <button className="btn btn-secondary btn-sm me-1">Edit</button> 
+                                        </td>
+                                        <td>
                                             <button className="btn btn-dark btn-sm">Delete</button>
                                         </td>
                                     </tr>
                                 </tbody>
                         </table>
+                        </>
+                        )}
+                        
                     </div>
-                </div>
             </div>
+
+            
         </StyledAdminPage>
     )
 }

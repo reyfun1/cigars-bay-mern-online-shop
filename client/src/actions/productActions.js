@@ -22,9 +22,9 @@ import {
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL,
 
-    PRODUCT_UPLOAD_IMAGES_REQUEST,
-    PRODUCT_UPLOAD_IMAGES_SUCCESS,
-    PRODUCT_UPLOAD_IMAGES_FAIL
+    PRODUCT_UPLOAD_IMAGE_REQUEST,
+    PRODUCT_UPLOAD_IMAGE_SUCCESS,
+    PRODUCT_UPLOAD_IMAGE_FAIL
 
 } from '../constants/productConstants'
 import axios from 'axios'
@@ -67,11 +67,11 @@ export const createProduct = (product) => async( dispatch, getState) => {
     }
 }
 
-export const uploadProductImages = (images) => async( dispatch, getState) => {
+export const uploadProductImage = (images) => async( dispatch, getState) => {
     try {
         // set loading true
         dispatch({
-            type: PRODUCT_UPLOAD_IMAGES_REQUEST
+            type: PRODUCT_UPLOAD_IMAGE_REQUEST
         })
 
         // extract info of the logeed in user 
@@ -94,12 +94,12 @@ export const uploadProductImages = (images) => async( dispatch, getState) => {
         const { data } = await axios.post('/api/upload', formData, reqConfig)
 
         // On success
-        dispatch({type: PRODUCT_UPLOAD_IMAGES_SUCCESS, payload: data})
+        dispatch({type: PRODUCT_UPLOAD_IMAGE_SUCCESS, payload: data})
 
     } catch (error) {
         // on error
         dispatch({
-            type: PRODUCT_UPLOAD_IMAGES_FAIL,
+            type: PRODUCT_UPLOAD_IMAGE_FAIL,
             payload: error.response && error.response.data.message ?
             error.response.data.message :
             error.message
@@ -107,3 +107,6 @@ export const uploadProductImages = (images) => async( dispatch, getState) => {
     }
 }
 
+export const listProducts = (keyword = '', pageNumber = '') => async (dispatch, getState) => {
+    
+}

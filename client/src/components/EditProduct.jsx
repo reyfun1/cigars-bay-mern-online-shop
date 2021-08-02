@@ -1,11 +1,9 @@
-import React, { useState , useRef} from 'react'
+import React, { useState , useRef, useEffect} from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 
-import axios from 'axios'
+import { createProduct, uploadProductImage } from '../actions/productActions'
 
-import { createProduct, uploadProductImages } from '../actions/productActions'
-
-const EditProduct = () => {
+const EditProduct = ({setShowAddNewProduct}) => {
     const dispatch = useDispatch()
     const imageUploader = useRef()
 
@@ -29,13 +27,18 @@ const EditProduct = () => {
     const adminProductCreate = useSelector(state => state.adminProductCreate)
     const { loading, error, product, success } = adminProductCreate
 
-    const uploadImages = async() => {
-        const images = imageUploader.current.files[0]
-        dispatch(uploadProductImages(images))
+    const uploadImage = async() => {
+        const image = imageUploader.current.files[0]
+        dispatch(uploadProductImage(image))
     }
+
+    const cancelShowAddNewProducts = () => setShowAddNewProduct(false)
 
     const submitHandler = async e => {
         e.preventDefault()
+
+        console.log(e)
+        return
 
         dispatch(createProduct({
             name,
@@ -49,9 +52,8 @@ const EditProduct = () => {
     }
 
     return (
-        <div>
+        <div className="border p-2">
             <form onSubmit={submitHandler}>
-                <h5>New Product</h5>
                 <div className="form-input my-3"> <i className="fa fa-envelope" /> 
                     <label>Product Name</label>
                     <input type="name" className="form-control" placeholder="Product Name" value={name} onChange={e => setName(e.target.value)}/>
@@ -61,8 +63,8 @@ const EditProduct = () => {
                     <input type="number" className="form-control" placeholder="Price" value={price} onChange={e => setPrice(e.target.value)}/>
                 </div>
                 <div className="form-input my-3">
-                    <label for="formFileMultiple" className="form-label">Upload Images</label>
-                    <input className="form-control" type="file" id="formFileMultiple" multiple ref={imageUploader}/>
+                    <label htmlFor="formFileMultiple" className="form-label">Upload Main Image</label>
+                    <input className="form-control" type="file" id="formFileMultiple" ref={imageUploader}/>
                 </div>
                 {imageLoading ? (
                     <div className="my-4 text-center fs-1">
@@ -74,10 +76,10 @@ const EditProduct = () => {
                     <>
                     {paths ? (
                         <div className="alert alert-success my-3" role="alert">
-                        Product Images Uploaded! <i className="bi bi-check-circle"></i>
+                        Main Product Image Uploaded <i className="bi bi-check-circle"></i>
                         </div>
                     ) : (
-                        <button className="btn btn-primary" onClick={uploadImages}>Upload</button>
+                        <button className="btn btn-primary" onClick={uploadImage}>Upload</button>
                     )}
                     </>
                 )}
@@ -112,8 +114,8 @@ const EditProduct = () => {
                            </div> 
                     ) : (
                         <>
-                            <button className="btn btn-success my-3 float-end">Submit</button>
-                            <button className="btn btn-secondary my-3">Cancel</button>
+                            <button type="submit" className="btn btn-success my-3 float-end">Submit</button>
+                            <a className="btn btn-secondary my-3" onClick={cancelShowAddNewProducts} >Cancel</a>
                         </>
                     )}
                     </>

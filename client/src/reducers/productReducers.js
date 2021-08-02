@@ -19,9 +19,9 @@ import {
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL,
 
-    PRODUCT_UPLOAD_IMAGES_REQUEST,
-    PRODUCT_UPLOAD_IMAGES_SUCCESS,
-    PRODUCT_UPLOAD_IMAGES_FAIL
+    PRODUCT_UPLOAD_IMAGE_REQUEST,
+    PRODUCT_UPLOAD_IMAGE_SUCCESS,
+    PRODUCT_UPLOAD_IMAGE_FAIL
 
 
 } from '../constants/productConstants'
@@ -41,13 +41,17 @@ export const productCreateReducer = (state = {}, action) => {
 
 export const productUploadImagesReducer = (state = {}, action) => {
     switch (action.type) {
-        case PRODUCT_UPLOAD_IMAGES_REQUEST:
+        case PRODUCT_UPLOAD_IMAGE_REQUEST:
             return {loading: true}
-        case PRODUCT_UPLOAD_IMAGES_SUCCESS:
+        case PRODUCT_UPLOAD_IMAGE_SUCCESS:
             return { loading: false, paths: action.payload}
-        case PRODUCT_UPLOAD_IMAGES_FAIL:
+        case PRODUCT_UPLOAD_IMAGE_FAIL:
             return { loading : false, error: action.payload}
         default:
             return state;
     }
+}
+
+export const prodcutListReducer = (state = {}, action) => {
+
 }
