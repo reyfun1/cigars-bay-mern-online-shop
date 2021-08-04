@@ -1,5 +1,5 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, Route, Switch, useLocation} from 'react-router-dom'
 
 import './index.css';
 import Navbar from './components/Navbar';
@@ -19,6 +19,7 @@ import AccountPage from './pages/AccountPage';
 import AdminPage from './pages/AdminPage';
 
 function App() {
+  
   return (
     <>
       <Router>
@@ -38,8 +39,10 @@ function App() {
           <Route exact path='/search/:keyword' component={SearchResults} />
           <Route component={NotFound}/>
           </Switch>
+          <Footer/>
       </Router>
-    <Footer/>
+      
+    
     </>
   );
 }

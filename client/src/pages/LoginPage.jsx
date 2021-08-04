@@ -33,6 +33,7 @@ const LoginPage = () => {
   useEffect(() => {
     if(success){
       setTimeout(() => {
+        // TODO: NEED TO PUSH TO /ADMIN WHEN ADMIN IS LOGGED IN 
         history.push('/myaccount')
       }, 1500)
     }

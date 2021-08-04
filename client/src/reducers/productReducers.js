@@ -44,7 +44,7 @@ export const productUploadImagesReducer = (state = {}, action) => {
         case PRODUCT_UPLOAD_IMAGE_REQUEST:
             return {loading: true}
         case PRODUCT_UPLOAD_IMAGE_SUCCESS:
-            return { loading: false, paths: action.payload}
+            return { loading: false, path: action.payload}
         case PRODUCT_UPLOAD_IMAGE_FAIL:
             return { loading : false, error: action.payload}
         default:

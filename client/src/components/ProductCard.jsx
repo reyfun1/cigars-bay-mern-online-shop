@@ -63,7 +63,7 @@ const DivStyled = styled.div`
 
     &:hover{
         img{
-            transform: scale(1.1) 
+            transform: scale(1.05) 
         }
     }
 

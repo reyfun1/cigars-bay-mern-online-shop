@@ -67,7 +67,7 @@ const AdminPage = () => {
                         </tbody>
                     </table>
                     </div>
-                    <div className="tab-pane fade col-12 col-lg-10 mx-auto" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div className="tab-pane fade col-12 col-md-8 col-lg-6 mx-auto" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                         <h5>Products</h5>
 
                         {/* Add New Product section */}

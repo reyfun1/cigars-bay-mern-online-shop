@@ -1,14 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ContactUs from './ContactUs'
 import ContactUsForm from './ContactUsForm'
 import styled from 'styled-components'
 import amex from '../img/svg/amex.svg'
 import applepay from '../img/svg/applepay.svg'
 import discover from '../img/svg/discover.svg'
+import { useHistory } from 'react-router-dom'
 
 const Footer = () => {
+    const history = useHistory() 
+
+    const [showFooter, setShowFooter] = useState(false)
+
+    // hide the footer based on the url location
+    useEffect(() => {
+        return history.listen((location) => { 
+        const {pathname} = location
+        console.log(`You changed the page to: ${location.pathname}`) 
+
+        if( pathname.includes('admin') || 
+            pathname.includes('login') ||
+            pathname.includes('signup') ||
+            pathname.includes('myaccount')
+            ){
+            setShowFooter(false)
+        } else{
+            setShowFooter(true)
+        }
+        }) 
+    },[history])
+
     return (
-        <FooterStyled>
+        <FooterStyled className={`${showFooter ? '' : 'd-none'}`}>
             <div className="container text-md-start mb-4">
                 <div className="row">
                     <div className="col-md text-center text-md-start mb-3">                  
