@@ -13,25 +13,25 @@ const EditProduct = ({setShowAddNewProduct}) => {
     const [brandName, setBrandName] = useState('')
     const [vitolaName, setVitolaName] = useState('')
     const [category, setCategory] = useState('')
-    const [cigarCount, setCigarCount] = useState(null)
+    const [cigarCount, setCigarCount] = useState()
 
     // Product Characteristics
     const [strength, setStrength] = useState('')
     const [wrapper, setWrapper] = useState('')
-    const [cigarRingSize, setCigarRingSize] = useState(null)
-    const [cigarLengthSize, setCigarLengthSize] = useState(null)
+    const [cigarRingSize, setCigarRingSize] = useState()
+    const [cigarLengthSize, setCigarLengthSize] = useState()
     const [description, setDescription] = useState()
 
     // Product Images TODO
     // const [mainImage, setMainImage] = useState('')
 
     // Price and Shipping
-    const [price, setPrice] = useState(null)
-    const [countInStock, setCountInStock] = useState(null)
-    const [weight, setWeight] = useState(null)
-    const [width, setWidth] = useState(null)
-    const [height, setHeight] = useState(null)
-    const [depth, setDepth] = useState(null)
+    const [price, setPrice] = useState()
+    const [countInStock, setCountInStock] = useState()
+    const [weight, setWeight] = useState()
+    const [width, setWidth] = useState()
+    const [height, setHeight] = useState()
+    const [depth, setDepth] = useState()
     const [tags, setTags] = useState('')
 
 
@@ -138,7 +138,7 @@ const EditProduct = ({setShowAddNewProduct}) => {
                 <p className="fs-5">Product Images</p>
                 <div className="form-input my-3">
                     <label htmlFor="formFileMultiple" className="form-label">Upload Main Image</label>
-                    <div className="d-flex">
+                    <div className={`${!mainImagePath && 'd-flex' }`}>
                         <input className="form-control" type="file" id="formFileMultiple" ref={imageUploader}/>
                         {imageLoading ? (
                         <div className="my-4 text-center fs-1">
@@ -156,7 +156,7 @@ const EditProduct = ({setShowAddNewProduct}) => {
                                 <button className="btn btn-primary" onClick={uploadImage}>Upload</button>
                             )}
                             </>
-                        )}
+                        )} 
                     </div>
                 </div>
 
@@ -168,10 +168,6 @@ const EditProduct = ({setShowAddNewProduct}) => {
                     <input type="text" className="form-control" value={price} onChange={e => setPrice(e.target.value)} aria-label="Amount (to the nearest dollar)"/>
                     <span className="input-group-text">.00</span>
                 </div>
-                {/* <div className="form-input my-3"> <i className="fa fa-envelope" /> 
-                    <label>Price</label>
-                    <input type="number" className="form-control" placeholder="0" value={price} onChange={e => setPrice(e.target.value)}/>
-                </div> */}
                 <div className="d-flex justify-content-center">
                     <div className="form-input my-3"> <i className="fa fa-envelope" /> 
                         <label>In stock</label>
