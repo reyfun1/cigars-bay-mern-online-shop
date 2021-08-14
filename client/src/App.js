@@ -18,10 +18,12 @@ import AboutPage from './pages/AboutPage';
 import AccountPage from './pages/AccountPage';
 import AdminPage from './pages/AdminPage';
 
+import styled from 'styled-components'
+
 function App() {
   
   return (
-    <>
+    <AppStyled>
       <Router>
         {/* <AnnouncementBar/> */}
         <Navbar/>
@@ -41,10 +43,20 @@ function App() {
           </Switch>
           <Footer/>
       </Router>
-      
-    
-    </>
+    </AppStyled>
   );
 }
 
 export default App;
+
+const AppStyled = styled.div`
+button{
+  i{
+    pointer-events: none
+  }
+}
+
+.bi{
+  vertical-align: .225em;
+}
+`

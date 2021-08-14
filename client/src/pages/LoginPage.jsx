@@ -5,6 +5,7 @@ import { useHistory } from 'react-router'
 import { loginUser } from '../actions/userActions'
 
 import styled from 'styled-components'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 const LoginPage = () => {
 
@@ -65,13 +66,7 @@ const LoginPage = () => {
               <input type="password" className="form-control" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/> 
             </div>
             
-            {loading ? (
-              <div className="my-4 text-center fs-1">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-            ) : (
+            {loading ? <LoadingSpinner/> : (
               <>
               {success ? (
                 <div className="alert alert-success my-3" role="alert">

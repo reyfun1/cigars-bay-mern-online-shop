@@ -51,7 +51,7 @@ const loginUser = asyncHandler(async(req,res) => {
     // find the user
     const user = await User.findOne({email})
 
-    // if the user eists and if the password matches using the method from the user 
+    // if the user exists and if the password matches using the method from the user 
     if(user && await user.matchPasswords(password)){
         res.json({
             _id: user._id,
@@ -123,7 +123,7 @@ const updateUserProfile = asyncHandler(async(req,res) => {
 // @route   GET /api/users
 // @access  Private/Admin
 const getUsers = asyncHandler( async(req,res) => {
-    const users = await Users.find({})
+    const users = await User.find({})
     res.json(users)
 })
 
@@ -164,7 +164,7 @@ const getUserById = asyncHandler(async(req,res) => {
 // @access  Private/Admin
 const updateUser = asyncHandler(async(req,res) => {
     // find the user in the db 
-    const user = await Usr.findById(req.params.id)
+    const user = await User.findById(req.params.id)
 
     // if user is ofund then change he properties of the user 
     if(user){

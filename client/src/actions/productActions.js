@@ -3,6 +3,7 @@ import {
     PRODUCT_LIST_REQUEST, 
     PRODUCT_LIST_SUCCESS, 
     PRODUCT_LIST_FAIL,
+    PRODUCT_LIST_RESET,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -46,7 +47,7 @@ export const createProduct = (product) => async( dispatch, getState) => {
 
         const reqConfig = {
             headers: {
-                'Authorization': `Bearer ${userInfo.data.token}`,
+                'Authorization': `Bearer ${userInfo.token}`,
                 'Content-Type' : 'application/json'
             }
         }
@@ -83,7 +84,7 @@ export const uploadProductImage = (images) => async( dispatch, getState) => {
 
         const reqConfig = {
             headers: {
-                'Authorization': `Bearer ${userInfo.data.token}`,
+                'Authorization': `Bearer ${userInfo.token}`,
                 'Content-Type' : 'multipart/form-data'
             }
         }
@@ -108,5 +109,24 @@ export const uploadProductImage = (images) => async( dispatch, getState) => {
 }
 
 export const listProducts = (keyword = '', pageNumber = '') => async (dispatch, getState) => {
-    
+    try {
+        dispatch({type: PRODUCT_LIST_REQUEST})
+
+        const { data } = await axios.get(`/api/products?keyword=${keyword}&pagenumber=${pageNumber}`)
+
+        dispatch({
+            type: PRODUCT_LIST_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_FAIL,
+            payload: 
+                error.response && 
+                error.response.data.message ? 
+                error.response.data.message : error.message
+        })
+    }
+
+
 }

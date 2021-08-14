@@ -3,15 +3,17 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 // Import reducers
-import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
-import { productCreateReducer, productUploadImagesReducer } from './reducers/productReducers'
+import { userLoginReducer, userRegisterReducer, userListReducer } from './reducers/userReducers'
+import { productCreateReducer, productUploadImagesReducer, productListReducer} from './reducers/productReducers'
 
 // Combine Reducers
 const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userLogin: userLoginReducer,
+    userList: userListReducer,
     adminProductCreate: productCreateReducer,
-    adminImageUpload : productUploadImagesReducer
+    adminImageUpload : productUploadImagesReducer,
+    productList: productListReducer,
 })
 
 // check if there is avaible user info in storage 

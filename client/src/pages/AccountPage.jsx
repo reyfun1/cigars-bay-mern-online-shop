@@ -10,7 +10,7 @@ const AccountPage = () => {
   // Grab the user login info 
   const userLogin = useSelector(state => state.userLogin)
   const { loading , error, userInfo, success } = userLogin 
-  const { data } =  userInfo
+  const { _id, name, email, createdAt,  } =  userInfo
 
     return (
         <AccountPageStyled className="container py-4">
@@ -18,7 +18,7 @@ const AccountPage = () => {
            <div className="row">
                <div className="col">
                    <h3>Welcome</h3>
-                   <p>{data.name} </p>
+                   <p>{name} </p>
                </div>
            </div>
 
@@ -56,19 +56,19 @@ const AccountPage = () => {
                     <p className="fs-5 fw-bold">Customer Info <button type="button" className="btn btn-sm btn-primary">Edit</button></p>
                         <div className="my-3">
                             <span className="d-block text-muted">Customer #</span>
-                            <span>{data._id}</span>
+                            <span>{_id}</span>
                         </div>
                         <div className="my-3" >
                             <span className="d-block text-muted">Customer Name</span>
-                            <span>{data.name}</span>
+                            <span>{name}</span>
                         </div>
                         <div className="my-3" >
                             <span className="d-block text-muted">Email</span>
-                            <span>{data.email}</span>
+                            <span>{email}</span>
                         </div>
                         <div className="my-3">
                             <span className="d-block text-muted">Customer Since</span>
-                            <span>{data.createdAt && new Date(data.createdAt).toLocaleDateString()}</span>
+                            <span>{createdAt && new Date(createdAt).toLocaleDateString()}</span>
                         </div>
                         
                         
