@@ -1,106 +1,149 @@
-import React from 'react'
+import { formatMoney } from 'accounting-js'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { listProductDetails } from '../actions/productActions'
 import BreadCrumb from '../components/BreadCrumb'
 import Carousel from '../components/Carousel'
 import ProductDetailsTable from '../components/ProductDetailsTable'
 import ProductSearchResult from '../components/ProductSearchResult'
 
-const ProductPage = () => {
+const ProductPage = ({match}) => {
+    const productID = match.params.id
+
+    const dispatch = useDispatch()
+
+    const productList = useSelector((state) => state.productList)
+    const { products } = productList
+
+    const productDetails = useSelector((state) => state.productDetails)
+    const { loading, product , error} = productDetails
+
+    // find the product in the array, if not found request it 
+    useEffect(() => {
+        dispatch(listProductDetails(productID))
+    }, [productID])
+
+
     return (
         <ProductPageStyled className="container py-4">
             <BreadCrumb/>
-
             <div className="row">
                 {/* Carousel Images */}
                 <div className="col mb-3">
-                    <Carousel carouselName="productImages"/>
+                    <Carousel carouselName="productImages" mainImage={product.image} images={product.productImages}/>
                 </div>
                 {/* Summary and price  */}
-                <div className="col-md-4 mb-3">
+                <div className="col-md-6 mb-3">
                     {/* Item title */}
                     <div>
-                        <h3>Alma Fuerte </h3>
-                        <h5>Generacion V - 7 x 58 Salomon</h5>
-                        <p className="text-muted">By: <a href="">Plasencia Cigars</a></p>
-                        <span className="fs-6">Item # : 231</span>
-                    </div>    
-                    <div>
-                        <div className="d-flex justify-content-between my-4">
-                            <div>
-                                <h3 className="m-0">$79.99</h3>
-                                <p className="text-muted m-0 font-weight-light text-decoration-line-through"> $89.99 MSRP</p>
-                            </div>
-                            <button type="button" className="btn btn-success">Add to Cart <i className="bi bi-cart"></i></button>
-                        </div>
-                        {/* Item Options */} 
-                        <div className="item-options mb-5 active">
-                                <button type="button" className="btn btn-outline-secondary active">
-                                    <p className="m-0">Box of 10 Cigars</p>
-                                    <p className="m-0">In Stock</p>
-                                </button>
-                                <button type="button" className="btn btn-outline-secondary">
-                                    <p className="m-0">5 Cigars</p>
-                                    <p className="m-0">In Stock</p>
-                                </button>
-                                <button type="button" className="btn btn-outline-secondary">
-                                    <p className="m-0">1 Cigar</p>
-                                    <p className="m-0">In Stock</p>
-                                </button>
-                        </div>
+                        <p className="fs-4">
+                            {product.brandName} {product.vitolaName} - {product.cigarLengthSize}x{product.cigarRingSize} {product.vitolaStyle} -  {product.category} of {product.cigarCount}
+                        </p>
 
-                        
-                    </div>       
+                        <p className="text-muted text-muted text-uppercase">By: <a href="">{product.companyName}</a></p>
+                        <span className="fs-6">Item # : {product._id}</span>
+                    </div>    
+
+                    {/* Quick description */}
+                    <div className="my-4">
+                          <p>This Plasencia Alma Del Fuego Candente cigar is made in Nicaragua. Outside, you'll find a Nicaraguan wrapper. Inside, the binder is Nicaraguan, and the filler is Nicaraguan.</p>  
+                    </div>
+
+                    {/* Item Options */}
+                    <div className="d-flex justify-content-between">
+                        <div>
+                        <label className="mb-2 text-muted text-uppercase">Cigar Count</label>
+                        <div className="d-flex item-options justify-content-start">
+                                    <div className="me-3">
+                                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked/>
+                                        <label class="btn btn-outline-dark" for="option1">Box of 10</label>
+                                    </div>
+
+                                    <div className="">
+                                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off"/>
+                                        <label class="btn btn-outline-dark" for="option2">Pack of 5</label>
+                                    </div>
+                        </div>
+                        </div>
+                        {/* Price */}
+                        <div>
+                        <label className="text-muted text-uppercase">Price</label>
+                            <div className="d-flex justify-content-between">
+                                <div>
+                                    <h3 className="m-0">{formatMoney(product.price)}</h3>
+                                    <p className="text-muted m-0 font-weight-light text-decoration-line-through"> $89.99 MSRP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* In stock */}
+                    <p className="m-0 text-success">{product.countInStock} in stock</p>
+                    {/*Qty and add to cart  */}
+                     <div className="my-4">
+                        <div className="form-input qty-cart-input"> <i className="fa fa-envelope" /> 
+                            <label className="mb-1 text-muted text-uppercase">Qty</label>
+                            <div className="d-flex">
+                                <input type="number" min="1" max={product.countInStock} className="form-control w-25 border-radius" placeholder="0" />
+                                <button class="btn btn-dark flex-grow-1 text-uppercase" type="button">Add to Cart <i className="bi bi-cart"></i></button>
+                            </div>
+                        </div>
+                     </div>
                 </div>
            
             </div>
 
             <div className="row mt-3">
-                {/* Description */}
-                <div className="col-md-6 mb-3">
-                    <nav>
-                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><h6>Description</h6></button>
-                        <button className="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><h6>About Plasencia Cigars</h6></button>
-                    </div>
-                    </nav>
-                    <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active p-2" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"><small>{PRODUCT_DESC}</small></div>
-                    <div className="tab-pane fade p-2" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <img src="//cdn.shopify.com/s/files/1/0430/5436/6888/files/Plasencia-Logo-Shopify_300x300.png?v=1597732732" alt="" />
-                        <p>
-                            <small>Aboout the company here</small>
-                        </p>
+            <p className="fs-4 pb-2">Product Information</p>
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Description</h5>
+                    <p class="card-text">{product.description}</p>
+                    <div className="company-logo">
+                        <img class="img-fluid d-block mx-auto" src="https://www.plasenciacigars.com/wp-content/themes/plasencia-cigars-2018/img/logo-footer.svg" alt="Responsive image"/>
                     </div>
                     </div>
                 </div>
                 
-                {/* Related */}
-                <div className="col-md-6">
-                <nav>
-                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <button className="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><h6>Other sizes</h6></button>
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Details</h5>
+                    <div className="">
+                        <div className="border-bottom ">
+                            <div className="d-flex justify-content-between border-bottom p-1">
+                                <p className="m-0 text-muted text-uppercase">Shape</p> <p className="m-0">{product.vitolaStyle}</p>
+                            </div>
+                            <div className="d-flex justify-content-between border-bottom p-1">
+                                <p className="m-0 text-muted text-uppercase">Strength</p> <p className="m-0">{product.strength}</p>
+                            </div>
+                            <div className="d-flex justify-content-between border-bottom p-1">
+                                <p className="m-0 text-muted text-uppercase">Wrapper</p> <p className="m-0">{product.wrapper}</p>
+                            </div>
+                            <div className="d-flex justify-content-between border-bottom p-1">
+                                <p className="m-0 text-muted text-uppercase">Size</p> <p className="m-0">{product.cigarLengthSize}x{product.cigarRingSize}</p>
+                            </div>
+                            <div className="d-flex justify-content-between p-1">
+                                <p className="m-0 text-muted text-uppercase">Origin</p> <p className="m-0">Nicaragua</p>
+                            </div>
+                        </div>
                     </div>
-                    </nav>
-                    <div className="tab-content d-flex flex-wrap" id="nav-tabContent">
-                        <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
-                        <ProductSearchResult productInfo={PRODUCT_INFO[1]} />
-                        <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
-                        <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
                     </div>
+                </div>
                 </div>
                   
             </div>
+            
 
             {/* Similar Products */}
             <div className="row my-5">
                 <div className="col">
                     <div>
-                        <h6 className="">Similar products</h6>
+                        <p className="fs-4 border-bottom pb-2"> Similar Products</p>
                         <div className="d-flex flex-wrap">
-                            <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
-                            <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
-                            <ProductSearchResult productInfo={PRODUCT_INFO[2] } />
-                            <ProductSearchResult productInfo={PRODUCT_INFO[1] } />
+
+                            {products && products.map(product => <ProductSearchResult key={product._id} productInfo={product} />)}
                         </div>
                         <h6 className="card-header"></h6>
                     </div>
@@ -125,70 +168,28 @@ table{
     font-size: 0.8em;
 }
 
-.item-options{
-    display: flex;
-    justify-content: space-between;
-
-    button{
-        p:nth-of-type(2) {
-            font-size: .7em;
-          }
+.qty-cart-input{
+    input{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
-
-    div {
-        font-size: .85em;
-        border: 2px solid grey;
-        padding: .25em .5em;
-        p{
-            margin: 0;
-        }
-        &:hover{
-            border: 2px solid blue;
-        }
+    button{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 }
+.company-logo{
+    img{
+        height: 75px;
+    }
+}
+
+.item-options{
+    // label{
+    //     font-size: 0.85rem;
+    // }
+    // small{
+    //     font-size: 0.65rem;
+    // }
+}
 `
-
-
-const PRODUCT_DESC = `Not only are Plasencia Alma Fuerte cigars some of the most beautifully presented handmades we’ve ever seen, they’re also unquestionably among the tastiest full-bodied cigars ever crafted. Comprised mainly of Nicaraguan Criollo ‘98 tobaccos spanning the country’s top growing regions of Estelí, Condega, Jalapa and Ometepe, Alma Fuerte projects an ethereal bouquet of sweet coffee, hot cocoa powder, creamy Nutella, marshmallow, and mineral qualities to deliver a delicious and invigorating smoke you won’t soon forget.`
-const PRODUCT_INFO = [
-    {
-        id: 1,
-        brand_name: 'Alma Fuerte',
-        product_name: 'Nestor IV Toro 6 x 54',
-        price: 299.99,
-        price_before: 399.99,
-        discount: 0.25,
-        imgSRC : 'https://assets.bestcigarprices.com/shopcontent/images/PLASENCIA_FUERTE_NESTORIV_233070.jpg'
-    },
-    {
-        id: 2,
-        brand_name: 'Alma del Campo',
-        product_name: 'Guajiro Robusto 5 1/2 x 50',
-        price: 199.99,
-        price_before: 299.99,
-        discount: 0.15,
-        imgSRC : 'https://assets.bestcigarprices.com/shopcontent/images/PLASENCIA_CAMPO_GUAJIRO_233066.jpg'
-    },
-    {
-        id: 3,
-        brand_name: 'Alma del Fuego',
-        product_name: 'Candente Robusto 5 x 50',
-        price: 134.99,
-        price_before: 150.99,
-        discount: 0,
-        imgSRC: 'https://assets.bestcigarprices.com/shopcontent/images/PLASENCIA_FUEGO_CANDENTE_236008.jpg'
-    },
-    {
-        id: 4,
-        brand_name: 'Serie G',
-        product_name: 'Churchill Cameroon 7 x 50',
-        price: 115.99,
-        price_before: 0,
-        discount: 0,
-        imgSRC : 'https://assets.bestcigarprices.com/shopcontent/images/oliva_g_chur_cam.jpg',
-        isFreatured : true,
-        freatured_text : `Oliva Serie 'G' is a good-looking Nicaraguan premium cigar made with an authentic African Cameroon wrapper. This leaf imparts a pleasant, nutty flavor, adding to the rich bouquet presented by the Nicaraguan Habano long-fillers inside.`
-    },
-    
-]

@@ -23,11 +23,22 @@ const Navbar = () => {
     const { success : successLogin } = userLogin 
 
     const [expanded, setExpanded] = useState(false);
+
+    // HANDLE Search 
     const [searchText, setSearchText] = useState('')
 
-    const handleSearchClick = () => {
-        // handle query here
-        history.push('/search/all')
+    const handleSearchClick = e => {
+        handleLinkClicked()
+        e.preventDefault()
+        console.log('handleSearch')
+
+        history.push(`/search/${searchText}`)
+
+        if (searchText.trim()) {
+            history.push(`/search/${searchText}`)
+        } else {
+            history.push('/')
+        }
     }
 
     const handleCartClick = () => {
@@ -66,18 +77,18 @@ const Navbar = () => {
                         <li className="nav-item ms-1 me-1">
                             <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Samplers</Link>
                         </li>
-                        <li className="nav-item ms-1 me-1">
+                        {/* <li className="nav-item ms-1 me-1">
                             <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Shop</Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/about/" className="nav-link" onClick={handleLinkClicked} >About</Link>
+                            <Link to="/about" className="nav-link" onClick={handleLinkClicked} >About</Link>
                         </li>
                         <li className="nav-item ms-1 me-1">
                             <Link to="/contactus" className="nav-link" onClick={handleLinkClicked} >Contact</Link>
                         </li>
                         <li className="nav-item mx-5"></li>
-                        <li className="me-2 order-1 my-3 my-lg-0">
-                            <form className="d-flex">
+                        <li className="me-2 my-3 order-1 order-lg-0 my-lg-0 w-100" id="search-text-box">
+                            <form className="d-flex" onSubmit={handleSearchClick}>
                                 <div className="input-group">
                                     <input 
                                         type="text" 
@@ -86,26 +97,30 @@ const Navbar = () => {
                                         aria-label="Search" 
                                         aria-describedby="button-addon2" 
                                         value={searchText} onChange={e => setSearchText(e.target.value)}/>
-                                    <button className="btn btn-secondary" type="button" id="button-addon2" onClick={() => {handleSearchClick();handleLinkClicked() }}><i className="bi bi-search"></i></button>
+                                    <button 
+                                        className="btn btn-secondary" 
+                                        type="submit" id="button-addon2">
+                                            <i className="bi bi-search"></i>
+                                    </button>
                                 </div>
                             </form>
                         </li>
                         {successRegister || successLogin ? (
                             <li className="nav-item">
                                 {isAdmin ? (
-                                    <Link to="/admin/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >Admin</Link>
+                                    <Link to="/admin" className="nav-link ms-1 me-1 btn btn-outline-secondary" onClick={handleLinkClicked} >Admin</Link>
                                 ) : (
-                                    <Link to="/myaccount/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >My Account</Link>
+                                    <Link to="/myaccount" className="nav-link ms-1 me-1 btn btn-outline-secondary" onClick={handleLinkClicked} >My Account</Link>
                                 )}
                             </li>    
                         ) : (
                             <>
                             <li className="nav-item">
-                                <Link to="/login/" className="nav-link ms-1 me-1" onClick={handleLinkClicked} >Login</Link>
+                                <Link to="/login" className="nav-link ms-1 me-1 btn btn-outline-secondary" onClick={handleLinkClicked} >Login</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to="/signup/" className="nav-link ms-1 me-1" onClick={handleLinkClicked}>SignUp</Link>
-                            </li>
+                            {/* <li className="nav-item">
+                                <Link to="/signup" className="nav-link ms-1 me-1" onClick={handleLinkClicked}>SignUp</Link>
+                            </li> */}
                             </>
                         ) }
                 </ul>  
@@ -120,5 +135,8 @@ export default Navbar
 const NavBarStyled = styled.nav`
     .bi{
         vertical-align: .250em;
+    }
+    #search-text-box{
+        max-width: 420px;
     }
 `

@@ -28,7 +28,6 @@ function App() {
         {/* <AnnouncementBar/> */}
         <Navbar/>
           <Switch>
-          <Route exact path='/' component={Home} />
           <Route exact path='/cart' component={Cart} />
           <Route exact path='/signup' component={SignUpPage} />
           <Route exact path='/login' component={LoginPage} />
@@ -39,6 +38,7 @@ function App() {
           <Route exact path='/admin' component={AdminPage} />
           <Route exact path='/product/:id' component={ProductPage} />
           <Route exact path='/search/:keyword' component={SearchResults} />
+          <Route exact path='/' component={Home} />
           <Route component={NotFound}/>
           </Switch>
           <Footer/>

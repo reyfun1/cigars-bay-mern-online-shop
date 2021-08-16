@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const SortFilter = () => {
+
+    const [priceFilter,setPriceFilter] = useState(0)
+
+    const handlePriceFilter = e => {
+        setPriceFilter(e.target.value)
+    }
     return (
         <SortFilteredStyled className="mb-3">
             <div className="p-3 bg-light border rounded-3">
@@ -19,15 +25,21 @@ const SortFilter = () => {
             </div>
             <div className="p-3 bg-light border rounded-3">
                 <h5 className="mb-3">Filter</h5>
+
                 <div className="mb-3">
                     <label className="mb-1">Brand</label>
                     <select className="form-select" aria-label="Default select example">
                         <option value="" disabled selected>Choose Brand</option>
-                        <option value="featured" >Alma Fuerte</option>
-                        <option value="trending">Alma del Fuego</option>
+                        <option value="featured" >AJ Fernandez</option>
+                        <option value="trending">Plasencia Cigars</option>
                     </select>
                 </div>
                 <div className="mb-3">
+                    <label for="customRange1" class="form-label mb-1">Price Range</label>
+                    <p className="m-0"><small>($0 - ${priceFilter})</small></p>
+                    <input type="range" class="form-range" id="customRange1" min="0" max="500" onChange={handlePriceFilter} value={priceFilter}/>
+                </div>
+                {/* <div className="mb-3">
                     <label className="mb-1">Strength</label>
                     <select className="form-select" aria-label="Default select example">
                         <option value=""disabled selected>Choose Strength</option>
@@ -58,7 +70,7 @@ const SortFilter = () => {
                         <option value="featured" selected="">Alma Fuerte</option>
                         <option value="trending">Alma del Fuego</option>
                     </select>
-                </div>
+                </div> */}
 
                 <div className="d-flex justify-content-between">
                     <button type="button" className="btn btn-danger">Reset</button>

@@ -6,6 +6,7 @@ import { createProduct, uploadProductImage } from '../actions/productActions'
 const EditProduct = ({setShowAddNewProduct}) => {
     const dispatch = useDispatch()
     const imageUploader = useRef()
+    const imagesUploader = useRef()
 
     // Brand Information
     const [productIdCode, setProductIdCode] = useState('')
@@ -46,12 +47,19 @@ const EditProduct = ({setShowAddNewProduct}) => {
     const { loading, error, product, success } = adminProductCreate
 
     // upload image method 
-    const uploadImage = async() => {
+    const uploadImage = async e => {
+        e.preventDefault()
         const image = imageUploader.current.files[0]
         dispatch(uploadProductImage(image))
     }
 
-    const cancelShowAddNewProducts = () => setShowAddNewProduct(false)
+    const uploadImages = async e => {
+        e.preventDefault()
+        const images = imagesUploader.current.files
+
+        console.log(images)
+
+    }
 
     const submitHandler = async e => {
         e.preventDefault()
@@ -145,9 +153,9 @@ const EditProduct = ({setShowAddNewProduct}) => {
                 <div>
                     <p className="fs-5">Product Images</p>
                     <div className="form-input my-3">
-                        <label htmlFor="formFileMultiple" className="form-label">Upload Main Image</label>
+                        <label htmlFor="mainImage" className="form-label">Upload Main Image</label>
                         <div className={`${!mainImagePath && 'd-flex' }`}>
-                            <input className="form-control" type="file" id="formFileMultiple" ref={imageUploader}/>
+                            <input className="form-control" type="file" id="mainImage" ref={imageUploader}/>
                             {imageLoading ? (
                             <div className="my-4 text-center fs-1">
                             <div className="spinner-border" role="status">
@@ -162,6 +170,29 @@ const EditProduct = ({setShowAddNewProduct}) => {
                                     </div>
                                 ) : (
                                     <button className="btn btn-primary" onClick={uploadImage}>Upload</button>
+                                )}
+                                </>
+                            )} 
+                        </div>
+                    </div>
+                    <div className="form-input my-4">
+                    <label htmlFor="formFileMultiple" className="form-label">Upload Other Images</label>
+                        <div className={`${!mainImagePath && 'd-flex' }`}>
+                            <input className="form-control" type="file" id="formFileMultiple" multiple ref={imagesUploader}/>
+                            {imageLoading ? (
+                            <div className="my-4 text-center fs-1">
+                            <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                            </div>
+                                </div>
+                            ) : (
+                                <>
+                                {mainImagePath ? (
+                                    <div className="alert alert-success my-3" role="alert">
+                                    Images Uploaded <i className="bi bi-check-circle"></i>
+                                    </div>
+                                ) : (
+                                    <button className="btn btn-primary" onClick={uploadImages}>Upload</button>
                                 )}
                                 </>
                             )} 

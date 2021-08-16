@@ -44,7 +44,8 @@ export default ProductCard
 
 const DivStyled = styled.div`
     cursor: pointer;
-    box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
+    //box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
+    box-shadow: 0 8px 22px 0 rgb(177 177 177 / 33%), 0 -8px 22px 0 rgb(177 177 177 / 33%);
     border-radius: 15px;
 
     &:not(.bigCard){
