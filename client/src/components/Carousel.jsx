@@ -2,22 +2,15 @@ import React, { useEffect, useState } from 'react'
 
 import styled from 'styled-components'
 
-const Carousel = ({ carouselName, mainImage, images }) => {
+const Carousel = ({ carouselName, images }) => {
 
     const [imagesArr, setImagesArr] = useState([])
-
-    console.log(carouselName)
-
+    
     // combine images together if they exist
     useEffect(() => { 
-        if(mainImage){
-            if(images){
-                setImagesArr([...images, mainImage].reverse())
-            } else{
-                setImagesArr([mainImage])
-            }
-        }
-    }, [mainImage, images])
+        setImagesArr(images)
+
+    }, [])
     
     const CarouselStyled = styled.div`
     .carousel-item{
@@ -36,7 +29,7 @@ const Carousel = ({ carouselName, mainImage, images }) => {
 
 
     return (
-        <CarouselStyled id={carouselName} className="carousel carousel-dark slide" data-bs-ride="carousel">
+        <CarouselStyled id={carouselName} className="carousel carousel-dark slide" data-bs-ride="carousel" options={{interval: false}}>
             <div className="carousel-indicators">
 
                 {imagesArr.length > 0 ? imagesArr.map((image, i) => {

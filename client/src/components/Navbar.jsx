@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import logo from '../img/logo.png'
 import { useSelector } from 'react-redux'
 
@@ -22,7 +22,7 @@ const Navbar = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { success : successLogin } = userLogin 
 
-    const [expanded, setExpanded] = useState(false);
+    const [showNavBar, setShowNavBar] = useState(true);
 
     // HANDLE Search 
     const [searchText, setSearchText] = useState('')
@@ -52,8 +52,27 @@ const Navbar = () => {
         if(isShowingCollapsable) togglerBtn.current.click()
     }
 
+    // hide the search bar on certain ocations
+    useEffect(() => {
+        
+        return history.listen((location) => { 
+        const {pathname} = location
+        
+        if( 
+            pathname.includes('login') ||
+            pathname.includes('signup') ||
+            pathname.includes('myaccount')
+            ){
+            setShowNavBar(false)
+        } else{
+            setShowNavBar(true)
+        }
+        }) 
+    },[history])
+
+
     return (
-        <NavBarStyled className="navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3">
+        <NavBarStyled className={`navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3 ${showNavBar ? '' : 'd-none'}`}>
         <div className="container">
             <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span className="navbar-toggler-icon"></span>

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CustomTable = ({type, data}) => {
+const CustomTable = ({type, data, editBtn}) => {
     switch (type) {
         case 'admin-list-product':
-            return <AdminListProductsTable data={data}/>
+            return <AdminListProductsTable data={data} editBtn={editBtn}/>
         case 'admin-list-users':
             return <AdminListUsersTable data={data}/>
         default:
@@ -13,42 +13,33 @@ const CustomTable = ({type, data}) => {
 
 export default CustomTable
 
-
-const AdminListProductsTable = ({data: products}) => {
+const AdminListProductsTable = ({data: products, editBtn}) => {
     return (
     <table className="table text-center">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>BRAND</th>
-                <th>VITOLA</th>
-                <th>SIZE</th>
-                <th>COUNT</th>
+                <th>NAME</th>
+                <th>VENDOR</th>
                 <th>CATEGORY</th>
-                <th>PRICE</th>
-                <th>IN STOCK</th>
-                <th></th>
+                <th>SKUS</th>
+                <th>STOCK</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             {products && products.length > 0 && products.map( product => {
-                const {_id, productIdCode, brandName, vitolaName, cigarRingSize, cigarLengthSize, cigarCount, category, price, countInStock} = product
+                const {_id, name, vendor, category, skus} = product
 
                return <tr key={_id}>
-                    <td>{productIdCode}</td>
-                    <td>{brandName}</td>
-                    <td>{vitolaName}</td>
-                    <td>{cigarLengthSize} x {cigarRingSize}</td>
-                    <td>{cigarCount}</td>
+                    <td>{_id}</td>
+                    <td>{name}</td>
+                    <td>{vendor}</td>
                     <td>{category}</td>
-                    <td>{price}</td>
-                    <td>{countInStock}</td>
+                    <td>{skus.length}</td>
+                    <td>{skus.reduce((acc, sku) => sku.stock_qty + acc, 0 )}</td>
                     <td>
-                        <button className="btn btn-secondary btn-sm me-1">Edit</button> 
-                    </td>
-                    <td>
-                        <button className="btn btn-dark btn-sm">Delete</button>
+                        <button className="btn btn-secondary btn-sm me-1" onClick={() => editBtn(_id)}><i className="bi bi-box-arrow-in-up-right"></i></button> 
                     </td>
                 </tr>
             })}

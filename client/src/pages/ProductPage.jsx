@@ -67,7 +67,7 @@ const ProductPage = ({match}) => {
                         </div>
                         </div>
                         {/* Price */}
-                        <div>
+                        <div className="">
                         <label className="text-muted text-uppercase">Price</label>
                             <div className="d-flex justify-content-between">
                                 <div>
@@ -85,7 +85,7 @@ const ProductPage = ({match}) => {
                         <div className="form-input qty-cart-input"> <i className="fa fa-envelope" /> 
                             <label className="mb-1 text-muted text-uppercase">Qty</label>
                             <div className="d-flex">
-                                <input type="number" min="1" max={product.countInStock} className="form-control w-25 border-radius" placeholder="0" />
+                                <input type="number" min="1" max={product.countInStock} className="form-control w-25 border-radius me-2" placeholder="0" />
                                 <button class="btn btn-dark flex-grow-1 text-uppercase" type="button">Add to Cart <i className="bi bi-cart"></i></button>
                             </div>
                         </div>

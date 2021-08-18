@@ -19,6 +19,8 @@ import AccountPage from './pages/AccountPage';
 import AdminPage from './pages/AdminPage';
 
 import styled from 'styled-components'
+import NewAdminPage from './pages/NewAdminPage';
+import AdminEditProduct from './adminPages/AdminEditProduct';
 
 function App() {
   
@@ -35,8 +37,11 @@ function App() {
           <Route exact path='/checkout' component={CheckoutPage} />
           <Route exact path='/contactus' component={ContactUsPage} />
           <Route exact path='/about' component={AboutPage} />
-          <Route exact path='/admin' component={AdminPage} />
+          <Route exact path='/oldadmin' component={AdminPage} />
+          <Route exact path='/admin' component={NewAdminPage} />
           <Route exact path='/product/:id' component={ProductPage} />
+          <Route exact path='/admin/product/view/:id' component={AdminEditProduct} />
+          <Route exact path='/admin/product/new/' component={AdminEditProduct} />
           <Route exact path='/search/:keyword' component={SearchResults} />
           <Route exact path='/' component={Home} />
           <Route component={NotFound}/>

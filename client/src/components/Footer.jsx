@@ -16,7 +16,6 @@ const Footer = () => {
     useEffect(() => {
         return history.listen((location) => { 
         const {pathname} = location
-        console.log(`You changed the page to: ${location.pathname}`) 
 
         if( pathname.includes('admin') || 
             pathname.includes('login') ||

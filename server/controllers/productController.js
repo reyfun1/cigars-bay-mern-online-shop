@@ -63,9 +63,16 @@ const createProduct = asyncHandler(async (req,res) => {
     let productInfo = req.body
 
     // add the user to product info 
-    productInfo['user'] = req.user._id
+    // productInfo['user'] = req.user._id
+    productInfo['user'] = '60fbbb963442c32b60fc671e'
+    productInfo['vendor'] = '611caaebda2b43aa1906cfc5'
+    productInfo['category'] = '611cab2fda2b43aa1906cfc6'
+
+    // console.log(productInfo)
 
     const product = new Product(productInfo)
+
+    // console.log(product)
 
     const createdProduct = await product.save()
     res.status(201).json(createdProduct)
