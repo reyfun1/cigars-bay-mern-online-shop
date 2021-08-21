@@ -46,16 +46,17 @@ const ProductPage = ({match}) => {
     }, [productID])
 
     // select sku based if it is searchaable or not 
-
     useEffect(()=>{
         if(product.skus){
             const searchableSku = product.skus.find(sku => sku.isSearchable)
             if(searchableSku) setSelectedSku(searchableSku)
         }
-    },[])
+    },[product])
 
-    const handleSkuChange = () => {
-
+    const handleSkuChange = e => {
+        const desiredSkuID = e.target.getAttribute('option')
+        const foundSKU = product.skus.find(sku => sku.sku === desiredSkuID)
+        setSelectedSku(foundSKU)
     }
 
     return (
@@ -97,7 +98,8 @@ const ProductPage = ({match}) => {
                                 <div key={key} className="me-3">
                                     <input type="radio" class="btn-check" 
                                         name="options" id={'option'+key} 
-                                        autocomplete="off" onChange={handleSkuChange} checked={sku.isSearchable}/>
+                                        option={sku.sku}
+                                        autocomplete="off" onChange={handleSkuChange} checked={selectedSku.sku === sku.sku}/>
                                     <label class="btn btn-outline-dark" for={'option'+key}>{sku.option}</label>
                                 </div>
                                 )
