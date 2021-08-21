@@ -5,12 +5,10 @@ import styled from 'styled-components'
 const Carousel = ({ carouselName, images }) => {
 
     const [imagesArr, setImagesArr] = useState([])
-    
-    // combine images together if they exist
-    useEffect(() => { 
-        setImagesArr(images)
 
-    }, [])
+    useEffect(() => { 
+        if(images) setImagesArr(images)
+    }, [images])
     
     const CarouselStyled = styled.div`
     .carousel-item{
@@ -26,7 +24,6 @@ const Carousel = ({ carouselName, images }) => {
         max-height: 390px;
     }
 `
-
 
     return (
         <CarouselStyled id={carouselName} className="carousel carousel-dark slide" data-bs-ride="carousel" options={{interval: false}}>

@@ -8,6 +8,9 @@ import Carousel from '../components/Carousel'
 import ProductDetailsTable from '../components/ProductDetailsTable'
 import ProductSearchResult from '../components/ProductSearchResult'
 
+import axios from 'axios'
+import LoadingSpinner from '../components/LoadingSpinner'
+
 const ProductPage = ({match}) => {
     const productID = match.params.id
 
@@ -19,11 +22,41 @@ const ProductPage = ({match}) => {
     const productDetails = useSelector((state) => state.productDetails)
     const { loading, product , error} = productDetails
 
+
+    const [selectedSku, setSelectedSku] = useState()
+    const [vendorLoading, setVendorLoading] = useState(true)
+    const [vendorFound, setVendorFound] = useState({})
+
+    // lookup vendor
+    useEffect(()=>{
+        setVendorLoading(true)
+        axios.get(`/api/vendors/${product.vendor}`)
+        .then(({data}) => {
+            setVendorFound(data)
+            setVendorLoading(false)
+        })
+        .catch(err => {
+
+        })
+    },[product])
+
     // find the product in the array, if not found request it 
     useEffect(() => {
         dispatch(listProductDetails(productID))
     }, [productID])
 
+    // select sku based if it is searchaable or not 
+
+    useEffect(()=>{
+        if(product.skus){
+            const searchableSku = product.skus.find(sku => sku.isSearchable)
+            if(searchableSku) setSelectedSku(searchableSku)
+        }
+    },[])
+
+    const handleSkuChange = () => {
+
+    }
 
     return (
         <ProductPageStyled className="container py-4">
@@ -31,23 +64,27 @@ const ProductPage = ({match}) => {
             <div className="row">
                 {/* Carousel Images */}
                 <div className="col mb-3">
-                    <Carousel carouselName="productImages" mainImage={product.image} images={product.productImages}/>
+                    <Carousel carouselName="productImages" images={product.images}/>
                 </div>
                 {/* Summary and price  */}
                 <div className="col-md-6 mb-3">
                     {/* Item title */}
-                    <div>
-                        <p className="fs-4">
-                            {product.brandName} {product.vitolaName} - {product.cigarLengthSize}x{product.cigarRingSize} {product.vitolaStyle} -  {product.category} of {product.cigarCount}
-                        </p>
+                    {vendorLoading ? (
+                        <LoadingSpinner/>
+                    ) : (
+                        <div>
+                            <p className="fs-4">
+                            {product.name}
+                            </p>
 
-                        <p className="text-muted text-muted text-uppercase">By: <a href="">{product.companyName}</a></p>
-                        <span className="fs-6">Item # : {product._id}</span>
-                    </div>    
+                            <p className="text-muted text-muted text-uppercase">By: <a href="">{vendorFound.name}</a></p>
+                            <span className="fs-6">Item # : {product._id}</span>
+                        </div>   
+                    )} 
 
                     {/* Quick description */}
                     <div className="my-4">
-                          <p>This Plasencia Alma Del Fuego Candente cigar is made in Nicaragua. Outside, you'll find a Nicaraguan wrapper. Inside, the binder is Nicaraguan, and the filler is Nicaraguan.</p>  
+                          <p>{product.description}</p>  
                     </div>
 
                     {/* Item Options */}
@@ -55,15 +92,16 @@ const ProductPage = ({match}) => {
                         <div>
                         <label className="mb-2 text-muted text-uppercase">Cigar Count</label>
                         <div className="d-flex item-options justify-content-start">
-                                    <div className="me-3">
-                                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked/>
-                                        <label class="btn btn-outline-dark" for="option1">Box of 10</label>
-                                    </div>
-
-                                    <div className="">
-                                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off"/>
-                                        <label class="btn btn-outline-dark" for="option2">Pack of 5</label>
-                                    </div>
+                            {product.skus && product.skus.map((sku,key) => {
+                                return (
+                                <div key={key} className="me-3">
+                                    <input type="radio" class="btn-check" 
+                                        name="options" id={'option'+key} 
+                                        autocomplete="off" onChange={handleSkuChange} checked={sku.isSearchable}/>
+                                    <label class="btn btn-outline-dark" for={'option'+key}>{sku.option}</label>
+                                </div>
+                                )
+                            })}
                         </div>
                         </div>
                         {/* Price */}
@@ -71,7 +109,7 @@ const ProductPage = ({match}) => {
                         <label className="text-muted text-uppercase">Price</label>
                             <div className="d-flex justify-content-between">
                                 <div>
-                                    <h3 className="m-0">{formatMoney(product.price)}</h3>
+                                    <h3 className="m-0">{selectedSku && formatMoney(selectedSku.price)}</h3>
                                     <p className="text-muted m-0 font-weight-light text-decoration-line-through"> $89.99 MSRP</p>
                                 </div>
                             </div>
@@ -79,7 +117,7 @@ const ProductPage = ({match}) => {
                     </div>
 
                     {/* In stock */}
-                    <p className="m-0 text-success">{product.countInStock} in stock</p>
+                    <p className="m-0 text-success">{selectedSku && selectedSku.stock_qty} in stock</p>
                     {/*Qty and add to cart  */}
                      <div className="my-4">
                         <div className="form-input qty-cart-input"> <i className="fa fa-envelope" /> 
@@ -100,7 +138,7 @@ const ProductPage = ({match}) => {
                 <div class="card">
                     <div class="card-body">
                     <h5 class="card-title">Description</h5>
-                    <p class="card-text">{product.description}</p>
+                    <p class="card-text">{vendorFound.description}</p>
                     <div className="company-logo">
                         <img class="img-fluid d-block mx-auto" src="https://www.plasenciacigars.com/wp-content/themes/plasencia-cigars-2018/img/logo-footer.svg" alt="Responsive image"/>
                     </div>
@@ -112,21 +150,12 @@ const ProductPage = ({match}) => {
                     <h5 class="card-title">Details</h5>
                     <div className="">
                         <div className="border-bottom ">
-                            <div className="d-flex justify-content-between border-bottom p-1">
-                                <p className="m-0 text-muted text-uppercase">Shape</p> <p className="m-0">{product.vitolaStyle}</p>
-                            </div>
-                            <div className="d-flex justify-content-between border-bottom p-1">
-                                <p className="m-0 text-muted text-uppercase">Strength</p> <p className="m-0">{product.strength}</p>
-                            </div>
-                            <div className="d-flex justify-content-between border-bottom p-1">
-                                <p className="m-0 text-muted text-uppercase">Wrapper</p> <p className="m-0">{product.wrapper}</p>
-                            </div>
-                            <div className="d-flex justify-content-between border-bottom p-1">
-                                <p className="m-0 text-muted text-uppercase">Size</p> <p className="m-0">{product.cigarLengthSize}x{product.cigarRingSize}</p>
-                            </div>
-                            <div className="d-flex justify-content-between p-1">
-                                <p className="m-0 text-muted text-uppercase">Origin</p> <p className="m-0">Nicaragua</p>
-                            </div>
+                            {product.attributes && Object.keys(product.attributes).map(attr => {
+                                return (
+                                <div className="d-flex justify-content-between border-bottom p-1">
+                                    <p className="m-0 text-muted text-uppercase">{attr}</p> <p className="m-0">{product.attributes[attr]}</p>
+                                </div>)
+                            })}
                         </div>
                     </div>
                     </div>
