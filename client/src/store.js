@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 // Import reducers
 import { userLoginReducer, userRegisterReducer, userListReducer } from './reducers/userReducers'
 import { productCreateReducer, productUploadImagesReducer, productListReducer, productDetailsReducer} from './reducers/productReducers'
+import { vendorListReducer } from './reducers/vendorReducers'
 
 // Combine Reducers
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     adminImageUpload : productUploadImagesReducer,
     productList: productListReducer,
     productDetails: productDetailsReducer,
+    vendorList : vendorListReducer,
 })
 
 // check if there is avaible user info in storage 

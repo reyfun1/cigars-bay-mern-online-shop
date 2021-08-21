@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useIntersection } from '../utils'
 
+
+
 import styled from  'styled-components'
-import CustomTable from '../components/CustomTable'
+import { AdminListProductsTable } from '../components/CustomTable'
 import LoadingSpinner from '../components/LoadingSpinner'
 import { listProducts } from '../actions/productActions'
 import { useHistory } from 'react-router-dom'
+import { getVendors } from '../actions/vendorActions'
 
 
 const AdminProducts = () => {
@@ -17,16 +20,26 @@ const AdminProducts = () => {
   
   // Extract from the state : 
   const productList = useSelector(state => state.productList)
-  const { loading :loadingProducts, error :errorProducts ,products, page, pages} = productList
+  const { loading :loadingProducts, error :errorProducts,products, page, pages} = productList
+
+  const vendorList = useSelector(state => state.vendorList)
+  const { loading :loadingVendors, error :errorVendors,vendors} = vendorList
+
 
   // Check if products section is visible and load products from db
   useEffect(() => {    
-    const observer = 
-      new IntersectionObserver(entries => entries[0].isIntersecting && loadProducts(), {})
+    const observer = new IntersectionObserver(entries => entries[0].isIntersecting 
+      && loadProducts() 
+      && loadVendorList() , {})
+
+
     observer.observe(productsTabRef.current)
   }, [])
 
+  // load products list
   const loadProducts = () => dispatch(listProducts('',1))
+  // load vendor list 
+  const loadVendorList = () => dispatch(getVendors())
 
   // go to admin edit product
   const goToViewProduct = productID => {
@@ -50,7 +63,10 @@ const AdminProducts = () => {
                   ? <LoadingSpinner/> 
                   : 
                   <>
-                    <CustomTable type="admin-list-product" data={products} editBtn={goToViewProduct}/>
+                    <AdminListProductsTable 
+                      products={products} 
+                      vendors={vendors} 
+                      editBtn={goToViewProduct}/>
                   </>
               }</>
           }

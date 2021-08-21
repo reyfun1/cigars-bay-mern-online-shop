@@ -1,20 +1,40 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
-const CustomTable = ({type, data, editBtn}) => {
-    switch (type) {
-        case 'admin-list-product':
-            return <AdminListProductsTable data={data} editBtn={editBtn}/>
-        case 'admin-list-users':
-            return <AdminListUsersTable data={data}/>
-        default:
-            break;
-    }
-}
+import axios from 'axios'
 
-export default CustomTable
+// const CustomTable = ({type, data, editBtn}) => {
+//     switch (type) {
+//         case 'admin-list-product':
+//             return <AdminListProductsTable data={data} editBtn={editBtn}/>
+//         case 'admin-list-users':
+//             return <AdminListUsersTable data={data}/>
+//         default:
+//             break;
+//     }
+// }
 
-const AdminListProductsTable = ({data: products, editBtn}) => {
+// export default CustomTable
+
+const AdminListProductsTable = ({products, vendors, editBtn}) => {
+
+    const [arr, setArr] = useState([])
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
+
+    // take vendors info and input into products
+    useEffect(()=>{
+      if(products && vendors){
+        products.forEach(product => {
+          const foundVendor = vendors.find(vendor => vendor._id === product.vendor)
+          if(foundVendor) product['vendor'] = foundVendor
+        })
+        setArr(products)
+      }
+    },[products, vendors])
+
     return (
+    <>
+    {loading && <p>Loading...</p>}
     <table className="table text-center">
         <thead>
             <tr>
@@ -28,24 +48,21 @@ const AdminListProductsTable = ({data: products, editBtn}) => {
             </tr>
         </thead>
         <tbody>
-            {products && products.length > 0 && products.map( product => {
+          {arr.length > 0 && products.map( product => {
                 const {_id, name, vendor, category, skus} = product
-
-               return <tr key={_id}>
-                    <td>{_id}</td>
-                    <td>{name}</td>
-                    <td>{vendor}</td>
-                    <td>{category}</td>
-                    <td>{skus.length}</td>
-                    <td>{skus.reduce((acc, sku) => sku.stock_qty + acc, 0 )}</td>
-                    <td>
-                        <button className="btn btn-secondary btn-sm me-1" onClick={() => editBtn(_id)}><i className="bi bi-box-arrow-in-up-right"></i></button> 
-                    </td>
-                </tr>
-            })}
-            
+                return <tr key={_id}>
+                      <td>{_id}</td>
+                      <td>{name}</td>
+                      <td>{vendor.name}</td>
+                      <td>{category}</td>
+                      <td>{skus.length}</td>
+                      <td>{skus.reduce((acc, sku) => sku.stock_qty + acc, 0 )}</td>
+                      <td><button className="btn btn-secondary btn-sm me-1" onClick={() => editBtn(_id)}><i className="bi bi-box-arrow-in-up-right"></i></button> </td>
+                  </tr>
+          })}
         </tbody>
     </table>
+    </>
     )
 }
 
@@ -89,6 +106,11 @@ const AdminListUsersTable = ({data: users}) => {
       </table>
 
     )
+}
+export default AdminListUsersTable
+export {
+  AdminListProductsTable,
+  AdminListUsersTable
 }
 
 

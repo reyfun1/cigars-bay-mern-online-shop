@@ -13,16 +13,22 @@ const AdminEditProduct = ({match}) => {
     const modalBtn = useRef(null)
 
     const productID = match.params.id
+
+    // Important states 
+    const [mainState, setMainState] = useState({})
     const [activeSKU, setActiveSKU] = useState({})
 
+
+    const [newImages, setNewImages] = useState({})
+
     const [editMode, setEditMode] = useState(false)
-    const [mainState, setMainState] = useState({})
     const [newProduct, setNewProduct] = useState(false)
 
     const [newAttribute, setNewAttribute] = useState(false)
 
     const attrName = useRef(null)
     const attrText = useRef(null)
+    const imagesUploader = useRef(null)
 
 
     // Editing product info from redux
@@ -36,13 +42,19 @@ const AdminEditProduct = ({match}) => {
         } else{
             setEditMode(true)
             setNewProduct(true)
+            setMainState({})
+            setActiveSKU({})
         }
     },[])
 
     // Fill the main state with the product info
     useEffect(()=>{
-        setMainState(product)
+        if(productID && Object.keys(product).length > 0){
+            setMainState(product)
+        }
     },[product])
+
+    console.log(mainState)
 
     // Functions 
     const deleteImage = () => {
@@ -51,11 +63,9 @@ const AdminEditProduct = ({match}) => {
 
     const handleMainEditBtnClick = editmode => {
         setEditMode(editmode)
-
         if(!editmode){
             setNewAttribute(false)
         }
-
     }
 
     const handleAttributeSaveClick = () => {
@@ -63,7 +73,7 @@ const AdminEditProduct = ({match}) => {
         const text = attrText.current.value
 
         if(name === '' || text === ''){
-                // show warning
+            // show warning
         } else{
             // extract old attr 
             const oldAttr = mainState.attributes
@@ -76,10 +86,6 @@ const AdminEditProduct = ({match}) => {
         }
     }
 
-    useEffect(()=>{
-        //console.log(mainState)
-    },[mainState])
-
     const handleAttrInput = (key,value) => {
         // get old state of attr 
         const attr = mainState.attributes
@@ -88,17 +94,31 @@ const AdminEditProduct = ({match}) => {
         setMainState({...mainState, attributes : attr})
     }
 
-    console.log(activeSKU)
+    const handleShippingInput = (key,value) => {
+        // get old shipment info 
+        let shipping = activeSKU.shipping
 
-    const handleSkuShippingInput = (key,value) => {
-        // get old state of shipping 
-        const skuShipping = activeSKU.shipping
+        // if shipping is undefined, then define it 
+        if(!shipping){
+            shipping = {}
 
-        // change the text for the property
-        skuShipping[key] = value
-        setActiveSKU({...activeSKU, shipping : skuShipping})
+            // set the value
+            shipping[key] = value
+
+            // add the shipping object to he state 
+            setActiveSKU({...activeSKU, shipping})
+        } 
+        // shipping is already defined
+        else{
+            // add the new property to the shipping obj 
+            shipping = {...shipping, [key]: value}
+
+            // change the state 
+            setActiveSKU({...activeSKU, shipping})
+        }
     }
-    
+
+
     const handleDeleteAttr = key => {
         console.log(key)
     }
@@ -109,16 +129,42 @@ const AdminEditProduct = ({match}) => {
         modalBtn.current.click()
     }
 
+    // handle data validation for save btn 
+    useEffect(()=> {
+    
+    },[activeSKU])
+    
+    // add Sku to the main state 
     const handleSaveSku = () => {
 
+        let mainSkus = mainState.skus 
+
+        // skus is undefined
+        if(!mainSkus){
+            let skus = [activeSKU]
+
+            setMainState({...mainState, skus})
+        } 
+        // skus is defined
+        else{   
+            // add to local arr 
+            mainSkus.push(activeSKU)
+
+            setMainState({...mainState, mainSkus})
+        }
+
+        // close the modal, erase active sku modal 
     }
 
     const handleSaveProduct = () => {
-        // things to submit 
-        console.log(mainState)
-        console.log(activeSKU)
+        console.log(mainState, activeSKU)
     }
 
+    const handleImagesUploader = e => {
+        setNewImages(imagesUploader.current.files)
+    }
+
+    console.log(newImages)
 
 
     return (
@@ -221,16 +267,38 @@ const AdminEditProduct = ({match}) => {
                 </div>
                 <div className="col-8">
                     <p className="fs-5">Images</p>
-                    <div className="d-flex flex-wrap justify-content-start border border-1 rounded-3 my-3 p-2">
-                        {product.images && product.images.map((imageURL,i) => {
-                            return (<div key={i} onClick={deleteImage} className="img-container img-thumbnail border-2 m-1">
+                    <div className="d-flex flex-wrap align-items-center justify-content-start border border-1 rounded-3 my-3 p-2">
+                        {mainState.images && mainState.images.map((imageURL,i) => {
+                            return (
+                            <div key={i} onClick={deleteImage} className="img-container img-thumbnail border-2 m-1">
                                 <img className="" src={imageURL} alt={imageURL} />
                             </div>)
                         })}
+                        {(editMode || newProduct) && 
                         <div className="img-thumbnail img-button-container">
-                            <button className="btn btn-outline-success float-end h-100 fs-3"><i className="bi bi-file-earmark-plus"></i></button>
-                        </div>
+                                <button className="btn btn-outline-success float-end h-100 fs-3" onClick={e => imagesUploader.current.click()}>
+                                    <i className="bi bi-file-earmark-plus"></i>
+                                </button>
+                                <div class="input-group mb-3 d-none">
+                                    <input ref={imagesUploader} multiple type="file" 
+                                    class="form-control" id="inputGroupFile02" onChange={handleImagesUploader}/>
+                                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                </div>
+                        </div>}
                     </div>
+                    {newImages.length > 0 && 
+                    <>
+                        <p>New Images to Upload</p>
+                        <div className="d-flex flex-wrap align-items-center justify-content-start border border-1 rounded-3 my-3 p-2"> 
+                            {newImages.length > 0 && [...newImages].map((file,i) => {
+                                return (
+                                <div key={i} onClick={deleteImage} className="img-container img-thumbnail border-2 m-1">
+                                    <img className="" src={URL.createObjectURL(file)} alt={file.name} />
+                                </div>)
+                            })}
+                        </div>
+                    </>
+                    }
                 </div>
             </div>
             <div className="row border-bottom py-4">
@@ -254,19 +322,20 @@ const AdminEditProduct = ({match}) => {
                                     <td>{sku.sku}</td>
                                     <td>{sku.option}</td>
                                     <td>{sku.stock_qty}</td>
-                                    <td>{formatMoney(sku.price.base)}</td>
+                                    <td>{formatMoney(sku.price * 1)}</td>
                                     <td>{sku.isSearchable ? <i className="bi bi-check"></i> : <i className="bi bi-x"></i> }</td>
                                     <td>L:{sku.shipping.l} x H:{sku.shipping.h} x W: {sku.shipping.w}  ({sku.shipping.weight} lbs)</td>
                                 </tr>
                             )
                         })}
+                        {(editMode || newProduct) && 
                         <tr>
                             <td className="p-0">
                                 <button type="button" className="btn btn-outline-primary w-100 border-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i className="bi bi-plus-circle-dotted"></i> New Sku
                                 </button>
                             </td>
-                        </tr>
+                        </tr>}
                     </tbody>
                     </table>
                     
@@ -319,7 +388,9 @@ const AdminEditProduct = ({match}) => {
                             value={activeSKU?.price?.base} onChange={e => setActiveSKU({...activeSKU,price: e.target.value}) } /> 
                         </div>
                         <div className="form-input my-3 form-check form-switch">
-                            <input className="form-check-input" checked={activeSKU.isSearchable} type="checkbox" id="flexSwitchCheckDefault"/>
+                            <input className="form-check-input" checked={activeSKU.isSearchable} disabled={!editMode} 
+                                type="checkbox" id="flexSwitchCheckDefault" value={activeSKU.isSearchable} 
+                                onChange={e => setActiveSKU({...activeSKU, isSearchable : (!activeSKU.isSearchable)})}/>
                             <label className="form-check-label" htmlFor="flexSwitchCheckDefault">SKU is Searchable</label><br />
                             <small>(This sku will show up in the search results of users)</small>
                         </div>
@@ -331,33 +402,34 @@ const AdminEditProduct = ({match}) => {
                                 <label>Length</label>
                                 <input type="num" className={`form-control ${!editMode ? 'read-only' : ''}`} 
                                 disabled={!editMode} placeholder="" 
-                                value={activeSKU?.shipping?.l} onChange={e => handleSkuShippingInput('l',e.target.value)}/>
+                                value={activeSKU?.shipping?.l} onChange={e => handleShippingInput('l',e.target.value)}/>
                             </div>
                             <div className="col">
                                 <label>Width</label>
                                 <input type="num" className={`form-control ${!editMode ? 'read-only' : ''}`} 
                                 disabled={!editMode} placeholder="" 
-                                value={activeSKU?.shipping?.w}/>
+                                value={activeSKU?.shipping?.w} onChange={e => handleShippingInput('w',e.target.value)}/>
                             </div>
                             <div className="col">
                                 <label>Height</label>
                                 <input type="num" className={`form-control ${!editMode ? 'read-only' : ''}`} 
                                 disabled={!editMode} placeholder="" 
-                                value={activeSKU?.shipping?.h}/>
+                                value={activeSKU?.shipping?.h} onChange={e => handleShippingInput('h',e.target.value)}/>
                             </div>
                         </div>
                         <div className="form-input row my-3">
                             <div className="col">
                                 <label>Weight (lbs)</label>
                                 <input type="num" className={`form-control ${!editMode ? 'read-only' : ''}`} 
-                                disabled={!editMode} placeholder="" value={activeSKU?.shipping?.weight}/>
+                                disabled={!editMode} placeholder="" 
+                                value={activeSKU?.shipping?.weight} onChange={e => handleShippingInput('weight',e.target.value)}/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary" onClick={handleSaveSku}>Save</button>
+                    {(editMode || newProduct) && <button type="button" className="btn btn-primary" onClick={handleSaveSku}>Save</button>}
                 </div>
                 </div>
             </div>
@@ -412,11 +484,15 @@ table {
     // }
 }
 .img-container{
-    max-width: 200px;
     cursor: pointer;
     opacity: 1;
     position: relative;
     text-align: center;
+    max-width: 150px;
+    img{
+        width: 100%;
+    }
+
     &:hover{
         border-color: red;
         opacity: 0.7;
@@ -433,12 +509,6 @@ table {
         }
     }
 
-    img{
-        height: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
+    
 }
 `
