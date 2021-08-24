@@ -10,6 +10,8 @@ import ProductSearchResult from '../components/ProductSearchResult'
 
 import axios from 'axios'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { addToCart } from '../actions/cartActions'
+import { LatestProductLittleCart } from '../components/LittleCart'
 
 const ProductPage = ({match}) => {
     const productID = match.params.id
@@ -22,10 +24,11 @@ const ProductPage = ({match}) => {
     const productDetails = useSelector((state) => state.productDetails)
     const { loading, product , error} = productDetails
 
-
     const [selectedSku, setSelectedSku] = useState()
     const [vendorLoading, setVendorLoading] = useState(true)
     const [vendorFound, setVendorFound] = useState({})
+
+    const [qty, setQty] = useState(1)
 
     // lookup vendor
     useEffect(()=>{
@@ -57,15 +60,26 @@ const ProductPage = ({match}) => {
         const desiredSkuID = e.target.getAttribute('option')
         const foundSKU = product.skus.find(sku => sku.sku === desiredSkuID)
         setSelectedSku(foundSKU)
+        setQty(1)
+    }
+    
+    const [showLittleCart, setShowLittleCart] = useState(false)
+
+    const handleAddToCart = () => {
+        setShowLittleCart(true)
+        dispatch(addToCart(product, selectedSku,vendorFound, qty))
     }
 
+
     return (
-        <ProductPageStyled className="container py-4">
+        <ProductPageStyled className="container py-4 position-relative">
             <BreadCrumb/>
+            {/* Little cart here  */}
+            <LatestProductLittleCart showLittleCart={showLittleCart} setShowLittleCart={setShowLittleCart}/>
             <div className="row">
                 {/* Carousel Images */}
                 <div className="col mb-3">
-                    <Carousel carouselName="productImages" images={product.images}/>
+                    {product.images && <Carousel carouselName="productImages" images={product.images}/>}
                 </div>
                 {/* Summary and price  */}
                 <div className="col-md-6 mb-3">
@@ -75,7 +89,7 @@ const ProductPage = ({match}) => {
                     ) : (
                         <div>
                             <p className="fs-4">
-                            {product.name}
+                            {product.name} - {selectedSku && selectedSku.option}
                             </p>
 
                             <p className="text-muted text-muted text-uppercase">By: <a href="">{vendorFound.name}</a></p>
@@ -93,25 +107,25 @@ const ProductPage = ({match}) => {
                         <div>
                         <label className="mb-2 text-muted text-uppercase">Cigar Count</label>
                         <div className="d-flex item-options justify-content-start">
-                            {product.skus && product.skus.map((sku,key) => {
+                            {(selectedSku && product) && product.skus.map((sku,key) => {
                                 return (
                                 <div key={key} className="me-3">
                                     <input type="radio" class="btn-check" 
                                         name="options" id={'option'+key} 
                                         option={sku.sku}
-                                        autocomplete="off" onChange={handleSkuChange} checked={selectedSku.sku === sku.sku}/>
-                                    <label class="btn btn-outline-dark" for={'option'+key}>{sku.option}</label>
+                                        autoComplete="off" onChange={handleSkuChange} checked={selectedSku.sku === sku.sku}/>
+                                    <label class="btn btn-outline-dark" htmlFor={'option'+key}>{sku.option}</label>
                                 </div>
                                 )
                             })}
                         </div>
                         </div>
                         {/* Price */}
-                        <div className="">
-                        <label className="text-muted text-uppercase">Price</label>
+                        <div className="price-container">
+                            <label className="text-muted text-uppercase">Price</label>
                             <div className="d-flex justify-content-between">
                                 <div>
-                                    <h3 className="m-0">{selectedSku && formatMoney(selectedSku.price)}</h3>
+                                    {selectedSku && <h3 className="m-0 price-amount">{formatMoney(selectedSku.price)}</h3>}
                                     <p className="text-muted m-0 font-weight-light text-decoration-line-through"> $89.99 MSRP</p>
                                 </div>
                             </div>
@@ -125,8 +139,9 @@ const ProductPage = ({match}) => {
                         <div className="form-input qty-cart-input"> <i className="fa fa-envelope" /> 
                             <label className="mb-1 text-muted text-uppercase">Qty</label>
                             <div className="d-flex">
-                                <input type="number" min="1" max={product.countInStock} className="form-control w-25 border-radius me-2" placeholder="0" />
-                                <button class="btn btn-dark flex-grow-1 text-uppercase" type="button">Add to Cart <i className="bi bi-cart"></i></button>
+                                <input type="num" min="1" max={selectedSku && selectedSku.stock_qty} 
+                                className="form-control w-25 border-radius me-2" placeholder="0" onChange={e => setQty(e.target.value)} value={qty} />
+                                <button class="btn btn-dark flex-grow-1 text-uppercase" type="button" onClick={handleAddToCart}>Add to Cart <i className="bi bi-cart"></i></button>
                             </div>
                         </div>
                      </div>
@@ -173,7 +188,6 @@ const ProductPage = ({match}) => {
                     <div>
                         <p className="fs-4 border-bottom pb-2"> Similar Products</p>
                         <div className="d-flex flex-wrap">
-
                             {products && products.map(product => <ProductSearchResult key={product._id} productInfo={product} />)}
                         </div>
                         <h6 className="card-header"></h6>
@@ -215,12 +229,4 @@ table{
     }
 }
 
-.item-options{
-    // label{
-    //     font-size: 0.85rem;
-    // }
-    // small{
-    //     font-size: 0.65rem;
-    // }
-}
 `

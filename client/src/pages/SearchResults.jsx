@@ -64,16 +64,6 @@ const SearchResults = ({match}) => {
                     {products && products.length > 0 
                         ? products.map(product => <ProductSearchResult productInfo={product} key={product._id} clickMethod={() => handleProductCardClick(product._id)}/> ) 
                         : <div>No Products Found</div>}
-                        {products && products.length > 0 
-                        ? products.map(product => <ProductSearchResult productInfo={product} key={product._id} clickMethod={() => handleProductCardClick(product._id)}/> ) 
-                        : <div>No Products Found</div>}
-                        {products && products.length > 0 
-                        ? products.map(product => <ProductSearchResult productInfo={product} key={product._id} clickMethod={() => handleProductCardClick(product._id)}/> ) 
-                        : <div>No Products Found</div>}
-                        {products && products.length > 0 
-                        ? products.map(product => <ProductSearchResult productInfo={product} key={product._id} clickMethod={() => handleProductCardClick(product._id)}/> ) 
-                        : <div>No Products Found</div>}
-
                     </>
                 )}
                 </div>

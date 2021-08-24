@@ -6,6 +6,8 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { LatestProductLittleCart } from './LittleCart'
+
 
 const Navbar = () => {
     const history = useHistory()
@@ -21,6 +23,10 @@ const Navbar = () => {
 
     const userLogin = useSelector(state => state.userLogin)
     const { success : successLogin } = userLogin 
+
+    // cart info
+    const cart = useSelector(state => state.cart)
+    const { cartItems } = cart 
 
     const [showNavBar, setShowNavBar] = useState(true);
 
@@ -72,7 +78,7 @@ const Navbar = () => {
 
 
     return (
-        <NavBarStyled className={`navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3 ${showNavBar ? '' : 'd-none'}`}>
+        <NavBarStyled className={`navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3 position-relative ${showNavBar ? '' : 'd-none'}`}>
         <div className="container">
             <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span className="navbar-toggler-icon"></span>
@@ -82,9 +88,10 @@ const Navbar = () => {
             <button type="button" className="btn btn-outline-primary position-relative my-2 my-lg-0 order-lg-last" onClick={()=>{handleLinkClicked();handleCartClick()}}>
                 <i className="bi bi-cart"></i>
                 <span className="d-lg-none"> Cart</span>
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    3
-                    <span className="visually-hidden">unread messages</span>
+                <span className={`position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger 
+                    ${cartItems && cartItems.length < 1 ? 'd-none' : ''}`}>
+                    {cartItems && cartItems.length}
+                <span className="visually-hidden">unread messages</span>
                 </span>
             </button>
 

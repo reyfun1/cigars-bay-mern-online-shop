@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { userLoginReducer, userRegisterReducer, userListReducer } from './reducers/userReducers'
 import { productCreateReducer, productUploadImagesReducer, productListReducer, productDetailsReducer} from './reducers/productReducers'
 import { vendorListReducer } from './reducers/vendorReducers'
+import { cartReducer } from './reducers/cartReducers'
 
 // Combine Reducers
 const reducer = combineReducers({
@@ -17,6 +18,8 @@ const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
     vendorList : vendorListReducer,
+    cart: cartReducer,
+
 })
 
 // check if there is avaible user info in storage 
@@ -24,8 +27,22 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
     ? JSON.parse(localStorage.getItem('userInfo')) 
     : null
 
+// check for cart items saved on storage
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+? JSON.parse(localStorage.getItem('cartItems'))
+: []
+
+// check for cart shipping address saved on storage
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+  ? JSON.parse(localStorage.getItem('shippingAddress'))
+  : {}
+
 // Define global initial states
 const initialState = {
+    cart : {
+        cartItems : cartItemsFromStorage,
+        sahippingAddress : shippingAddressFromStorage
+    },
     userLogin : {
         userInfo : userInfoFromStorage,
         success : userInfoFromStorage ? true : false

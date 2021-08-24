@@ -1,55 +1,58 @@
+import { formatMoney } from 'accounting-js'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import BreadCrumb from '../components/BreadCrumb'
+
+import styled from 'styled-components'
 
 const CheckoutPage = () => {
 
   const history = useHistory()
 
+  const cart = useSelector(state => state.cart)
+  const { cartItems } = cart 
+
   const handleReturnToCart = () => {
     history.push('/cart/')
   }
     return (
-        <div className="container p-4">
+        <CheckoutPageStyled className="container p-4">
         <BreadCrumb/>
-        <div className="row py-2">
+        {cartItems && <div className="row py-2">
           <div className="col-md-4 order-md-2 mb-4">
             <h4 className="d-flex justify-content-between align-items-center mb-3">
               <span className="text-muted">Your cart</span>
-              <span className="badge badge-secondary badge-pill text-dark">3</span>
+              <span className="badge badge-secondary badge-pill text-dark">{cartItems.reduce( (acc,curr) => (curr.qty * 1 + acc), 0 )}</span>
             </h4>
             <ul className="list-group mb-3">
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Product name</h6>
-                  <small className="text-muted">Brief description</small>
+              {cartItems.map( item => {
+                return (<li key={item.sku} className="cart-item list-group-item d-flex justify-content-between lh-condensed">
+
+                <div clasName="">
+                  <span className="text-muted">({item.qty})</span>
                 </div>
-                <span className="text-muted">$12</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Second product</h6>
-                  <small className="text-muted">Brief description</small>
+
+                <div className="name-container px-2">
+                  <h6 className="my-0">{item.name}</h6>
+                  <small className="text-muted">{item.option}</small>
                 </div>
-                <span className="text-muted">$8</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                  <h6 className="my-0">Third item</h6>
-                  <small className="text-muted">Brief description</small>
+
+                <div className="align-self-end">
+                  <span className="text-muted">{formatMoney(item.qty * item.price)}</span>
                 </div>
-                <span className="text-muted">$5</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between bg-light">
+              </li>)
+              })}
+              {/* <li className="list-group-item d-flex justify-content-between bg-light">
                 <div className="text-success">
                   <h6 className="my-0">Promo code</h6>
                   <small>EXAMPLECODE</small>
                 </div>
                 <span className="text-success">-$5</span>
-              </li>
+              </li> */}
               <li className="list-group-item d-flex justify-content-between">
                 <span>Total (USD)</span>
-                <strong>$20</strong>
+                <strong>{formatMoney(cartItems.reduce( (acc, current) => ( (current.qty * current.price * 1) + acc), 0))}</strong>
               </li>
             </ul>
             <form className="p-0">
@@ -215,9 +218,15 @@ const CheckoutPage = () => {
               </div>
             </form>
           </div>
-        </div>
-      </div>
+        </div>}
+      </CheckoutPageStyled>
     )
 }
 
 export default CheckoutPage
+
+const CheckoutPageStyled = styled.div`
+.name-container{
+  width: 100%;
+}
+`
