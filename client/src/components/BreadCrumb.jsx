@@ -33,6 +33,9 @@ export default BreadCrumb
 
 const BreadCrumbStyled = styled.div`
     font-size: 0.90em;    
+    a{
+        text-decoration: none;
+    }
     a.disabled{
         color: gray;
         pointer-events: none; 

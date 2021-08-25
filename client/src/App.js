@@ -1,5 +1,10 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Route, Switch, useLocation} from 'react-router-dom'
+import React, { useContext, useEffect} from 'react'
+import { Route, Switch, useLocation} from 'react-router-dom'
+import { __RouterContext } from 'react-router'
+import {useTransition, animated } from '@react-spring/web'
+
+import ScrollToTop from './utils'
+
 
 import './index.css';
 import Navbar from './components/Navbar';
@@ -22,32 +27,49 @@ import styled from 'styled-components'
 import NewAdminPage from './pages/NewAdminPage';
 import AdminEditProduct from './adminPages/AdminEditProduct';
 
+
+
 function App() {
+
+  // const { location } = useContext(__RouterContext)
+
+  const location = useLocation()
+ 
+   const transitions = useTransition(location, {
+    from: { opacity: 0, position: 'initial', top: '5rem', width: '100%'},
+    enter: { opacity: 1, positon: 'absolute'},
+    leave: { opacity: 0, position: 'absolute'},
+    config: {duration: 300}
+  });
+
   
   return (
     <AppStyled>
-      <Router>
         {/* <AnnouncementBar/> */}
         <Navbar/>
-          <Switch>
-          <Route exact path='/cart' component={Cart} />
-          <Route exact path='/signup' component={SignUpPage} />
-          <Route exact path='/login' component={LoginPage} />
-          <Route exact path='/myaccount' component={AccountPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route exact path='/contactus' component={ContactUsPage} />
-          <Route exact path='/about' component={AboutPage} />
-          <Route exact path='/oldadmin' component={AdminPage} />
-          <Route exact path='/admin' component={NewAdminPage} />
-          <Route exact path='/product/:id' component={ProductPage} />
-          <Route exact path='/admin/product/view/:id' component={AdminEditProduct} />
-          <Route exact path='/admin/product/new/' component={AdminEditProduct} />
-          <Route exact path='/search/:keyword' component={SearchResults} />
-          <Route exact path='/' component={Home} />
-          <Route component={NotFound}/>
-          </Switch>
-          <Footer/>
-      </Router>
+        {transitions( (props, item) => (
+          <animated.div style={props}>
+            <ScrollToTop/>
+            <Switch location={item}>
+              <Route exact path='/cart' component={Cart} className="w-100" />
+              <Route exact path='/signup' component={SignUpPage} />
+              <Route exact path='/login' component={LoginPage} />
+              <Route exact path='/myaccount' component={AccountPage} />
+              <Route exact path='/checkout' component={CheckoutPage} />
+              <Route exact path='/contactus' component={ContactUsPage} />
+              <Route exact path='/about' component={AboutPage} />
+              <Route exact path='/oldadmin' component={AdminPage} />
+              <Route exact path='/admin' component={NewAdminPage} />
+              <Route exact path='/product/:id' component={ProductPage} />
+              <Route exact path='/admin/product/view/:id' component={AdminEditProduct} />
+              <Route exact path='/admin/product/new/' component={AdminEditProduct} />
+              <Route exact path='/search/:keyword' component={SearchResults} />
+              <Route exact path='/' component={Home} />
+              <Route component={NotFound}/>
+            </Switch>
+          </animated.div>
+        ))}
+        <Footer/>
     </AppStyled>
   );
 }
@@ -59,6 +81,11 @@ button{
   i{
     pointer-events: none
   }
+}
+
+.animated-page{
+  position: absolute;
+  width: 100%;
 }
 
 .bi{

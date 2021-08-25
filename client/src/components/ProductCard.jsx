@@ -9,7 +9,7 @@ const ProductCard = ({productInfo, bigCard, clickMethod}) => {
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses} `} onClick={clickMethod}>
+        <DivStyled className={`card ${extraClasses} align-self-stretch`} onClick={clickMethod}>
             <div className="overflow-hidden">
                 <img src={imgSRC} className="card-img-top" alt="..."/>
             </div>

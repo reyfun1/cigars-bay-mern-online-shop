@@ -20,6 +20,7 @@ const Footer = () => {
         if( pathname.includes('admin') || 
             pathname.includes('login') ||
             pathname.includes('signup') ||
+            pathname.includes('checkout') ||
             pathname.includes('myaccount')
             ){
             setShowFooter(false)
@@ -30,12 +31,12 @@ const Footer = () => {
     },[history])
 
     return (
-        <FooterStyled className={`${showFooter ? '' : 'd-none'}`}>
+        <FooterStyled className={`${showFooter ? '' : 'd-none'} border-top pt-4`}>
             <div className="container text-md-start mb-4">
                 <div className="row">
                     <div className="col-md text-center text-md-start mb-3">                  
                         {/* <ContactUsForm/> */}
-                        <h4>Useful Links</h4>
+                        <h5>Useful Links</h5>
                         <ul>
                             <li><a href="" className="text-muted">Terms &amp; Conditions</a></li>
                             <li><a href="" className="text-muted">Privacy Policy</a></li>
@@ -45,7 +46,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-md text-center text-md-start mb-3">
-                        <h4>Shop</h4>
+                        <h5>Shop</h5>
                         <ul>
                             <li><a href="" className="text-muted">Brands</a></li>
                             <li><a href="" className="text-muted">On Sale Now</a></li>
@@ -55,7 +56,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-md text-center text-md-start mb-3">
-                        <h4>Join Our Newsletter!</h4>
+                        <h5>Join Our Newsletter!</h5>
                         <p className="text-muted">Sign up for our newsletter recevie updates an exlusive offers.</p>
                         <div className="form-group mb-3">
                             <label className="mb-1" htmlFor="exampleInputEmail1">Email address</label>

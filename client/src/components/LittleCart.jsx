@@ -91,20 +91,24 @@ const LatestProductLittleCartStyled = styled.div`
     @media only screen and (min-width : 768px) {
         @keyframes slidein {
             from {
+              opacity: 0;
               transform: translate(0%,-100%);
             }
           
             to {
+              opacity: 1;
               transform: translate(0%,0%);
             }
           }
     
         @keyframes slideout {
             from {
+                opacity: 1;
                 transform: translate(0%,0%);
             }
             
             to {
+                opacity: 0;
                 transform: translate(0%,-150%);
             }
         }

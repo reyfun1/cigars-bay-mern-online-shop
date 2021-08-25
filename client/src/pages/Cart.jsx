@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {formatMoney} from 'accounting-js'
 
@@ -9,6 +9,8 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import BreadCrumb from '../components/BreadCrumb'
 import { useSelector } from 'react-redux'
+
+import {useTransition, animated } from '@react-spring/web'
 
 
 const Cart = () => {
@@ -28,6 +30,17 @@ const Cart = () => {
     const handleProceedToCheckout = () => {
         history.push('/checkout/')
     }
+
+    
+    const transitions = useTransition(cartItems, {
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+        delay: 200,
+        //config: config.molasses,
+      })
+
+
     return (
         <CartStyled className="container py-4">
            <BreadCrumb/>
@@ -42,9 +55,12 @@ const Cart = () => {
            {cartItems && cartItems.length > 0 ? (
             <div className="row">
                <div className="col-md-9 card px-5">
-                   {cartItems.map( (item,key) => {
-                       return <CartItem key={key} productInfo={item} type="item"/> 
-                   })}
+
+                {transitions( (props, item) => (
+                    <animated.div style={props} className={`border-bottom border-2`}>
+                        <CartItem productInfo={item} type="item"/>
+                    </animated.div>
+                ))}
                     <div className="row my-3 py-2">
                         <div className="col text-end ">
                             <p className="fs-4">Subtotal : <span className="fw-bold">{formatMoney(cartItems.reduce( (acc, current) => ( (current.price * current.qty) + acc ), 0))}</span></p>
@@ -53,7 +69,7 @@ const Cart = () => {
                </div>
                <div className="col-md-3  my-3 my-lg-0">
                 <button type="button" className="btn btn-primary w-100" onClick={handleProceedToCheckout}>Proceed to Checkout</button>
-                <button type="button" className="btn btn-outline-secondary mt-2 w-100">Continue Shopping</button>
+                <button type="button" className="btn btn-outline-secondary mt-2 w-100" onClick={handleShoppingClick}>Continue Shopping</button>
                </div>
            </div>
 

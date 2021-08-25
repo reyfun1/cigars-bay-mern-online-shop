@@ -90,7 +90,7 @@ const Navbar = () => {
                 <span className="d-lg-none"> Cart</span>
                 <span className={`position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger 
                     ${cartItems && cartItems.length < 1 ? 'd-none' : ''}`}>
-                    {cartItems && cartItems.length}
+                    {cartItems && cartItems.reduce( (acc, curr) => (curr.qty * 1 + acc), 0)}
                 <span className="visually-hidden">unread messages</span>
                 </span>
             </button>

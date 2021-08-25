@@ -41,7 +41,7 @@ const SearchResults = ({match}) => {
                     <p className="fs-6 text-md-start text-sm-center">{products ? products.length : '0'} results for: <span className="fst-italic">"{searchText}"</span></p>
                 </div>
             </div>
-            <div className="row  d-sm-block text-center">
+            <div className="row  d-sm-block">
                 <div className="col">
                     <button 
                         type="button" 
@@ -49,7 +49,7 @@ const SearchResults = ({match}) => {
                         onClick={()=>setShowFilterTab(!showFilterTab)}>
                             {showFilterTab ? "Hide" : "Show"} Filters
                     </button>
-                    {products && products.length > 0 && <p className="text-muted mb-2">Showing {products.length} items </p>}
+                    {products && products.length > 0 && <p className="text-muted mb-2 text-center">Showing {products.length} items </p>}
                 </div>
             </div>
             <div className="row">
@@ -58,19 +58,19 @@ const SearchResults = ({match}) => {
                     <SortFilter/>
                 </div>}
                 
-                <div className="col d-flex align-content-center flex-wrap">
+                <div className="col d-flex align-items-stretch flex-wrap product-result">
                 {loading ? <div className="w-100"> <LoadingSpinner size={6} borderWidth={0.40}/> </div>: (
                     <>
-                    {products && products.length > 0 
+                        {products && products.length > 0 
                         ? products.map(product => <ProductSearchResult productInfo={product} key={product._id} clickMethod={() => handleProductCardClick(product._id)}/> ) 
                         : <div>No Products Found</div>}
+                        
                     </>
                 )}
                 </div>
-
+                {products && products.length < 3 && <div className="spacer-less-than-3"></div>}
             </div>
-
-                <nav className="mt-5" aria-label="Page navigation example">
+                {products && products.length > 12 && <nav className="mt-5" aria-label="Page navigation example">
                     <ul className="pagination justify-content-end">
                         <li className="page-item disabled">
                         <a className="page-link" href="#" tabIndex="-1" aria-disabled="true">Previous</a>
@@ -82,7 +82,7 @@ const SearchResults = ({match}) => {
                         <a className="page-link" href="#">Next</a>
                         </li>
                     </ul>
-                </nav>
+                </nav>}
         </SearchResultStyled>
     )
 }
@@ -90,6 +90,12 @@ const SearchResults = ({match}) => {
 export default SearchResults
 
 const SearchResultStyled = styled.div`
+.product-result{
+    gap: 2px;
+}
+.spacer-less-than-3{
+    height: 300px;
+}
 a{
     text-decoration: none;
 }
