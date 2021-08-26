@@ -6,16 +6,13 @@ import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { LatestProductLittleCart } from './LittleCart'
-
 
 const Navbar = () => {
     const history = useHistory()
     const togglerBtn = useRef()
     const navBarCollapsable = useRef()
 
-    //TNP TO CHANGE LATER
-    const isAdmin = true
+    const [isAdmin, setIsAdmin] = useState(false)
 
     // Grab the user register info 
     const userRegister = useSelector(state => state.userRegister)
@@ -58,16 +55,14 @@ const Navbar = () => {
         if(isShowingCollapsable) togglerBtn.current.click()
     }
 
-    // hide the search bar on certain ocations
+    // hide the nav bar on certain ocations
     useEffect(() => {
-        
         return history.listen((location) => { 
         const {pathname} = location
         
         if( 
             pathname.includes('login') ||
-            pathname.includes('signup') ||
-            pathname.includes('myaccount')
+            pathname.includes('signup')
             ){
             setShowNavBar(false)
         } else{
@@ -76,6 +71,13 @@ const Navbar = () => {
         }) 
     },[history])
 
+    // handle the admin stuff
+    useEffect(() => {
+        if(successRegister) setIsAdmin(successRegister.isAdmin)
+        if(successLogin) setIsAdmin(successLogin.isAdmin)
+    }, [successRegister, successLogin])
+
+    
 
     return (
         <NavBarStyled className={`navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3 position-relative ${showNavBar ? '' : 'd-none'}`}>
@@ -131,24 +133,22 @@ const Navbar = () => {
                                 </div>
                             </form>
                         </li>
+
                         {successRegister || successLogin ? (
-                            <li className="nav-item">
-                                {isAdmin ? (
-                                    <Link to="/admin" className="nav-link ms-1 me-1 btn btn-outline-secondary" onClick={handleLinkClicked} >Admin</Link>
-                                ) : (
-                                    <Link to="/myaccount" className="nav-link ms-1 me-1 btn btn-outline-secondary" onClick={handleLinkClicked} >My Account</Link>
-                                )}
-                            </li>    
-                        ) : (
                             <>
-                            <li className="nav-item">
-                                <Link to="/login" className="nav-link ms-1 me-1 btn btn-outline-secondary" onClick={handleLinkClicked} >Login</Link>
-                            </li>
-                            {/* <li className="nav-item">
-                                <Link to="/signup" className="nav-link ms-1 me-1" onClick={handleLinkClicked}>SignUp</Link>
-                            </li> */}
+                            {isAdmin ? (
+                                <Link to="/admin" className="nav-link ms-1 me-1 btn btn-outline-secondary text-nowrap" onClick={handleLinkClicked}>Admin</Link>    
+                            ) : (
+                                <Link to="/myaccount" className="nav-link ms-1 me-1 btn btn-outline-secondary text-nowrap" onClick={handleLinkClicked}>My Account</Link>
+                            )}
                             </>
-                        ) }
+                        ) : (
+                            <li className="nav-item">
+                                <Link to="/login" className="nav-link ms-1 me-1 btn btn-outline-secondary text-nowrap" onClick={handleLinkClicked}>Login</Link>
+                            </li>
+                        )}
+
+
                 </ul>  
             </div>
         </div>

@@ -20,14 +20,21 @@ import {
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_FAIL,
 
-    PRODUCT_TOP_REQUEST,
-    PRODUCT_TOP_SUCCESS,
-    PRODUCT_TOP_FAIL,
+    PRODUCT_BEST_SELLER_REQUEST,
+    PRODUCT_BEST_SELLER_SUCCESS,
+    PRODUCT_BEST_SELLER_FAIL,
+
+    PRODUCT_NEW_ARRIVAL_REQUEST,
+    PRODUCT_NEW_ARRIVAL_SUCCESS,
+    PRODUCT_NEW_ARRIVAL_FAIL,
+
+    PRODUCT_FREATURED_REQUEST,
+    PRODUCT_FREATURED_SUCCESS,
+    PRODUCT_FREATURED_FAIL,
 
     PRODUCT_UPLOAD_IMAGE_REQUEST,
     PRODUCT_UPLOAD_IMAGE_SUCCESS,
     PRODUCT_UPLOAD_IMAGE_FAIL
-
 
 } from '../constants/productConstants'
 
@@ -73,6 +80,53 @@ export const productListReducer = (state = {}, action) => {
             return state
     }
 }
+
+export const productBestSellerReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PRODUCT_BEST_SELLER_REQUEST:
+            return {loading: true, products: []}
+        case PRODUCT_BEST_SELLER_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload.products
+            }
+            case PRODUCT_BEST_SELLER_FAIL: 
+            return { loading: false, error: action.payload}
+        default:
+            return state
+    }
+}
+export const productNewArrivalReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PRODUCT_NEW_ARRIVAL_REQUEST:
+            return {loading: true, products: []}
+        case PRODUCT_NEW_ARRIVAL_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload.products
+            }
+            case PRODUCT_NEW_ARRIVAL_FAIL: 
+            return { loading: false, error: action.payload}
+        default:
+            return state
+    }
+}
+export const productFreaturedReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PRODUCT_FREATURED_REQUEST:
+            return {loading: true, products: []}
+        case PRODUCT_FREATURED_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload.products
+            }
+            case PRODUCT_FREATURED_FAIL: 
+            return { loading: false, error: action.payload}
+        default:
+            return state
+    }
+}
+
 
 export const productDetailsReducer = (
     state = { product: { } },

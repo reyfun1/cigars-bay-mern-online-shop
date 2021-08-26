@@ -58,7 +58,9 @@ const LatestProductLittleCart = ({showLittleCart, setShowLittleCart}) => {
             </div>
 
             <div className="card-footer px-5">
-                <button className="btn btn-sm btn-primary w-100" onClick={handleViewCartClick}>View Cart</button>
+                <button className="btn btn-sm btn-primary w-100" onClick={handleViewCartClick}>
+                        View Cart ({cartItems && cartItems.reduce( (acc, current) => (acc + current.qty * 1), 0)})
+                </button>
                 <button className="btn btn-sm btn-light w-100" onClick={() => setShowLittleCart(false)}>Continue Shopping</button>    
             </div>
 

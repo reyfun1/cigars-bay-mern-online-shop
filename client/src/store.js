@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 // Import reducers
 import { userLoginReducer, userRegisterReducer, userListReducer } from './reducers/userReducers'
-import { productCreateReducer, productUploadImagesReducer, productListReducer, productDetailsReducer} from './reducers/productReducers'
+import { productCreateReducer, productUploadImagesReducer, productListReducer, productDetailsReducer, productNewArrivalReducer, productBestSellerReducer, productFreaturedReducer} from './reducers/productReducers'
 import { vendorListReducer } from './reducers/vendorReducers'
 import { cartReducer } from './reducers/cartReducers'
 
@@ -17,9 +17,11 @@ const reducer = combineReducers({
     adminImageUpload : productUploadImagesReducer,
     productList: productListReducer,
     productDetails: productDetailsReducer,
+    productListNewArrival: productNewArrivalReducer,
+    productListBestSeller: productBestSellerReducer,
+    productListFreatured : productFreaturedReducer,
     vendorList : vendorListReducer,
     cart: cartReducer,
-
 })
 
 // check if there is avaible user info in storage 

@@ -5,6 +5,7 @@ import {useTransition, animated } from '@react-spring/web'
 
 import ScrollToTop from './utils'
 
+import { LatestProductLittleCart } from './components/LittleCart'
 
 import './index.css';
 import Navbar from './components/Navbar';

@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HomeCarousel} from '../components/Carousel'
-import Freatured from '../components/Freatured'
+import ProductsShowCase from '../components/ProductsShowCase'
 import AboutComponent from '../components/AboutComponent'
 import PolicyShowcase from '../components/PolicyShowcase'
 
@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <div>
             <HomeCarousel carouselName="home-page-freatured"/>
-            <Freatured/>
+            <ProductsShowCase/>
             <PolicyShowcase/>
             <AboutComponent/>
         </div>

@@ -1,39 +1,62 @@
-import React from 'react'
+import React  , { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import {  formatMoney } from 'accounting-js'
+import axios from 'axios'
+import LoadingSpinner from './LoadingSpinner'
+
  
 
 const ProductCard = ({productInfo, bigCard, clickMethod}) => {
-    const {id, company_name, brand_name, product_name, price, price_before, discount, imgSRC, freatured_text, isFreatured} = productInfo
+    const {name, images, vendor, skus, tags, description} = productInfo
 
     let extraClasses = bigCard ?  'bigCard ': '';
 
+    const [vendorLoading, setVendorLoading] = useState(true)
+    const [vendorFound, setVendorFound] = useState({})
+
+    // lookup vendor
+    useEffect(()=>{
+        setVendorLoading(true)
+        axios.get(`/api/vendors/${vendor}`)
+        .then(({data}) => {
+            setVendorFound(data)
+            setVendorLoading(false)
+        })
+        .catch(err => {
+
+        })
+    },[])
+    
+
     return (
-        <DivStyled className={`card ${extraClasses} align-self-stretch`} onClick={clickMethod}>
-            <div className="overflow-hidden">
-                <img src={imgSRC} className="card-img-top" alt="..."/>
+        <DivStyled className={`card ${extraClasses} align-self-stretch position-relative`} onClick={() => clickMethod(productInfo)}>
+            <div className="overflow-hidden image-container">
+                <img src={images && images[0]} className="card-img-top img-fluid" alt="..."/>
             </div>
             <div className="card-body">
-                {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>}
-                {isFreatured && <span className="badge bg-warning fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
-                <p className="card-title mb-3 h6">
-                    {brand_name} - {product_name}
-                </p>
-                <p className="card-title mb-3">
-                    {company_name}
-                </p>
+                {/* {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>} */}
+                {tags && tags.includes('freatured') && <span className="badge bg-warning fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
 
-                {isFreatured && <p className="card-text">{freatured_text}</p>}
+                {vendorLoading ? (
+                    <LoadingSpinner/>
+                ) : (
+                    <>
+                    <p className="card-title m-0 mb-2 text-muted text-uppercase">{vendorFound.name}</p>
+                    <p className="card-title m-0 mb-2">{name}</p>
 
-                <p className="card-text">
-                    <span className="h6">{formatMoney(price)}</span> &nbsp;
-                    <span className='text-muted'><del>{price_before > 0 && formatMoney(price_before)}</del></span>
-                </p>
+                    {tags && tags.includes('freatured') && bigCard && <p className="card-text">{description}</p>}
+                    </>
+                )}
+                
+
 
                 {bigCard && 
                     <div className="text-end">
                         <button type="button" className="btn btn-outline-primary m-3">View Collection</button>
                     </div>}
+            </div>
+            <div class="card-footer border-none text-end">
+                {skus && <span className="h6 fw-bold">{formatMoney(skus[0].price)}</span>}
             </div>
         </DivStyled>
     )
@@ -43,20 +66,33 @@ export default ProductCard
 
 
 const DivStyled = styled.div`
+    
     cursor: pointer;
-    //box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
     box-shadow: 0 8px 22px 0 rgb(177 177 177 / 33%), 0 -8px 22px 0 rgb(177 177 177 / 33%);
     border-radius: 15px;
 
+    .card-title{
+        font-size: 0.9rem;
+    }
+
     &:not(.bigCard){
         :hover {
-            background-color: #e0e0e0
+            background-color: #e0e0e0;
         }
+    }
+
+    .img-container{
+        width: 100%;
+        margin: 0 auto;
+        max-width: 150px;
     }
     
     img{
+        height: 100%;
         transition: transform .2s ease;
-        border-radius: 15px;
+        border-top-right-radius : 15px;
+        border-top-left-radius : 15px;
+        object-fit: cover;
         :hover{
             transform: scale(1.1)
         }
@@ -68,6 +104,7 @@ const DivStyled = styled.div`
         }
     }
 
+
     .card-body .badge{
         position: absolute;
         top: 0;
@@ -78,6 +115,22 @@ const DivStyled = styled.div`
 
     .bi{
         vertical-align: .225em;
-      }
+    }
+    &:not(.bigCard){
+        max-height: 380px;  
+    }
+   
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        &:not(.bigCard){
+            max-width: 32%;    
+        }
+    }
+    @media screen and (min-width: 992px) {
+        &:not(.bigCard){
+            max-width: 24%; 
+        }  
+    }
 `
 
