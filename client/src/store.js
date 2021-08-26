@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { createMiddleware } from 'redux-action-listener-hook';
 
 // Import reducers
 import { userLoginReducer, userRegisterReducer, userListReducer } from './reducers/userReducers'
@@ -57,6 +58,6 @@ const middleware = [thunk]
 const store = createStore(
     reducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
+    composeWithDevTools(applyMiddleware(createMiddleware(), thunk))
 )
 export default store

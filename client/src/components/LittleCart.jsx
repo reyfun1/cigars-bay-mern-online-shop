@@ -24,6 +24,7 @@ const LatestProductLittleCart = ({showLittleCart, setShowLittleCart}) => {
     const history = useHistory()
 
     const handleViewCartClick = () => {
+        setShowLittleCart(false)
         history.push('/cart/')
     }
 
@@ -31,7 +32,7 @@ const LatestProductLittleCart = ({showLittleCart, setShowLittleCart}) => {
         setActiveItem(cartItems[cartItems.length - 1])
     }, [cartItems])
     return (
-        <LatestProductLittleCartStyled className={`position-absolute end-0 top-0 shadow-lg ${showLittleCart ? 'show' : 'not-show'}`}>
+        <LatestProductLittleCartStyled className={`position-fixed top-0 end-0 shadow-lg ${showLittleCart ? 'show' : 'not-show'}`}>
             {activeItem && <div className="card">
             <div class="card-header text-uppercase text-muted text-center d-flex justify-content-between">
                 <p className="m-0">Just Added to Your Cart!</p>
@@ -72,7 +73,7 @@ const LatestProductLittleCart = ({showLittleCart, setShowLittleCart}) => {
 const LatestProductLittleCartStyled = styled.div`
 
     max-width: 350px;
-    z-index : 1080;
+    z-index : 2280;
 
     &.show{
         display: block;

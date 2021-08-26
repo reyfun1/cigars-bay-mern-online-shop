@@ -1,7 +1,9 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useContext, useEffect, useState} from 'react'
 import { Route, Switch, useLocation} from 'react-router-dom'
 import { __RouterContext } from 'react-router'
 import {useTransition, animated } from '@react-spring/web'
+
+import { useActionListener } from 'redux-action-listener-hook';
 
 import ScrollToTop from './utils'
 
@@ -10,7 +12,6 @@ import { LatestProductLittleCart } from './components/LittleCart'
 import './index.css';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import AnnouncementBar from './components/AnnouncementBar';
 import Footer from './components/Footer'
 import SearchResults from './pages/SearchResults';
 import NotFound from './pages/NotFound';
@@ -27,14 +28,18 @@ import AdminPage from './pages/AdminPage';
 import styled from 'styled-components'
 import NewAdminPage from './pages/NewAdminPage';
 import AdminEditProduct from './adminPages/AdminEditProduct';
+import { connect, connectAdvanced, useSelector } from 'react-redux'
 
 
 
-function App() {
-
-  // const { location } = useContext(__RouterContext)
+function App(props) {
 
   const location = useLocation()
+
+  const cart = useSelector(state => state.cart)
+  const { cartItems } = cart 
+
+  const [showLittleCart, setShowLittleCart] = useState(false)
  
    const transitions = useTransition(location, {
     from: { opacity: 0, position: 'initial', top: '5rem', width: '100%'},
@@ -43,11 +48,23 @@ function App() {
     config: {duration: 300}
   });
 
+  // Listen for Cart item being added
+  useActionListener('CART_ADD_ITEM', (dispatch, action) => {
+    setShowLittleCart(true)
+  });
+
+
+  // run when add to cart runs 
+  useEffect(()=>{
+    console.log(props)
+  },[props])
+
   
   return (
     <AppStyled>
         {/* <AnnouncementBar/> */}
         <Navbar/>
+        <LatestProductLittleCart showLittleCart={showLittleCart} setShowLittleCart={setShowLittleCart}/>
         {transitions( (props, item) => (
           <animated.div style={props}>
             <ScrollToTop/>
@@ -76,6 +93,8 @@ function App() {
 }
 
 export default App;
+
+
 
 const AppStyled = styled.div`
 button{

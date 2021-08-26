@@ -3,10 +3,13 @@ import styled from 'styled-components'
 import {  formatMoney } from 'accounting-js'
 import axios from 'axios'
 import LoadingSpinner from './LoadingSpinner'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../actions/cartActions'
 
 const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
     const [vendorLoading, setVendorLoading] = useState(true)
     const [vendorFound, setVendorFound] = useState({})
+    const dispatch = useDispatch()
 
     const {name, price, images, vendor, skus, description} = productInfo
 
@@ -23,19 +26,26 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
         })
     },[])
 
+    const handleAddToCartClick  = () => {
+        console.log('hello')
+        dispatch(addToCart(productInfo, skus[0],vendorFound, 1))
+    }
+
     
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses} border`} onClick={() => clickMethod(productInfo)}>
+        <DivStyled className={`card ${extraClasses} border`}>
             {skus && skus.length > 0 && skus.map( sku => {
                 if(sku.isSearchable){
                     return (
                     <>
-                        <div className="img-container">
-                            <img src={images[0]} className="" alt="..."/>
+                        <div className="img-container position-relative">
+                            <img src={images[0]} className="" alt="..." onClick={() => clickMethod(productInfo)}/>
+                            <button className="btn btn-danger btn-sm addtocart-btn" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
                         </div>
-                        <div className="card-body">
+                        
+                        <div className="card-body" onClick={() => clickMethod(productInfo)}>
                             {vendorLoading 
                                 ? <LoadingSpinner/> 
                                 : (<>
@@ -59,7 +69,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                 }
                                 </>) }
                         </div>
-                        <div class="card-footer text-end border-0">
+                        <div class="card-footer text-end border-0 position-relative"  onClick={() => clickMethod(productInfo)}>
                             {skus && <span className="h6 fw-bold">{formatMoney(skus[0].price)}</span>}
                         </div>
                         
@@ -76,8 +86,31 @@ export default ProductSearchResult
 
 const DivStyled = styled.div`
     border-radius: 0 !important;
-    border: none;
     cursor: pointer;
+
+    .addtocart-btn{
+        border-radius: 0 !important;
+        position: absolute;
+        width: 90%;
+        font-size: 0.9rem;
+        z-index: 1200;
+        top: 100%;
+        left:50%;
+        transform: translate(-50%,0%);
+        transition: transform .2s;
+    }
+
+
+    :hover{
+        .addtocart-btn{
+            transform: translate(-50%,-100%)
+        }
+    }
+
+    .card-body{
+        background-color: white;
+        z-index: 2000;
+    }
 
     .card-title{
         font-size: 0.9rem;
@@ -116,7 +149,7 @@ const DivStyled = styled.div`
         margin-left: auto;   
         margin-right: auto; 
         width: 100%;
-        
+
         &:not(.bigCard){
             max-width: 48%;   
             width: 100%;
@@ -133,7 +166,7 @@ const DivStyled = styled.div`
             max-width: 48%;    
             width: 100%;
         }
-        &:hover{
+        .card-body:hover, .card-footer{
             .card-title{
                 text-decoration: underline;
             }
@@ -146,7 +179,10 @@ const DivStyled = styled.div`
         }
     }
     @media screen and (max-width: 450px) {
-        
+        .addtocart-btn{
+            display: none;
+            //padding: .75rem;
+        }
     }
 `
 

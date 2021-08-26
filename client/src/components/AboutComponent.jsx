@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from './Carousel'
 import logo from '../img/logo.png'
+import InstagramPost from './InstagramPost'
 
 const AboutComponent = () => {
     return (
@@ -36,3 +37,4 @@ const AboutComponent = () => {
 }
 
 export default AboutComponent
+

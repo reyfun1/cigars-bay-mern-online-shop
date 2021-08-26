@@ -89,7 +89,7 @@ const ProductPage = ({match}) => {
             {product ? (
                 <>
                     {/* Little cart here  */}
-                    <LatestProductLittleCart showLittleCart={showLittleCart} setShowLittleCart={setShowLittleCart}/>
+                    {/* <LatestProductLittleCart showLittleCart={showLittleCart} setShowLittleCart={setShowLittleCart}/> */}
                     <div className="row">
                         {/* Carousel Images */}
                         <div className="col mb-3">
