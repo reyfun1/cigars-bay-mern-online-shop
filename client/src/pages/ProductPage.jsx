@@ -128,7 +128,7 @@ const ProductPage = ({match}) => {
                                                 name="options" id={'option'+key} 
                                                 option={sku.sku}
                                                 autoComplete="off" onChange={handleSkuChange} checked={selectedSku.sku === sku.sku}/>
-                                            <label class="btn btn-outline-dark text-nowrap m-0" htmlFor={'option'+key}>{sku.option}</label>
+                                            <label className="btn btn-outline-dark text-nowrap m-0" htmlFor={'option'+key}>{sku.option}</label>
                                         </div>
                                         )
                                     })}
@@ -180,21 +180,21 @@ const ProductPage = ({match}) => {
                     {/*  */}
                     <div className="row mt-3">
                     <p className="fs-4 pb-2">Product Information</p>
-                    <div class="card-group">
-                    <div class="card">
-                        <div class="card-body">
-                        <h5 class="card-title">Description</h5>
-                        <p class="card-text">{vendorFound.description}</p>
+                    <div className="card-group">
+                    <div className="card">
+                        <div className="card-body">
+                        <h5 className="card-title">Description</h5>
+                        <p className="card-text">{vendorFound.description}</p>
                         <div className="company-logo">
-                            <img class="img-fluid d-block mx-auto" src="https://www.plasenciacigars.com/wp-content/themes/plasencia-cigars-2018/img/logo-footer.svg" alt="Responsive image"/>
+                            <img className="img-fluid d-block mx-auto" src="https://www.plasenciacigars.com/wp-content/themes/plasencia-cigars-2018/img/logo-footer.svg" alt="Responsive image"/>
                         </div>
                         </div>
                     </div>
                         
                     {/*  */}
-                    <div class="card">
-                        <div class="card-body">
-                        <h5 class="card-title">Details</h5>
+                    <div className="card">
+                        <div className="card-body">
+                        <h5 className="card-title">Details</h5>
                         <div className="">
                             <div className="border-top">
                                 {product.attributes && Object.keys(product.attributes).map(attr => {

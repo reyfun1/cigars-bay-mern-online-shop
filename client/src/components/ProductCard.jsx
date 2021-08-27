@@ -55,7 +55,7 @@ const ProductCard = ({productInfo, bigCard, clickMethod}) => {
                         <button type="button" className="btn btn-outline-primary m-3">View Collection</button>
                     </div>}
             </div>
-            <div class="card-footer border-none text-end">
+            <div className="card-footer border-none text-end">
                 {skus && <span className="h6 fw-bold">{formatMoney(skus[0].price)}</span>}
             </div>
         </DivStyled>

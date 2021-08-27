@@ -27,7 +27,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
     },[])
 
     const handleAddToCartClick  = () => {
-        console.log('hello')
+        console.log(productInfo)
         dispatch(addToCart(productInfo, skus[0],vendorFound, 1))
     }
 
@@ -39,13 +39,13 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
             {skus && skus.length > 0 && skus.map( sku => {
                 if(sku.isSearchable){
                     return (
-                    <>
+                    <div key={sku.sku}>
                         <div className="img-container position-relative">
                             <img src={images[0]} className="" alt="..." onClick={() => clickMethod(productInfo)}/>
                             <button className="btn btn-danger btn-sm addtocart-btn" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
                         </div>
                         
-                        <div className="card-body" onClick={() => clickMethod(productInfo)}>
+                        <div className="card-body position-relative" onClick={() => clickMethod(productInfo)}>
                             {vendorLoading 
                                 ? <LoadingSpinner/> 
                                 : (<>
@@ -69,11 +69,11 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                 }
                                 </>) }
                         </div>
-                        <div class="card-footer text-end border-0 position-relative"  onClick={() => clickMethod(productInfo)}>
+                        <div className="card-footer text-end border-0 position-relative"  onClick={() => clickMethod(productInfo)}>
                             {skus && <span className="h6 fw-bold">{formatMoney(skus[0].price)}</span>}
                         </div>
                         
-                    </>)
+                    </div>)
                 }                
                 }
             )}
@@ -93,16 +93,20 @@ const DivStyled = styled.div`
         position: absolute;
         width: 90%;
         font-size: 0.9rem;
-        z-index: 1200;
+        z-index: 100;
         top: 100%;
         left:50%;
         transform: translate(-50%,0%);
-        transition: transform .2s;
+        pointer-events: none;
+        opacity: 0;
+        transition: transform .2s, opacity .4s;
     }
 
 
     :hover{
         .addtocart-btn{
+            pointer-events: all;
+            opacity: 0.85;
             transform: translate(-50%,-100%)
         }
     }

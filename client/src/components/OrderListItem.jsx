@@ -60,7 +60,7 @@ const OrderListItem = () => {
                 
             </div>
 
-            <div class="card-footer">
+            <div className="card-footer">
                 <span className="d-block text-muted">Shipped to</span>
                 <span>12418 SW 125th Terrace, Miami, FL 33186</span>
             </div>

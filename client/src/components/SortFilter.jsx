@@ -35,9 +35,9 @@ const SortFilter = () => {
                     </select>
                 </div>
                 <div className="mb-3">
-                    <label for="customRange1" class="form-label mb-1">Price Range</label>
+                    <label for="customRange1" className="form-label mb-1">Price Range</label>
                     <p className="m-0"><small>($0 - ${priceFilter})</small></p>
-                    <input type="range" class="form-range" id="customRange1" min="0" max="500" onChange={handlePriceFilter} value={priceFilter}/>
+                    <input type="range" className="form-range" id="customRange1" min="0" max="500" onChange={handlePriceFilter} value={priceFilter}/>
                 </div>
                 {/* <div className="mb-3">
                     <label className="mb-1">Strength</label>

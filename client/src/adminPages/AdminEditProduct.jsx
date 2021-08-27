@@ -279,10 +279,10 @@ const AdminEditProduct = ({match}) => {
                                 <button className="btn btn-outline-success float-end h-100 fs-3" onClick={e => imagesUploader.current.click()}>
                                     <i className="bi bi-file-earmark-plus"></i>
                                 </button>
-                                <div class="input-group mb-3 d-none">
+                                <div className="input-group mb-3 d-none">
                                     <input ref={imagesUploader} multiple type="file" 
-                                    class="form-control" id="inputGroupFile02" onChange={handleImagesUploader}/>
-                                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                    className="form-control" id="inputGroupFile02" onChange={handleImagesUploader}/>
+                                    <label className="input-group-text" for="inputGroupFile02">Upload</label>
                                 </div>
                         </div>}
                     </div>

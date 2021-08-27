@@ -40,7 +40,7 @@ function App(props) {
   const { cartItems } = cart 
 
   const [showLittleCart, setShowLittleCart] = useState(false)
- 
+  
    const transitions = useTransition(location, {
     from: { opacity: 0, position: 'initial', top: '5rem', width: '100%'},
     enter: { opacity: 1, positon: 'absolute'},
@@ -52,12 +52,6 @@ function App(props) {
   useActionListener('CART_ADD_ITEM', (dispatch, action) => {
     setShowLittleCart(true)
   });
-
-
-  // run when add to cart runs 
-  useEffect(()=>{
-    console.log(props)
-  },[props])
 
   
   return (
@@ -82,6 +76,9 @@ function App(props) {
               <Route exact path='/admin/product/view/:id' component={AdminEditProduct} />
               <Route exact path='/admin/product/new/' component={AdminEditProduct} />
               <Route exact path='/search/:keyword' component={SearchResults} />
+              <Route exact path='/search' component={SearchResults} />
+              <Route exact path='/page/:pageNumber' component={SearchResults} />
+              <Route exact path='/search/:keyword/page/:pageNumber' component={SearchResults} />
               <Route exact path='/' component={Home} />
               <Route component={NotFound}/>
             </Switch>

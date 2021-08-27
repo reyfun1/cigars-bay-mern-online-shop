@@ -34,9 +34,9 @@ const LatestProductLittleCart = ({showLittleCart, setShowLittleCart}) => {
     return (
         <LatestProductLittleCartStyled className={`position-fixed top-0 end-0 shadow-lg ${showLittleCart ? 'show' : 'not-show'}`}>
             {activeItem && <div className="card">
-            <div class="card-header text-uppercase text-muted text-center d-flex justify-content-between">
+            <div className="card-header text-uppercase text-muted text-center d-flex justify-content-between">
                 <p className="m-0">Just Added to Your Cart!</p>
-                <button type="button" class="btn-close" aria-label="Close" onClick={() => setShowLittleCart(false)}></button>
+                <button type="button" className="btn-close" aria-label="Close" onClick={() => setShowLittleCart(false)}></button>
             </div>
             <div className="card-body">
                 <div className="row">

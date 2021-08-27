@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import SearchBox from './SearchBox'
 
 
 const Navbar = () => {
@@ -100,10 +101,7 @@ const Navbar = () => {
             <div ref={navBarCollapsable} className="collapse navbar-collapse" id="navmenu" >
                 <ul className="navbar-nav d-flex justify-content-between w-100 mt-3 mt-lg-0">
                         <li className="nav-item ms-1 me-1">
-                            <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Cigars</Link>
-                        </li>
-                        <li className="nav-item ms-1 me-1">
-                            <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Samplers</Link>
+                            <Link to="/search" className="nav-link" onClick={handleLinkClicked}>Cigars</Link>
                         </li>
                         {/* <li className="nav-item ms-1 me-1">
                             <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Shop</Link>
@@ -116,22 +114,7 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item mx-5"></li>
                         <li className="me-2 my-3 order-1 order-lg-0 my-lg-0 w-100" id="search-text-box">
-                            <form className="d-flex" onSubmit={handleSearchClick}>
-                                <div className="input-group">
-                                    <input 
-                                        type="text" 
-                                        className="form-control" 
-                                        placeholder="Search" 
-                                        aria-label="Search" 
-                                        aria-describedby="button-addon2" 
-                                        value={searchText} onChange={e => setSearchText(e.target.value)}/>
-                                    <button 
-                                        className="btn btn-secondary" 
-                                        type="submit" id="button-addon2">
-                                            <i className="bi bi-search"></i>
-                                    </button>
-                                </div>
-                            </form>
+                            <SearchBox handleLinkClicked={handleLinkClicked}/>
                         </li>
 
                         {successRegister || successLogin ? (

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { listProducts } from '../actions/productActions'
 import BreadCrumb from '../components/BreadCrumb'
 import LoadingSpinner from '../components/LoadingSpinner'
+import Pagination from '../components/Pagination'
 import ProductSearchResult from '../components/ProductSearchResult'
 import SortFilter from '../components/SortFilter'
 
@@ -12,33 +13,40 @@ import SortFilter from '../components/SortFilter'
 const SearchResults = ({match}) => {
     const history = useHistory()
     const dispatch = useDispatch()
-
     const windowWidth = window.innerWidth
+
+    // keyword and pagenumber from query 
+    const keyword = match.params.keyword
+    const pageNumber = match.params.pageNumber || 1
 
     const [showFilterTab,setShowFilterTab] = useState(windowWidth >= 992)
     
-    const pageNumber = match.params.pageNumber || 1
-    const searchText = match.params.keyword
-
+    // import product list from redux state
     const productList = useSelector((state) => state.productList)
-    const { loading, error, products, page, pages } = productList
+    const { loading, error, products, page, pages, totalProductCount } = productList
 
-    // push product id here 
+    // Go to ProductPage
     const handleProductCardClick = id => {
         history.push(`/product/${id}`)
     }
 
     useEffect(() => {
-        console.log(searchText)
-        dispatch(listProducts('', pageNumber))
-      }, [dispatch, searchText, pageNumber])
+        dispatch(listProducts(keyword, pageNumber))
+    }, [dispatch, keyword, pageNumber])
 
     return (
         <SearchResultStyled className="container py-4">
             <BreadCrumb/>
             <div className="row">
                 <div className="col">
-                    <p className="fs-6 text-md-start text-sm-center">{products ? products.length : '0'} results for: <span className="fst-italic">"{searchText}"</span></p>
+                    {keyword && keyword !== '' ? (
+                        <p className="fs-6 text-md-start text-sm-center">
+                        {totalProductCount ? totalProductCount : '0'} results for: 
+                        <span className="fst-italic">"{keyword}"</span>
+                    </p>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </div>
             <div className="row  d-sm-block">
@@ -49,7 +57,8 @@ const SearchResults = ({match}) => {
                         onClick={()=>setShowFilterTab(!showFilterTab)}>
                             {showFilterTab ? "Hide" : "Show"} Filters
                     </button>
-                    {products && products.length > 0 && <p className="text-muted mb-2 text-center">Showing {products.length} items </p>}
+                    {products && products.length > 0 && 
+                    <p className="text-muted mb-2 text-center">Showing {products.length} of {totalProductCount} results </p>}
                 </div>
             </div>
             <div className="row">
@@ -67,21 +76,12 @@ const SearchResults = ({match}) => {
                     </>
                 )}
                 </div>
-                {products && products.length < 3 && <div className="spacer-less-than-3"></div>}
+                {products && products.length < 5 && <div className="spacer-less-than-5"></div>}
+            </div>  
+            {/* Pagination Here */}
+            <div className="row mt-5">
+                <Pagination pages={pages} page={page} keyword={keyword ? keyword : ''}/>            
             </div>
-                {products && products.length > 12 && <nav className="mt-5" aria-label="Page navigation example">
-                    <ul className="pagination justify-content-start justify-content-md-end">
-                        <li className="page-item disabled">
-                        <a className="page-link" href="#" tabIndex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li className="page-item active"><a className="page-link" href="#">1</a></li>
-                        <li className="page-item"><a className="page-link" href="#">2</a></li>
-                        <li className="page-item"><a className="page-link" href="#">3</a></li>
-                        <li className="page-item">
-                        <a className="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>}
         </SearchResultStyled>
     )
 }
@@ -89,7 +89,7 @@ const SearchResults = ({match}) => {
 export default SearchResults
 
 const SearchResultStyled = styled.div`
-.spacer-less-than-3{
+.spacer-less-than-5{
     height: 300px;
 }
 a{
