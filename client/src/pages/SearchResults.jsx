@@ -24,6 +24,7 @@ const SearchResults = ({match}) => {
     const keyword = match.params.keyword
     const pageNumber = match.params.pageNumber || 1
 
+
     const [showFilterTab,setShowFilterTab] = useState(windowWidth >= 992)
     
     // import product list from redux state
@@ -48,8 +49,6 @@ const SearchResults = ({match}) => {
     useEffect(() => {
         getProducts()
     }, [dispatch, keyword, pageNumber, sortFilter])
-
-    console.log(sortFilter)
 
     return (
         <SearchResultStyled className="container py-4">
@@ -82,24 +81,28 @@ const SearchResults = ({match}) => {
                  
                 </div>
             </div>
-            <div className="row d-sm-block">
+            {/* <div className="row mb-3 d-sm-block text-end">
                 <div className="col">
                     <button 
                         type="button" 
-                        className="btn btn-outline-primary my-2  d-lg-none " 
+                        className="btn btn-outline-secondary my-2  d-lg-none " 
                         onClick={()=>setShowFilterTab(!showFilterTab)}>
                             {showFilterTab ? "Hide" : "Show"} Filters
                     </button>
                 </div>
-            </div>
+            </div> */}
             <div className="row">
                 {/* Left SideTab */}
-                {showFilterTab && 
+                {/* {showFilterTab &&  */}
                 <div className="col-md-4 col-lg-3 col-xxl-2">
                     <SortFilter sortFilter={sortFilter} setSortFilter={setSortFilter}/>
                     <div className="border w-100 my-4"></div>
-                    <SideSuggestions/>
-                </div>}
+                    {showFilterTab && 
+                        <SideSuggestions/>
+                    }
+                </div>
+
+                
                 
                 <div className="col d-flex align-items-stretch flex-wrap gap-1">
                 {loading ? <div className="w-100"> <LoadingSpinner size={6} borderWidth={0.40}/> </div>: (

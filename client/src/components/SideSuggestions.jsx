@@ -16,7 +16,7 @@ const SideSuggestions = () => {
 
     return (
         <div>
-            <div className="bg-light">
+            <div className="p-2">
                 <h6 className="mb-2 text-uppercase">Brands</h6>
                 <ul className="list-group list-group-flush">
                     {!loading ? (

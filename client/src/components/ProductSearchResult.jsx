@@ -39,7 +39,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                             <button className="btn btn-danger btn-sm addtocart-btn" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
                         </div>
                         
-                        <div className="card-body" onClick={() => clickMethod(productInfo)}>
+                        <div className="card-body bg-light" onClick={() => clickMethod(productInfo)}>
                             {loading 
                                 ? <LoadingSpinner/> 
                                 : (<>
@@ -47,7 +47,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                 {productInfo.tags.includes('freatured') && <span className="badge bg-warning fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
 
                                 <p className="card-title mb-3 display-inline-block">
-                                    <small className="text-uppercase text-muted text-nowrap">{vendorFound.name}</small> <br />
+                                    <small className="text-uppercase text-muted text-nowrap">{vendorFound && vendorFound.name}</small> <br />
                                     {name} - {sku.option}
                                 </p>
                         
@@ -57,7 +57,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                         {description}
                                     </p>
                                     <div className="text-center">
-                                        <button type="button" className="btn btn-outline-primary m-3">View Collection</button>
+                                        {/* <button type="button" className="btn btn-outline-primary m-3">View Collection</button> */}
                                     </div>
                                 </>
                                 }
@@ -106,7 +106,6 @@ const DivStyled = styled.div`
     }
 
     .card-body{
-        background-color: white;
         z-index: 2000;
     }
     .card-title{

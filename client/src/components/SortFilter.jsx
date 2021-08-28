@@ -20,7 +20,7 @@ const SortFilter = ({sortFilter, setSortFilter}) => {
 
     return (
         <SortFilteredStyled className="">
-            <div className="bg-light">
+            <div className="p-2">
                 <h6 className="mb-2 text-uppercase">Refine Search</h6>
                     <div className="">
                         <label className="mb-1">Sort By</label>
@@ -31,9 +31,9 @@ const SortFilter = ({sortFilter, setSortFilter}) => {
                         </select>
                 </div>
             </div>
-            <div className="bg-light mt-3">
+            <div className="mt-3">
                 {/* <div className="">
-                    <label for="customRange1" className="form-label mb-1">Filter</label>
+                    <label htmlFor="customRange1" className="form-label mb-1">Filter</label>
                     <p className="m-0"><small>($0 - ${priceFilter})</small></p>
                     <input type="range" className="form-range" id="customRange1" min="0" max="500" onChange={handlePriceFilter} value={priceFilter}/>
                 </div> */}

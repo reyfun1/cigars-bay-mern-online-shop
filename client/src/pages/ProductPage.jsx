@@ -2,7 +2,7 @@ import { formatMoney } from 'accounting-js'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { listProductDetails } from '../actions/productActions'
+import { getProductsByTag, listProductDetails } from '../actions/productActions'
 import BreadCrumb from '../components/BreadCrumb'
 import Carousel from '../components/Carousel'
 import ProductDetailsTable from '../components/ProductDetailsTable'
@@ -28,25 +28,26 @@ const ProductPage = ({match}) => {
     const productDetails = useSelector((state) => state.productDetails)
     const { loading, product , error} = productDetails
 
+    // Product List best Seller
+    const productListBestSeller = useSelector((state) => state.productListBestSeller)
+    const { products: productsBestSeller, loading: bestSellerLoading, error: bestSellerError } = productListBestSeller
+
     const [selectedSku, setSelectedSku] = useState()
-    const [vendorLoading, setVendorLoading] = useState(true)
+
+    const vendorList = useSelector(state => state.vendorList)
+    const { vendors, loading : vendorLoading } = vendorList
+
     const [vendorFound, setVendorFound] = useState({})
 
     const [qty, setQty] = useState(1)
 
-    // lookup vendor
+    // lookup the vendor in the vendor list
     useEffect(()=>{
-        if(!product) return
-        setVendorLoading(true)
-        axios.get(`/api/vendors/${product.vendor}`)
-        .then(({data}) => {
-            setVendorFound(data)
-            setVendorLoading(false)
-        })
-        .catch(err => {
-
-        })
-    },[product])
+        if(vendors){
+            const foundVendor = vendors.find(v => v._id === product.vendor)
+            setVendorFound(foundVendor)
+        }
+    },[])
 
     // find the product in the array, if not found request it 
     useEffect(() => {
@@ -60,6 +61,13 @@ const ProductPage = ({match}) => {
             if(searchableSku) setSelectedSku(searchableSku)
         }
     },[product])
+
+    // fetch related products if its empty 
+    useEffect(()=>{
+        if(!productsBestSeller){
+            dispatch(getProductsByTag('best-seller'))
+        }
+    }, [])
 
     const handleSkuChange = e => {
         const desiredSkuID = e.target.getAttribute('option')
@@ -75,6 +83,7 @@ const ProductPage = ({match}) => {
         dispatch(addToCart(product, selectedSku,vendorFound, qty))
     }
 
+    
     const transitions = useTransition(selectedSku, {
         from: { transform: 'scale(1.5)' },
         enter: { transform: 'scale(1)' },
@@ -106,7 +115,7 @@ const ProductPage = ({match}) => {
                                     {product.name} - {selectedSku && selectedSku.option}
                                     </p>
 
-                                    <p className="text-muted text-muted text-uppercase">By: <a href="">{vendorFound.name}</a></p>
+                                    <p className="text-muted text-muted text-uppercase">By: <a href="">{vendorFound && vendorFound.name}</a></p>
                                     <span className="fs-6">Item # : {product._id}</span>
                                 </div>   
                             )} 
@@ -184,7 +193,7 @@ const ProductPage = ({match}) => {
                     <div className="card">
                         <div className="card-body">
                         <h5 className="card-title">Description</h5>
-                        <p className="card-text">{vendorFound.description}</p>
+                        <p className="card-text">{vendorFound && vendorFound.description}</p>
                         <div className="company-logo">
                             <img className="img-fluid d-block mx-auto" src="https://www.plasenciacigars.com/wp-content/themes/plasencia-cigars-2018/img/logo-footer.svg" alt="Responsive image"/>
                         </div>
@@ -224,10 +233,15 @@ const ProductPage = ({match}) => {
                     <div>
                         <p className="fs-4 border-bottom pb-2"> Similar Products</p>
                         <div className="d-flex flex-wrap">
-                            {products && 
-                            products.
-                            filter(x => x.vendor === product.vendor)
-                            .slice(0,3)
+                            {products && products
+                            .filter(x => x.vendor === product.vendor)
+                            .slice(0,4)
+                            .map(product => 
+                                <ProductSearchResult key={product._id} 
+                                    productInfo={product} clickMethod={() =>  history.push(`/product/${product._id}`)} 
+                            />)}
+
+                            {!products && productsBestSeller && productsBestSeller
                             .map(product => 
                                 <ProductSearchResult key={product._id} 
                                     productInfo={product} clickMethod={() =>  history.push(`/product/${product._id}`)} 

@@ -82,7 +82,7 @@ const ProductsShowCase = () => {
                         <div className="col"></div>
                         <div className="col"></div>
                         <div className="col-lg-6">
-                        <Link to={`/search/all`} type="button" className="btn btn-primary w-100">Shop New Arrivals &gt; </Link>
+                        <Link to={`/search/all`} className="btn btn-primary w-100">Shop New Arrivals &gt; </Link>
                         </div>
                     </div>
 
@@ -110,7 +110,7 @@ const ProductsShowCase = () => {
                         <div className="col"></div>
                         <div className="col"></div>
                         <div className="col-lg-6">
-                            <Link to={`/search/all`} type="button" className="btn btn-primary w-100">Shop Best Sellers &gt; </Link>
+                            <Link to={`/search/all`} className="btn btn-primary w-100">Shop Best Sellers &gt; </Link>
                         </div>
                     </div>
 

@@ -30,12 +30,9 @@ export const cartReducer = (state = {cartItems: [], shippingAddress : {}}, actio
             const newQty = action.payload.newQty
             const sku_id = action.payload.sku_id
 
-
             return {
                 ...state,
                 cartItems : state.cartItems.map(x => {
-
-                    console.log(x.sku,sku_id )
                     if(x.sku === sku_id){
                         x.qty = newQty
                         return x

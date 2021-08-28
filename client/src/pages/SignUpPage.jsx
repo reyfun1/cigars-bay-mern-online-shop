@@ -73,7 +73,7 @@ const SignUpPage = () => {
                     ) : (
                       <>
                       {success ? (
-                        <div className="alert alert-success my-3" role="alert">
+                        <div className="alert alert-success my-3 text-center" role="alert">
                         Your Account was successfuly created! <i className="bi bi-check-circle"></i>
                       </div>
                       ) : (

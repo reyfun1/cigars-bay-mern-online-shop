@@ -282,7 +282,7 @@ const AdminEditProduct = ({match}) => {
                                 <div className="input-group mb-3 d-none">
                                     <input ref={imagesUploader} multiple type="file" 
                                     className="form-control" id="inputGroupFile02" onChange={handleImagesUploader}/>
-                                    <label className="input-group-text" for="inputGroupFile02">Upload</label>
+                                    <label className="input-group-text" htmlFor="inputGroupFile02">Upload</label>
                                 </div>
                         </div>}
                     </div>

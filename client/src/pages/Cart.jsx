@@ -90,12 +90,12 @@ const Cart = () => {
             <div className="col-md-9">
                         <div className="w-100 d-md-none mt-5"></div>
                         <p className="h4">Best Sellers</p>
-                        <div className="d-flex align-items-stretch gap-2">
+                        <div className="d-flex align-items-stretch gap-2 flex-wrap">
                             {bestSellerLoading ? <LoadingSpinner/> : (
                                 <>
                                 {!bestSellerError ? (
                                     productsBestSeller && productsBestSeller.map(product => 
-                                            <ProductSearchResult productInfo={product} clickMethod={handleProductCardClick} />)
+                                            <ProductSearchResult key={product._id} productInfo={product} clickMethod={handleProductCardClick} />)
                                 ) : (
                                     <p>Error</p>
                                 )}

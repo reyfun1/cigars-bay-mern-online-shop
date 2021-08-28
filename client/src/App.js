@@ -60,7 +60,7 @@ function App() {
 
   // check if vendor list is populated, if not then disaptch to load
   useEffect(()=>{
-    if(vendors.length < 1) dispatch(getVendors())
+    if(!vendors || vendors.length < 1) dispatch(getVendors())
   }, [])
 
   
@@ -104,6 +104,7 @@ export default App;
 
 
 const AppStyled = styled.div`
+overflow-x: hidden;
 button{
   i{
     pointer-events: none
@@ -118,4 +119,5 @@ button{
 .bi{
   vertical-align: .225em;
 }
+
 `

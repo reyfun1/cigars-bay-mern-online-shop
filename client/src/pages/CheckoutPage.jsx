@@ -168,7 +168,7 @@ const CheckoutPage = () => {
               </div>
               <div className="form-check mt-2 text-dark">
                 <input className="form-check-input" name="save-shipping" type="checkbox" value="" id="save-info"/>
-                <label className="form-check-label" for="save-info">
+                <label className="form-check-label" htmlFor="save-info">
                   Save shipping information for next time
                 </label>
               </div>
@@ -178,19 +178,19 @@ const CheckoutPage = () => {
               <div className="d-none my-3">
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" value="" id="credit-card"/>
-                  <label className="form-check-label" for="credit-card">
+                  <label className="form-check-label" htmlFor="credit-card">
                   Credit Card
                   </label>
                 </div>
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" value="" id="debit-card"/>
-                  <label className="form-check-label" for="debit-card">
+                  <label className="form-check-label" htmlFor="debit-card">
                   Debit Card
                   </label>
                 </div>
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" value="" id="paypal"/>
-                  <label className="form-check-label" for="paypal">
+                  <label className="form-check-label" htmlFor="paypal">
                   Paypal
                   </label>
                 </div>
@@ -232,7 +232,7 @@ const CheckoutPage = () => {
               <p className="mb-2 text-muted text-uppercase">Billing Address</p>
               <div className="form-check my-3 text-dark">
                 <input className="form-check-input" name="address_same" type="checkbox" onChange={handleBillingSection} value={!showBilling} id="address-same"/>
-                <label className="form-check-label" for="address-same">
+                <label className="form-check-label" htmlFor="address-same">
                   Billing address is the same as shipping address
                 </label>
               </div>
