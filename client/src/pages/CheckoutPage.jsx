@@ -15,6 +15,7 @@ const CheckoutPage = () => {
   const { cartItems } = cart 
 
   const [showBilling,setShowBilling] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   const handleReturnToCart = () => {
     history.push('/cart/')
@@ -35,8 +36,6 @@ const CheckoutPage = () => {
     Array.from(form.elements).forEach(el => {
       result[el.name] = el.value
     })
-
-    console.log(result)
 
   }
 

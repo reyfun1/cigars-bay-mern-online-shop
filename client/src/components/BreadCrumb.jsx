@@ -16,15 +16,15 @@ const BreadCrumb = () => {
             <ol className="breadcrumb mb-4 fw-light">
                 <Link to="/" className="breadcrumb-item">Home</Link>
 
-                {pathArr.map( path => {
+                {pathArr.map( (path,key) => {
                     // if path is the last one
                     if(path === pathArr[pathArr.length - 1]){
-                        return <Link to={path} className="breadcrumb-item active disabled">{path}</Link>
+                        return <Link key={key} to={path} className="breadcrumb-item active disabled">{path}</Link>
                     } else{
-                        return <Link to={path} className="breadcrumb-item">{path}</Link>
+                        return <Link key={key}to={path} className="breadcrumb-item">{path}</Link>
                     }
                 })}
-            </ol>
+            </ol> 
         </BreadCrumbStyled>
     )
 }
