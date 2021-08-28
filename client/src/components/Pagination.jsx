@@ -12,7 +12,7 @@ const Pagination = ({ pages, page, isAdmin = false, keyword = '' }) => {
                             !isAdmin
                             ? keyword
                                 ? `/search/${keyword}/page/${page - 1}`
-                                : `/page/${page - 1}`
+                                : `search/page/${page - 1}`
                             : `/admin/productlist/${page - 1}`
                         } tabIndex="-1" aria-disabled="true">&laquo; Previous</Link>
                     </li>
@@ -23,7 +23,7 @@ const Pagination = ({ pages, page, isAdmin = false, keyword = '' }) => {
                                 !isAdmin
                                     ? keyword
                                         ? `/search/${keyword}/page/${x + 1}`
-                                        : `/page/${x + 1}`
+                                        : `/search/page/${x + 1}`
                                     : `/admin/productlist/${x + 1}`
                             }>{x + 1}</Link>
                         </li>
@@ -34,7 +34,7 @@ const Pagination = ({ pages, page, isAdmin = false, keyword = '' }) => {
                             !isAdmin
                             ? keyword
                                 ? `/search/${keyword}/page/${page + 1}`
-                                : `/page/${page + 1}`
+                                : `/search/page/${page + 1}`
                             : `/admin/productlist/${page + 1}`
                         }>Next &raquo;</Link>
                     </li>

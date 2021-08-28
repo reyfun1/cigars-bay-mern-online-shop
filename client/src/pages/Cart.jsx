@@ -27,8 +27,8 @@ const Cart = () => {
     const { products: productsBestSeller, loading: bestSellerLoading, error: bestSellerError } = productListBestSeller
 
 
-    const handleShoppingClick = () => history.push('/search/all')
-    const handleProceedToCheckout = () => history.push('/checkout/')
+    const handleShoppingClick = () => history.push('/search')
+    const handleProceedToCheckout = () => history.push('cart/checkout/')
     const handleProductCardClick = (productInfo) => history.push(`/product/${productInfo._id}`)
 
     const transitions = useTransition(cartItems, {

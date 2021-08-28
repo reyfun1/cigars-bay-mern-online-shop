@@ -73,11 +73,12 @@ function App() {
           <animated.div style={props}>
             <ScrollToTop/>
             <Switch location={item}>
-              <Route exact path='/cart' component={Cart} className="w-100" />
+              
               <Route exact path='/signup' component={SignUpPage} />
               <Route exact path='/login' component={LoginPage} />
               <Route exact path='/myaccount' component={AccountPage} />
-              <Route exact path='/checkout' component={CheckoutPage} />
+              <Route exact path='/cart' component={Cart} className="w-100" />
+              <Route exact path='/cart/checkout' component={CheckoutPage} />
               <Route exact path='/contactus' component={ContactUsPage} />
               <Route exact path='/about' component={AboutPage} />
               <Route exact path='/oldadmin' component={AdminPage} />
@@ -85,10 +86,12 @@ function App() {
               <Route exact path='/product/:id' component={ProductPage} />
               <Route exact path='/admin/product/view/:id' component={AdminEditProduct} />
               <Route exact path='/admin/product/new/' component={AdminEditProduct} />
-              <Route exact path='/search/:keyword' component={SearchResults} />
+
               <Route exact path='/search' component={SearchResults} />
-              <Route exact path='/page/:pageNumber' component={SearchResults} />
+              <Route exact path='/search/:keyword' component={SearchResults} />
+              <Route exact path='/search/page/:pageNumber' component={SearchResults} />
               <Route exact path='/search/:keyword/page/:pageNumber' component={SearchResults} />
+
               <Route exact path='/' component={Home} />
               <Route component={NotFound}/>
             </Switch>

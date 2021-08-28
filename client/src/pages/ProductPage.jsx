@@ -14,7 +14,7 @@ import { addToCart } from '../actions/cartActions'
 import { LatestProductLittleCart } from '../components/LittleCart'
 
 import {useTransition, animated } from '@react-spring/web'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const ProductPage = ({match}) => {
     const productID = match.params.id
@@ -115,7 +115,9 @@ const ProductPage = ({match}) => {
                                     {product.name} - {selectedSku && selectedSku.option}
                                     </p>
 
-                                    <p className="text-muted text-muted text-uppercase">By: <a href="">{vendorFound && vendorFound.name}</a></p>
+                                    <p className="text-muted text-muted text-uppercase">
+                                        {vendorFound && vendorFound.name && <>By: <Link to={`/search/${vendorFound.name.toLowerCase()}`}>{vendorFound.name}</Link></>}
+                                    </p>
                                     <span className="fs-6">Item # : {product._id}</span>
                                 </div>   
                             )} 
