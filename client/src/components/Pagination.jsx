@@ -7,8 +7,8 @@ const Pagination = ({ pages, page, isAdmin = false, keyword = '' }) => {
             <nav aria-label="Page navigation example">
                 <ul className="pagination justify-content-end">
                     {/* Previous */}
-                    <li class={`page-item ${page <= 1 ? 'disabled' : ''}`}>
-                        <Link class="page-link" to={
+                    <li className={`page-item ${page <= 1 ? 'disabled' : ''}`}>
+                        <Link className="page-link" to={
                             !isAdmin
                             ? keyword
                                 ? `/search/${keyword}/page/${page - 1}`
@@ -29,8 +29,8 @@ const Pagination = ({ pages, page, isAdmin = false, keyword = '' }) => {
                         </li>
                     ))}
                     {/* Next */}
-                    <li class={`page-item`}>
-                        <Link class="page-link" to={
+                    <li className={`page-item`}>
+                        <Link className="page-link" to={
                             !isAdmin
                             ? keyword
                                 ? `/search/${keyword}/page/${page + 1}`

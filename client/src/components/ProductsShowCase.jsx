@@ -61,7 +61,7 @@ const ProductsShowCase = () => {
                 <div className="col-md">
                     <p className="h3 text-center text-md-start my-5 my-md-0 mb-md-2">New Arrivals</p>
                     <div className="d-flex align-items-stretch flex-wrap gap-2">
-                        {newArrivalLoading ? <LoadingSpinner/> 
+                        {newArrivalLoading ? <div className="text-center w-100"><LoadingSpinner/></div> 
                         : (
                             <>
                             {!newArrivalError ? (
@@ -75,8 +75,6 @@ const ProductsShowCase = () => {
                             )}
                             </>
                         )}  
-                        {/* <!-- Force next columns to break to new line at md breakpoint and up -->
-                        <div className="w-100 d-lg-none"></div> */}
                     </div>
 
                     <div className="row mt-3">
@@ -91,7 +89,7 @@ const ProductsShowCase = () => {
 
                     <p className="h3 text-center text-md-start my-5 my-md-4 mb-md-2 ">Best Sellers</p>
                     <div className="d-flex align-items-stretch flex-wrap gap-2">
-                        {bestSellerLoading ? <LoadingSpinner/> 
+                        {bestSellerLoading ? <div className="text-center w-100"><LoadingSpinner/></div> 
                             : (
                                 <>
                                 {!bestSellerError ? (

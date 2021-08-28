@@ -28,16 +28,21 @@ import AdminPage from './pages/AdminPage';
 import styled from 'styled-components'
 import NewAdminPage from './pages/NewAdminPage';
 import AdminEditProduct from './adminPages/AdminEditProduct';
-import { connect, connectAdvanced, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getVendors } from './actions/vendorActions';
 
 
 
-function App(props) {
+function App() {
 
   const location = useLocation()
+  const dispatch = useDispatch()
 
   const cart = useSelector(state => state.cart)
   const { cartItems } = cart 
+
+  const vendorList = useSelector(state => state.vendorList)
+  const { vendors } = vendorList 
 
   const [showLittleCart, setShowLittleCart] = useState(false)
   
@@ -52,6 +57,11 @@ function App(props) {
   useActionListener('CART_ADD_ITEM', (dispatch, action) => {
     setShowLittleCart(true)
   });
+
+  // check if vendor list is populated, if not then disaptch to load
+  useEffect(()=>{
+    if(vendors.length < 1) dispatch(getVendors())
+  }, [])
 
   
   return (

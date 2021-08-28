@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom'
 const Footer = () => {
     const history = useHistory() 
 
-    const [showFooter, setShowFooter] = useState(false)
+    const [showFooter, setShowFooter] = useState(true)
 
     // hide the footer based on the url location
     useEffect(() => {

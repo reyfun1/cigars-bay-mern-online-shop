@@ -163,11 +163,18 @@ export const getProductsByTag = (tag) => async(dispatch, getState) => {
 }
 
 
-export const listProducts = (keyword = '', pageNumber = '') => async (dispatch) => {
+export const listProducts = ({
+    keyword = '', 
+    pageNumber = '', 
+    sortBy = '',
+    sortDirection = 1
+    }
+    ) => async (dispatch) => {
     try {
         dispatch({type: PRODUCT_LIST_REQUEST})
 
-        const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`)
+        const { data } = 
+        await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}&sortBy=${sortBy}&sortDirection=${sortDirection}`)
 
         dispatch({
             type: PRODUCT_LIST_SUCCESS,

@@ -3,56 +3,50 @@ import styled from 'styled-components'
 import {  formatMoney } from 'accounting-js'
 import axios from 'axios'
 import LoadingSpinner from './LoadingSpinner'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addToCart } from '../actions/cartActions'
 
 const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
-    const [vendorLoading, setVendorLoading] = useState(true)
     const [vendorFound, setVendorFound] = useState({})
     const dispatch = useDispatch()
 
-    const {name, price, images, vendor, skus, description} = productInfo
+    const vendorList = useSelector(state => state.vendorList)
+    const { vendors, loading } = vendorList 
+
+    const {name, images, vendor, skus, description} = productInfo
 
     // lookup vendor
     useEffect(()=>{
-        setVendorLoading(true)
-        axios.get(`/api/vendors/${vendor}`)
-        .then(({data}) => {
-            setVendorFound(data)
-            setVendorLoading(false)
-        })
-        .catch(err => {
-
-        })
+        if(vendors){
+            const foundVendor = vendors.find(v => v._id === vendor)
+            setVendorFound(foundVendor)
+        }
     },[])
 
-    const handleAddToCartClick  = () => {
-        console.log(productInfo)
-        dispatch(addToCart(productInfo, skus[0],vendorFound, 1))
-    }
+    const handleAddToCartClick  = () => dispatch(addToCart(productInfo, skus[0],vendorFound, 1))
 
-    
+
     let extraClasses = bigCard ?  'bigCard ': '';
 
     return (
-        <DivStyled className={`card ${extraClasses} border`}>
+        <DivStyled className={`card ${extraClasses} border flex-row`}>
             {skus && skus.length > 0 && skus.map( sku => {
                 if(sku.isSearchable){
                     return (
-                    <div key={sku.sku}>
+                    <div key={sku.sku} className="d-flex flex-column justify-content-between">
                         <div className="img-container position-relative">
                             <img src={images[0]} className="" alt="..." onClick={() => clickMethod(productInfo)}/>
                             <button className="btn btn-danger btn-sm addtocart-btn" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
                         </div>
                         
-                        <div className="card-body position-relative" onClick={() => clickMethod(productInfo)}>
-                            {vendorLoading 
+                        <div className="card-body" onClick={() => clickMethod(productInfo)}>
+                            {loading 
                                 ? <LoadingSpinner/> 
                                 : (<>
                                 {/* {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>} */}
                                 {productInfo.tags.includes('freatured') && <span className="badge bg-warning fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
 
-                                <p className="card-title mb-3">
+                                <p className="card-title mb-3 display-inline-block">
                                     <small className="text-uppercase text-muted text-nowrap">{vendorFound.name}</small> <br />
                                     {name} - {sku.option}
                                 </p>
@@ -69,7 +63,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                 }
                                 </>) }
                         </div>
-                        <div className="card-footer text-end border-0 position-relative"  onClick={() => clickMethod(productInfo)}>
+                        <div className="card-footer bg-light text-end border-0 position-relative"  onClick={() => clickMethod(productInfo)}>
                             {skus && <span className="h6 fw-bold">{formatMoney(skus[0].price)}</span>}
                         </div>
                         
@@ -115,7 +109,6 @@ const DivStyled = styled.div`
         background-color: white;
         z-index: 2000;
     }
-
     .card-title{
         font-size: 0.9rem;
     }
