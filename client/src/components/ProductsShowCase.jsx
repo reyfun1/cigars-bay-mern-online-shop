@@ -61,7 +61,10 @@ const ProductsShowCase = () => {
                         </>
                     )}                        
                 </div>
+                
+
                 <div className="col-md">
+                <div className="border-top border-secondary mx-auto w-75 d-md-none my-5"></div>
                     <div className="text-center text-md-start my-4 my-md-0 mb-md-2">
                         <p className="fs-3 m-0">New Arrivals</p>
                         <span className="text-muted">Recently added products</span>
@@ -88,6 +91,8 @@ const ProductsShowCase = () => {
                             <Link to={`/search/all`} className="btn btn-primary py-3 fw-bold w-100 text-dark text-uppercase shadow">Shop New Arrivals <i className="bi bi-arrow-right-circle"></i> </Link>
                         </div>
                     </div>
+
+                    <div className="border-top border-secondary mx-auto w-75 d-lg-none my-5"></div>
 
                     <div className="text-center text-md-start mt-4 mb-2">
                         <p className="fs-3 m-0">Best Sellers</p>
