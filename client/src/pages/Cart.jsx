@@ -38,6 +38,10 @@ const Cart = () => {
         delay: 200,
     })
 
+    const getNumOfItemsInCart = () => {
+        return cartItems.reduce( (acc, current) => (acc + current.qty * 1), 0)
+    }
+
     // fetch best seller products if it is empty
     useEffect(()=>{
         if(!productsBestSeller) dispatch(getProductsByTag('best-seller'))
@@ -47,18 +51,21 @@ const Cart = () => {
     return (
         <CartStyled className="container py-4">
            <BreadCrumb/>
+           
            <div className="row mb-2">
                <div className="col">
-                   <h3>Shopping Cart</h3>
-                   {cartItems.length > 0 ? '( ':''}
-                   {cartItems && cartItems.length > 0 && cartItems.reduce( (acc, current) => (acc + current.qty * 1), 0) + ` ${cartItems.length > 1 ? ') Items':') Item'} in your cart` } 
+                   <div className="my-4 my-md-0 mb-md-2">
+                        <p className="fs-3 m-0">Shopping Cart</p>
+                        {cartItems.length > 0 ? '( ':''}
+                        {cartItems && cartItems.length > 0 && 
+                            getNumOfItemsInCart() + ` ${getNumOfItemsInCart() > 1 ? ') Items':') Item'} in your cart` }
+                    </div>
                </div>
            </div>
 
            {cartItems && cartItems.length > 0 ? (
             <div className="row">
                <div className="col-md-9 card px-5">
-
                 {transitions( (props, item) => (
                     <animated.div style={props} className={`border-bottom border-2`}>
                         <CartItem productInfo={item} type="item"/>
@@ -89,8 +96,11 @@ const Cart = () => {
            <div className="row my-5">
             <div className="col-md-9">
                         <div className="w-100 d-md-none mt-5"></div>
-                        <p className="h4">Best Sellers</p>
-                        <div className="d-flex align-items-stretch gap-2 flex-wrap">
+                            <div className="text-center text-md-start mt-4 mb-2">
+                                <p className="fs-4 m-0">Best Sellers</p>
+                                <span className="text-muted">CigarsBay most sold products</span>
+                            </div>  
+                        <div className="d-flex align-items-stretch justify-content-center gap-2 flex-wrap">
                             {bestSellerLoading ? <LoadingSpinner/> : (
                                 <>
                                 {!bestSellerError ? (
@@ -103,12 +113,9 @@ const Cart = () => {
                             )}
                         </div>
 
-                        <div className="row gy-2 mt-3">
-                            <div className="col"></div>
-                            <div className="col"></div>
-                            <div className="col"></div>
+                        <div className="row mt-3 justify-content-md-end pe-2">
                             <div className="col-lg-6">
-                                <button type="button" className="btn btn-primary w-100">Shop More Best Sellers &gt; </button>
+                                <Link to={`/search/all`} className="btn btn-primary py-3 fw-bold w-100 text-dark text-uppercase">Shop Best Sellers &nbsp;<i className="bi bi-arrow-right-circle"></i> </Link>
                             </div>
                         </div>
         

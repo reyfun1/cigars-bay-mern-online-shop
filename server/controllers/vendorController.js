@@ -1,5 +1,4 @@
 import asyncHandler from 'express-async-handler'
-
 import Vendor from '../models/vendorModel.js'
 
 // @desc    Fetch single vendor
@@ -7,7 +6,6 @@ import Vendor from '../models/vendorModel.js'
 // @access  Public
 const getVendorById = asyncHandler(async(req,res) => {
     const vendor = await Vendor.findById(req.params.id)
-
     if(vendor){
         res.json(vendor)
     } else{

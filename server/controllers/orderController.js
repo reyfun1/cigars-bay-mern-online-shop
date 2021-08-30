@@ -5,7 +5,7 @@ import Order from '../models/orderModel.js'
 // @route   POST /api/orders
 // @access  Private
 const createOrder = asyncHandler(async(req,res) => {
-    // get params from the bosy
+    // get params from the body
     const {
         orderItems,
         shippingAddress,

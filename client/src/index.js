@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter} from 'react-router-dom'
 import ReactDOM from 'react-dom';
-import './index.css';
+import '../src/styles/main.css'
 import App from './App';
 
 // Import stuff for redux

@@ -6,29 +6,45 @@ import sale from '../img/sale.png'
 import styled from 'styled-components'
 
 const PolicyShowcase = () => {
+    
+    const PolicyShowcaseContainer = styled.div`
+        background-image: url(${cigarBackground});
+        padding: 6rem 4rem;
+        img{
+            width: 80px;
+        }
+        .policy-card{
+            transition: transform 300ms ease-in-out;
+        }
+        @media only screen and (min-width: 991px) {
+            .policy-card:hover{
+                transform: scale(1.05)
+            }
+        }
+    `
     return (
         <PolicyShowcaseContainer>
-            <img src={cigarBackground} alt="" />
-            <div className="row gy-3 position-absolute policy-cards container">
+            {/* <img src={cigarBackground} className="img-fluid" alt="..." /> */}
+            <div className="row policy-cards gy-4 text-light text-center">
                 <div className="col-md">
-                    <div className="policy-card">
-                        <img src={free} alt="" />
-                        <h4>Free Shipping</h4>
-                        <p className="text-muted">On orders over $50</p>
+                    <div className="policy-card p-3 bg-light text-dark">
+                        <img className="mb-1" src={free} alt="..." />
+                        <p className="fs-5 m-0 text-uppercase">Free Shipping</p>
+                        <p className="m-0">On orders over $50</p>
                     </div>
                 </div>
                 <div className="col-md">
-                    <div className="policy-card">
-                        <img src={refund} alt="" />
-                        <h4>30 Days Return</h4>
-                        <p className="text-muted"> Buy with confidence</p>
+                    <div className="policy-card p-3 bg-light text-dark">
+                        <img className="mb-1" src={refund} alt="..." />
+                        <p className="fs-5 m-0 text-uppercase">30 Days Return</p>
+                        <p className="m-0"> Buy with confidence</p>
                     </div>
                 </div>
                 <div className="col-md">
-                    <div className="policy-card">
-                        <img src={sale} alt="" />
-                        <h4>Big Sale</h4>
-                        <p className="text-muted">Sales every week</p>
+                    <div className="policy-card p-3 bg-light text-dark">
+                        <img className="mb-1" src={sale} alt="..." />
+                        <p className="fs-5 m-0 text-uppercase">Big Sales</p>
+                        <p className="m-0">Sales every week</p>
                     </div>
                 </div>
             </div>
@@ -37,33 +53,3 @@ const PolicyShowcase = () => {
 }
 
 export default PolicyShowcase
-
-const PolicyShowcaseContainer = styled.div`
-    overflow: hidden;
-    position: relative;
-    max-height: 500px; 
-
-    @media only screen and (max-width: 768px) {
-        max-height: 90vh;
-        .policy.card{
-            margin: auto 1em;
-        }
-    }
-
-    .policy-cards{
-        width: 100%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-    }
-
-    .policy-card{
-        padding: 1em 3em;
-        background-color:white;
-        height: 100%;
-        text-align: center;
-        img{
-            width: 100px;
-        }
-    }
-`

@@ -5,9 +5,18 @@ import Product from '../models/productModel.js';
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async(req,res) => {
-    const pageSize = 10
+    const pageSize = 12
     const page = Number(req.query.pageNumber) || 1
+    const sortBy = req.query.sortBy
+    const sortDirection = Number(req.query.sortDirection)
 
+    let sort = {}
+
+    if(sortBy !== ''){
+        sort = {[`skus.0.${sortBy}`] : sortDirection}
+    }
+
+    // TODO : make regex more flexible to matching
     // if keyword is sent make regex
     const keyword = req.query.keyword 
         ? {
@@ -18,13 +27,29 @@ const getProducts = asyncHandler(async(req,res) => {
         } : {}
     
     // get total count of documents matching the keyword
-    const count = await Product.countDocuments({ ...keyword })
+    const totalProductCount = await Product.countDocuments({ ...keyword })
     
     // return the products depending on keyword match and the page number
-    const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize * (page - 1))
+    const products = await Product.find({ ...keyword })
+        .sort(sort)
+        .limit(pageSize)
+        .skip(pageSize * (page - 1))
     
+    // return products found, the current page number, and the generated amount of pages
+    res.json({ products, page, pages: Math.ceil(totalProductCount / pageSize), totalProductCount })
+}) 
+
+// @desc    Fetch all products
+// @route   GET /api/products/tags/:tag
+// @access  Public
+const getProductsByTag = asyncHandler(async(req,res) => {
+    const tag = req.params.tag
+    const limit = Number(req.query.limit) || 16
+
+    const products = await Product.find( { tags: { $all: tag } } ).limit(limit)
+
     // return info
-    res.json({ products, page, pages: Math.ceil(count / pageSize) })
+    res.json({products})
 }) 
 
 // @desc    Fetch single product
@@ -109,6 +134,7 @@ const updateProduct = asyncHandler(async(req,res) => {
 
 export {
     getProducts,
+    getProductsByTag,
     getProductById,
     deleteProduct,
     createProduct,

@@ -15,6 +15,7 @@ import { LatestProductLittleCart } from '../components/LittleCart'
 
 import {useTransition, animated } from '@react-spring/web'
 import { Link, useHistory } from 'react-router-dom'
+import { getVendors } from '../actions/vendorActions'
 
 const ProductPage = ({match}) => {
     const productID = match.params.id
@@ -37,7 +38,7 @@ const ProductPage = ({match}) => {
     const vendorList = useSelector(state => state.vendorList)
     const { vendors, loading : vendorLoading } = vendorList
 
-    const [vendorFound, setVendorFound] = useState({})
+    const [vendorFound, setVendorFound] = useState()
 
     const [qty, setQty] = useState(1)
 
@@ -47,7 +48,7 @@ const ProductPage = ({match}) => {
             const foundVendor = vendors.find(v => v._id === product.vendor)
             setVendorFound(foundVendor)
         }
-    },[])
+    },[vendors])
 
     // find the product in the array, if not found request it 
     useEffect(() => {
@@ -76,10 +77,7 @@ const ProductPage = ({match}) => {
         setQty(1)
     }
     
-    const [showLittleCart, setShowLittleCart] = useState(false)
-
     const handleAddToCart = () => {
-        setShowLittleCart(true)
         dispatch(addToCart(product, selectedSku,vendorFound, qty))
     }
 
@@ -163,9 +161,9 @@ const ProductPage = ({match}) => {
 
                             {/* In stock */}
                             {selectedSku && selectedSku.stock_qty > 3 ? (
-                                <p className="m-0 mt-3 text-success">{selectedSku && selectedSku.stock_qty} in stock</p>
+                                <p className="m-0 mt-3 text-success">{selectedSku && selectedSku.stock_qty} in stock <i className="bi bi-check"></i></p>
                             ) : (
-                                <p className="m-0 mt-3 text-danger">Out of Stock</p>
+                                <p className="m-0 mt-3 text-danger">Out of Stock <i className="bi bi-check"></i></p>
                             )}
                             
                             {/*Qty and add to cart  */}
@@ -178,9 +176,9 @@ const ProductPage = ({match}) => {
                                         className="form-control w-25 border-radius me-2" placeholder="0" onChange={e => setQty(e.target.value)} value={qty} />
                                         <button 
                                             disabled={selectedSku && selectedSku.stock_qty < 3 ? true: false} 
-                                            className="btn btn-dark flex-grow-1 text-uppercase" 
+                                            className="btn btn-primary flex-grow-1 text-uppercase text-dark py-2" 
                                             type="button" onClick={handleAddToCart}>
-                                                Add to Cart {selectedSku && selectedSku.stock_qty < 3 ? <small>(Out of Stock)</small>: ''}<i className="bi bi-cart"></i>
+                                                Add to Cart &nbsp; {selectedSku && selectedSku.stock_qty < 3 ? <small>(Out of Stock)</small>: ''}<i className="bi bi-cart"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -190,11 +188,14 @@ const ProductPage = ({match}) => {
                     </div>
                     {/*  */}
                     <div className="row mt-3">
-                    <p className="fs-4 pb-2">Product Information</p>
+                        <div className="text-center text-md-start mt-4 mb-2">
+                            <p className="fs-4 m-0">Product Information</p>
+                            <span className="text-muted">Manufacturer Info and Details</span>
+                        </div> 
                     <div className="card-group">
                     <div className="card">
                         <div className="card-body">
-                        <h5 className="card-title">Description</h5>
+                        <h5 className="card-title">Company Description</h5>
                         <p className="card-text">{vendorFound && vendorFound.description}</p>
                         <div className="company-logo">
                             <img className="img-fluid d-block mx-auto" src="https://www.plasenciacigars.com/wp-content/themes/plasencia-cigars-2018/img/logo-footer.svg" alt="Responsive image"/>
@@ -229,11 +230,13 @@ const ProductPage = ({match}) => {
             )}
 
             {/* Similar Products */}
-            {/* TODO : make brand new api call */}
             <div className="row my-5">
                 <div className="col">
                     <div>
-                        <p className="fs-4 border-bottom pb-2"> Similar Products</p>
+                        <div className="text-center text-md-start mt-4 mb-2">
+                            <p className="fs-4 m-0">Similar Products</p>
+                            <span className="text-muted">CigarsBay most sold products</span>
+                        </div> 
                         <div className="d-flex flex-wrap">
                             {products && products
                             .filter(x => x.vendor === product.vendor)
@@ -249,7 +252,6 @@ const ProductPage = ({match}) => {
                                     productInfo={product} clickMethod={() =>  history.push(`/product/${product._id}`)} 
                             />)}
                         </div>
-                        <h6 className="card-header"></h6>
                     </div>
                 </div>
             </div>
@@ -260,6 +262,10 @@ const ProductPage = ({match}) => {
 export default ProductPage
 
 const ProductPageStyled = styled.div`
+.bi{
+    vertical-align: .125em;
+}
+
 .price-amount{
     transition: attention 1s;
 }

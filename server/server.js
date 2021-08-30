@@ -14,6 +14,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import vendorRoutes from './routes/vendorRoutes.js'
+import messageRoutes from './routes/messageRoutes.js'
 
 // Start dotenv, connect db , declare app , port and accept json
 dotenv.config()
@@ -34,6 +35,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/order', orderRoutes )
 app.use('/api/upload', uploadRoutes)
 app.use('/api/vendors', vendorRoutes)
+app.use('/api/msg',messageRoutes)
 
 // make the upload folder accessible from the front end 
 const __dirname = path.resolve()

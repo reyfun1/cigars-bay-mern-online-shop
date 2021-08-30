@@ -16,8 +16,6 @@ const SignUpPage = () => {
   const [pass1, setPass1] = useState('')
   const [pass2, setPass2] = useState('')
 
-  const [successRegister, setSuccessRegister] = useState(false)
-
   // Grab the user register info 
   const userRegister = useSelector(state => state.userRegister)
   const { loading , error, userInfo, success } = userRegister 
@@ -57,13 +55,21 @@ const SignUpPage = () => {
             <div className="card p-5"> <span className="circle"><i className="fa fa-check" /></span>
                     <h5>Sign up </h5> <small className="mt-2 text-muted">Join the latest and greatest online cigar store!</small>
                   <div className="form-input my-3"> <i className="fa fa-envelope" /> 
-                    <input disabled={loading || success ? true : false} type="text" className="form-control" placeholder="Name" value={name} onChange={e => setName(e.target.value)} /> </div>
+                    <label className="mb-1" htmlFor="">Name</label>
+                    <input disabled={loading || success ? true : false} type="text" className="form-control" placeholder="Name" value={name} onChange={e => setName(e.target.value)} /> 
+                    </div>
                   <div className="form-input mb-3"> <i className="fa fa-envelope" /> 
-                    <input disabled={loading || success ? true : false} type="email" className="form-control" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)} /> </div>
+                    <label className="mb-1" htmlFor="">Email address</label>
+                    <input disabled={loading || success ? true : false} type="email" className="form-control" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)} /> 
+                    </div>
                   <div className="form-input mb-3"> <i className="fa fa-lock" />
-                    <input disabled={loading || success ? true : false} type="password" className="form-control" placeholder="Password" value={pass1} onChange={e => setPass1(e.target.value)} /> </div>
+                    <label className="mb-1" htmlFor="">Password</label>
+                    <input disabled={loading || success ? true : false} type="password" className="form-control" placeholder="Password" value={pass1} onChange={e => setPass1(e.target.value)} /> 
+                    </div>
                   <div className="form-input"> <i className="fa fa-lock" /> 
-                    <input disabled={loading || success ? true : false} type="password" className="form-control" placeholder="Password (Repeat)"  value={pass2} onChange={e => setPass2(e.target.value)} /> </div>
+                    <label className="mb-1" htmlFor="">Password (Repeat)</label>
+                    <input disabled={loading || success ? true : false} type="password" className="form-control" placeholder="Password (Repeat)"  value={pass2} onChange={e => setPass2(e.target.value)} /> 
+                    </div>
                     {loading ? (
                       <div className="my-4 text-center fs-1">
                         <div className="spinner-border" role="status">
@@ -82,14 +88,14 @@ const SignUpPage = () => {
                         <button className="btn btn-primary mt-4 signup" onClick={handleRegisterClick}>Create Account</button>
                       </div>
                       <div className="text-center mt-3"> <span>Or continue with these social profile</span> </div>
-                      <div className="d-flex justify-content-center mt-4"> 
+                      {/* <div className="d-flex justify-content-center mt-4"> 
                       <button type="button" className="btn btn-outline-danger">
                         <span className="bi bi-google"></span> Google
                       </button> 
                         <span className="social"><i className="fa fa-facebook" /></span>
                         <span className="social"><i className="fa fa-twitter" /></span>
                           <span className="social"><i className="fa fa-linkedin" /></span> 
-                      </div>
+                      </div> */}
                       <div className="text-center mt-4"> <span>Already a member?</span> <a href="#" className="text-decoration-none" onClick={handleGoToLoginClick}>Login</a> </div>
 
                         </>

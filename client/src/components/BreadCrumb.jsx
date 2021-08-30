@@ -16,18 +16,11 @@ const BreadCrumb = () => {
 
     return (
         <BreadCrumbStyled aria-label="breadcrumb row">
-            <ol className="breadcrumb mb-4 fw-light">
+            <ol className="breadcrumb mb-4 ">
                 {/* First link is always Home */}
-                {pathnames.length > 0 ? (
                     <li className="breadcrumb-item">
-                        <Link to="/">HOME</Link>
+                        <Link to="/" className="fw-bold text-decoration-none">HOME</Link>
                     </li>
-                ) : (
-                    <li className="breadcrumb-item">
-                        <Link className="m-0">HOME</Link>
-                    </li>
-                )}
-
                 {/* Rest of links  */}
                 {pathnames.map( (name, index) => {
                     let isProductID = false
@@ -51,14 +44,14 @@ const BreadCrumb = () => {
                 
                     // Item is disabled 
                     return (isLast || isPage) ? (
-                        <li key={name} className="breadcrumb-item active" aria-current="page">
+                        <li key={name} className="breadcrumb-item fw-ligth active " aria-current="page">
                             {name && name.toUpperCase()}
                         </li>
 
                     // Item is clickable
                     ) : (
-                        <li className="breadcrumb-item" key={name}>
-                            <Link to={routeTo}>
+                        <li className="breadcrumb-item fw-bold" key={name}>
+                            <Link to={routeTo} className="text-decoration-none">
                                 {name.toUpperCase()}
                             </Link>
                         </li>

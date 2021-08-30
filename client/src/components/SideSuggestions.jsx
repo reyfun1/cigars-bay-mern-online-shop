@@ -6,13 +6,15 @@ import LoadingSpinner from './LoadingSpinner'
 const SideSuggestions = () => {
     const dispatch = useDispatch()
 
+  // const [vendorsFound,setVendorsFound] = useState()
+
     const vendorList = useSelector(state => state.vendorList)
     const { vendors, loading } = vendorList 
 
     // check if vendor list is populated, if not then load
     useEffect(() => {
-        if(vendors.length < 1) dispatch(getVendors())
-    },[])
+        if(!vendors || vendors.length < 1) dispatch(getVendors())
+    },[vendors])
 
     return (
         <div>

@@ -11,5 +11,4 @@ Router.route('/')
 Router.route('/:id')
       .get(getVendorById)
 
-
 export default Router;

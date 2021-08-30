@@ -5,6 +5,7 @@ const AboutPage = () => {
     return (
         <div className="container py-5">
              <BreadCrumb/>
+        
         </div>
     )
 }

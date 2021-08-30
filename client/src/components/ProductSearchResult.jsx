@@ -21,7 +21,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
             const foundVendor = vendors.find(v => v._id === vendor)
             setVendorFound(foundVendor)
         }
-    },[])
+    },[vendors])
 
     const handleAddToCartClick  = () => dispatch(addToCart(productInfo, skus[0],vendorFound, 1))
 
@@ -36,7 +36,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                     <div key={sku.sku} className="d-flex flex-column justify-content-between">
                         <div className="img-container position-relative">
                             <img src={images[0]} className="" alt="..." onClick={() => clickMethod(productInfo)}/>
-                            <button className="btn btn-danger btn-sm addtocart-btn" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
+                            <button className="btn btn-primary btn-sm addtocart-btn text-uppercase" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
                         </div>
                         
                         <div className="card-body bg-light" onClick={() => clickMethod(productInfo)}>
@@ -44,7 +44,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                 ? <LoadingSpinner/> 
                                 : (<>
                                 {/* {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>} */}
-                                {productInfo.tags.includes('freatured') && <span className="badge bg-warning fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
+                                {productInfo.tags.includes('freatured') && <span className="badge bg-dark text-primary fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
 
                                 <p className="card-title mb-3 display-inline-block">
                                     <small className="text-uppercase text-muted text-nowrap">{vendorFound && vendorFound.name}</small> <br />
@@ -106,26 +106,17 @@ const DivStyled = styled.div`
     }
 
     .card-body{
-        z-index: 2000;
+        z-index: 200;
     }
     .card-title{
         font-size: 0.9rem;
     }
 
-    //box-shadow: 15px 15px 53px rgba(128, 0, 255, 0.11);
     box-shadow: 0 8px 22px 0 rgb(177 177 177 / 50%);
 
-    &:not(.bigCard){
-        //max-height: 330px;
-        // :hover {
-        //     background-color: #e0e0e0
-        // }
-    }
 
     .img-container{
         width: 100%;
-        //margin: 0 auto;
-        //max-width: 200px;
         img{
             transition: transform .2s ease;
             width: 100%;
@@ -177,7 +168,6 @@ const DivStyled = styled.div`
     @media screen and (max-width: 450px) {
         .addtocart-btn{
             display: none;
-            //padding: .75rem;
         }
     }
 `

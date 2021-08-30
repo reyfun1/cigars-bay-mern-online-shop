@@ -33,6 +33,7 @@ const registerUser = asyncHandler(async(req,res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+            createdAt: user.createdAt,
             token : generateToken(user._id)
         })
     } else{
@@ -53,6 +54,7 @@ const loginUser = asyncHandler(async(req,res) => {
 
     // if the user exists and if the password matches using the method from the user 
     if(user && await user.matchPasswords(password)){
+        console.log(user.createdAt)
         res.json({
             _id: user._id,
             name: user.name,
@@ -82,6 +84,7 @@ const getUserProfile = asyncHandler(async(req,res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            createdAt: user.createdAt,
             isAdmin : user.isAdmin,
         })
     }

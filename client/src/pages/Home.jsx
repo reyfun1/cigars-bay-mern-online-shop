@@ -8,9 +8,9 @@ const Home = () => {
     return (
         <div>
             <HomeCarousel carouselName="home-page-freatured"/>
-            <ProductsShowCase/>
-            <PolicyShowcase/>
-            <AboutComponent/>
+            <div className="my-5"><ProductsShowCase/></div>
+            <div className="my-5"><PolicyShowcase/></div>
+            <div className="my-5"><AboutComponent/></div>
         </div>
     )
 }

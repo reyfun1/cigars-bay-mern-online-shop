@@ -42,32 +42,32 @@ const AccountPage = () => {
 
             {/* Profile and Orders Links */}
            <nav className="my-3">
-                <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button className="nav-link active fs-6" id="nav-home-tab" 
+                <div className="nav nav-tabs nav-pills" id="nav-tab" role="tablist">
+                    <button className="nav-link active fs-6 text-uppercase text-dark" id="nav-home-tab" 
                         data-bs-toggle="tab" data-bs-target="#nav-home" 
                         type="button" role="tab" aria-controls="nav-home" 
                         aria-selected="true">
                             Profile <i className="bi bi-person-lines-fill"></i>
                     </button>
-                    <button className="nav-link fs-6" id="nav-profile-tab" 
+                    <button className="nav-link fs-6 text-uppercase text-dark" id="nav-profile-tab" 
                         data-bs-toggle="tab" data-bs-target="#nav-profile" 
                         type="button" role="tab" aria-controls="nav-profile" 
                         aria-selected="false">
                             Orders <i className="bi bi-cart-check"></i>
                     </button>
-                    <button className="nav-link fs-6" id="nav-payment-tab" 
+                    <button className="nav-link fs-6 text-uppercase text-dark" id="nav-payment-tab" 
                         data-bs-toggle="tab" data-bs-target="#nav-payment" 
                         type="button" role="tab" aria-controls="nav-payment" 
                         aria-selected="false">
                             Payment <i className="bi bi-credit-card"></i>
                     </button>
-                    <button className="nav-link fs-6" id="nav-favorite-tab" 
+                    <button className="nav-link fs-6 text-uppercase text-dark" id="nav-favorite-tab" 
                         data-bs-toggle="tab" data-bs-target="#nav-favorite" 
                         type="button" role="tab" aria-controls="nav-favorite" 
                         aria-selected="false">
                             Favorites <i className="bi bi-bookmark-star"></i>
                     </button>
-                    <button className="nav-link fs-6" id="nav-review-tab" 
+                    <button className="nav-link fs-6 text-uppercase text-dark" id="nav-review-tab" 
                         data-bs-toggle="tab" data-bs-target="#nav-review" 
                         type="button" role="tab" aria-controls="nav-review" 
                         aria-selected="false">
@@ -83,7 +83,7 @@ const AccountPage = () => {
                 
                 <div className="row">
                     {/* Basic Account Info */}
-                    <div className="col border-right border-end border-2">
+                    <div className="col border-right border-end border-1">
                         <div className="d-flex justify-content-between">
                             <p className="fs-5 m-0 ">Customer Info </p>
                             <button type="button" className="btn btn-sm btn-primary disabled">Edit Info</button>
@@ -116,7 +116,7 @@ const AccountPage = () => {
                                 <h4>No Shipping Address Saved</h4>
                                 <p className="text-muted">Your Shipping addresses will show up here</p>
                                 <i className="bi bi-exclamation-triangle text-warning fs-3"></i>
-                                <button  className="btn btn-primary mt-4 disabled">Add New Adress</button>
+                                <button  className="btn btn-primary mt-4 disabled">Add New Address</button>
                             </div>
                         </div>
                         {/* <div className="d-flex justify-content-between">
@@ -198,6 +198,6 @@ export default AccountPage
 
 const AccountPageStyled = styled.div`
 .bi{
-  vertical-align: .225em;
+  vertical-align: .125em;
 }
 `

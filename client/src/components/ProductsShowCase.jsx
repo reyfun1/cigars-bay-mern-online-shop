@@ -40,10 +40,13 @@ const ProductsShowCase = () => {
     }, [])
 
     return (
-        <div className="container my-4">
+        <ProductsShowCaseStyled className="container">
             <div className="row">
                 <div className="col-md-4">
-                    <p className="h3 text-center text-md-start my-4 my-md-0 mb-md-2">Freatured</p>
+                    <div className="text-center text-md-start my-4 my-md-0 mb-md-2">
+                        <p className="fs-3 m-0">Freatured</p>
+                        <span className="text-muted">CigarsBay house blend</span>
+                    </div>                   
                     {freaturedLoading ? <LoadingSpinner/> : (
                         <>
                         {!freaturedError ? (
@@ -59,8 +62,11 @@ const ProductsShowCase = () => {
                     )}                        
                 </div>
                 <div className="col-md">
-                    <p className="h3 text-center text-md-start my-5 my-md-0 mb-md-2">New Arrivals</p>
-                    <div className="d-flex align-items-stretch flex-wrap gap-2">
+                    <div className="text-center text-md-start my-4 my-md-0 mb-md-2">
+                        <p className="fs-3 m-0">New Arrivals</p>
+                        <span className="text-muted">Recently added products</span>
+                    </div>  
+                    <div className="d-flex align-items-stretch justify-content-center flex-wrap gap-2">
                         {newArrivalLoading ? <div className="text-center w-100"><LoadingSpinner/></div> 
                         : (
                             <>
@@ -77,18 +83,17 @@ const ProductsShowCase = () => {
                         )}  
                     </div>
 
-                    <div className="row mt-3">
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
+                    <div className="row mt-3 justify-content-md-end pe-2">
                         <div className="col-lg-6">
-                        <Link to={`/search/all`} className="btn btn-primary w-100">Shop New Arrivals &gt; </Link>
+                            <Link to={`/search/all`} className="btn btn-primary py-3 fw-bold w-100 text-dark text-uppercase shadow">Shop New Arrivals <i className="bi bi-arrow-right-circle"></i> </Link>
                         </div>
                     </div>
 
-
-                    <p className="h3 text-center text-md-start my-5 my-md-4 mb-md-2 ">Best Sellers</p>
-                    <div className="d-flex align-items-stretch flex-wrap gap-2">
+                    <div className="text-center text-md-start mt-4 mb-2">
+                        <p className="fs-3 m-0">Best Sellers</p>
+                        <span className="text-muted">CigarsBay most sold products</span>
+                    </div>  
+                    <div className="d-flex align-items-stretch justify-content-center flex-wrap gap-2">
                         {bestSellerLoading ? <div className="text-center w-100"><LoadingSpinner/></div> 
                             : (
                                 <>
@@ -105,22 +110,24 @@ const ProductsShowCase = () => {
                         )}
                     </div>
 
-                    <div className="row gy-2 mt-3">
-                        <div className="col"></div>
-                        <div className="col"></div>
-                        <div className="col"></div>
+                    <div className="row mt-3 justify-content-md-end pe-2">
                         <div className="col-lg-6">
-                            <Link to={`/search/all`} className="btn btn-primary w-100">Shop Best Sellers &gt; </Link>
+                            <Link to={`/search/all`} className="btn btn-primary py-3 fw-bold w-100 text-dark text-uppercase shadow">Shop Best Sellers &nbsp;<i className="bi bi-arrow-right-circle"></i> </Link>
                         </div>
                     </div>
 
-                    
                 </div>
             </div>
 
-        </div>
+        </ProductsShowCaseStyled>
     )
 }
 
 export default ProductsShowCase
 
+
+const ProductsShowCaseStyled = styled.div`
+.bi{
+    vertical-align: .120em;
+  }
+`

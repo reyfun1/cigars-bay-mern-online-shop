@@ -56,22 +56,6 @@ const Navbar = () => {
         if(isShowingCollapsable) togglerBtn.current.click()
     }
 
-    // hide the nav bar on certain ocations
-    useEffect(() => {
-        return history.listen((location) => { 
-        const {pathname} = location
-        
-        if( 
-            pathname.includes('login') ||
-            pathname.includes('signup')
-            ){
-            setShowNavBar(false)
-        } else{
-            setShowNavBar(true)
-        }
-        }) 
-    },[history])
-
     // handle the admin stuff
     useEffect(() => {
         if(successRegister) setIsAdmin(successRegister.isAdmin)
@@ -81,10 +65,10 @@ const Navbar = () => {
     
 
     return (
-        <NavBarStyled className={`navbar navbar-expand-lg bg-dark navbar-dark text-dark py-3 position-relative ${showNavBar ? '' : 'd-none'}`}>
+        <NavBarStyled className={`navbar navbar-expand-lg bg-dark navbar-dark py-3 shadow ${showNavBar ? '' : 'd-none'} fixed-top`}>
         <div className="container">
             <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-                <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon border-dark"></span>
             </button>
             <Link to="/" className="navbar-brand" onClick={handleLinkClicked}>CigarsBay</Link>
 
@@ -100,19 +84,19 @@ const Navbar = () => {
 
             <div ref={navBarCollapsable} className="collapse navbar-collapse" id="navmenu" >
                 <ul className="navbar-nav d-flex justify-content-between w-100 mt-3 mt-lg-0">
+                        <li className="nav-item ms-1 me-1"></li>
                         <li className="nav-item ms-1 me-1">
                             <Link to="/search" className="nav-link" onClick={handleLinkClicked}>Cigars</Link>
                         </li>
-                        {/* <li className="nav-item ms-1 me-1">
-                            <Link to="/search/all" className="nav-link" onClick={handleLinkClicked}>Shop</Link>
-                        </li> */}
                         <li className="nav-item ms-1 me-1">
                             <Link to="/about" className="nav-link" onClick={handleLinkClicked} >About</Link>
                         </li>
                         <li className="nav-item ms-1 me-1">
                             <Link to="/contactus" className="nav-link" onClick={handleLinkClicked} >Contact</Link>
                         </li>
-                        <li className="nav-item mx-5"></li>
+
+                        <div className="border-top border-secondary w-100 my-4 m-auto d-block d-lg-none"></div>
+
                         <li className="me-2 my-3 order-1 order-lg-0 my-lg-0 w-100" id="search-text-box">
                             <SearchBox handleLinkClicked={handleLinkClicked}/>
                         </li>
@@ -120,14 +104,14 @@ const Navbar = () => {
                         {successRegister || successLogin ? (
                             <>
                             {isAdmin ? (
-                                <Link to="/admin" className="nav-link ms-1 me-1 btn btn-outline-secondary text-nowrap" onClick={handleLinkClicked}>Admin</Link>    
+                                <Link to="/admin" className="py-2 me-1 btn btn-outline-primary text-nowrap" onClick={handleLinkClicked}>Admin</Link>    
                             ) : (
-                                <Link to="/myaccount" className="nav-link ms-1 me-1 btn btn-outline-secondary text-nowrap" onClick={handleLinkClicked}>My Account</Link>
+                                <Link to="/myaccount" className="py-2 me-1 btn btn-outline-primary text-nowrap" onClick={handleLinkClicked}>My Account</Link>
                             )}
                             </>
                         ) : (
                             <li className="nav-item">
-                                <Link to="/login" className="nav-link ms-1 me-1 btn btn-outline-secondary text-nowrap" onClick={handleLinkClicked}>Login</Link>
+                                <Link to="/login" className="py-2 me-1 btn btn-primary text-nowrap" onClick={handleLinkClicked}>Login</Link>
                             </li>
                         )}
 

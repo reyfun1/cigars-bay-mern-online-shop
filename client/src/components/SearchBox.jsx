@@ -26,7 +26,7 @@ const SearchBox = ({handleLinkClicked}) => {
                     aria-describedby="button-addon2" 
                     value={keyword} onChange={e => setKeyword(e.target.value)}/>
                 <button 
-                    className="btn btn-secondary" 
+                    className="btn btn-primary" 
                     type="submit" id="button-addon2"
                     onClick={handleLinkClicked}>
                         <i className="bi bi-search"></i>

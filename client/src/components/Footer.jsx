@@ -5,54 +5,33 @@ import styled from 'styled-components'
 import amex from '../img/svg/amex.svg'
 import applepay from '../img/svg/applepay.svg'
 import discover from '../img/svg/discover.svg'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const Footer = () => {
-    const history = useHistory() 
-
-    const [showFooter, setShowFooter] = useState(true)
-
-    // hide the footer based on the url location
-    useEffect(() => {
-        return history.listen((location) => { 
-        const {pathname} = location
-
-        if( pathname.includes('admin') || 
-            pathname.includes('login') ||
-            pathname.includes('signup') ||
-            pathname.includes('checkout') ||
-            pathname.includes('myaccount')
-            ){
-            setShowFooter(false)
-        } else{
-            setShowFooter(true)
-        }
-        }) 
-    },[history])
 
     return (
-        <FooterStyled className={`${showFooter ? '' : 'd-none'} border-top pt-4`}>
+        <FooterStyled className={`border-top pt-4`}>
             <div className="container text-md-start mb-4">
                 <div className="row">
                     <div className="col-md text-center text-md-start mb-3">                  
                         {/* <ContactUsForm/> */}
                         <h5>Useful Links</h5>
-                        <ul>
-                            <li><a href="" className="text-muted">Terms &amp; Conditions</a></li>
-                            <li><a href="" className="text-muted">Privacy Policy</a></li>
-                            <li><a href="" className="text-muted">Return Policy</a></li>
-                            <li><a href="" className="text-muted">Shipping Policy</a></li>
-                            <li><a href="" className="text-muted">Return Policy</a></li>
+                        <ul className="m-0 p-0">
+                            <li><Link to="" className="text-secondary">Terms &amp; Conditions</Link></li>
+                            <li><Link to="" className="text-secondary">Privacy Policy</Link></li>
+                            <li><Link to="" className="text-secondary">Return Policy</Link></li>
+                            <li><Link to="" className="text-secondary">Shipping Policy</Link></li>
+                            <li><Link to="" className="text-secondary">Return Policy</Link></li>
                         </ul>
                     </div>
                     <div className="col-md text-center text-md-start mb-3">
                         <h5>Shop</h5>
-                        <ul>
-                            <li><a href="" className="text-muted">Brands</a></li>
-                            <li><a href="" className="text-muted">On Sale Now</a></li>
-                            <li><a href="" className="text-muted">Cigars</a></li>
-                            <li><a href="" className="text-muted">Samplers</a></li>
-                            <li><a href="" className="text-muted">New Arrivals</a></li>
+                        <ul className="m-0 p-0">
+                            <li><Link to="" className="text-secondary">Brands</Link></li>
+                            <li><Link to="" className="text-secondary">On Sale Now</Link></li>
+                            <li><Link to="" className="text-secondary">Cigars</Link></li>
+                            <li><Link to="" className="text-secondary">Samplers</Link></li>
+                            <li><Link to="" className="text-secondary">New Arrivals</Link></li>
                         </ul>
                     </div>
                     <div className="col-md text-center text-md-start mb-3">
@@ -78,9 +57,9 @@ const Footer = () => {
                             <a href=""className='bi bi-twitter icon'></a>
                             <a href="" className='bi bi-facebook icon'></a>
                         </div>
-                        <div className="col fs-6">
+                        {/* <div className="col fs-6">
                             <span>Copyright © 2021 By <a href="">Fundora Technologies</a></span>
-                        </div>
+                        </div> */}
                         <div className="col payment">
                             <img src={amex} alt="" />
                             <img src={applepay} alt="" />
@@ -107,27 +86,18 @@ export default Footer
 
 const FooterStyled = styled.footer`
     .bi{
-        vertical-align: .225em;
+        vertical-align: -.110em;
     }
   
-    ul{
-        margin: 0;
-        padding: 0
-    }
-
     li{
         list-style-type: none;
         margin: 1em 0;
         a{
             text-decoration: none;
-            &:hover{
-                color: blue !important;
-            }
         }
     }    
 
     footer{
-
         span{
             font-size: .85em;
         }
@@ -141,7 +111,6 @@ const FooterStyled = styled.footer`
             display: inline-block;
             transform: translateY(-2px);
         }
-
 
         .payment img{
             margin: auto .5em;

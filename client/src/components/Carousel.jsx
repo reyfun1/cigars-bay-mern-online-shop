@@ -108,7 +108,7 @@ const HomeCarousel = ({ carouselName, images }) => {
                 <button type="button" data-bs-target={`#${carouselName}`} data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div className="carousel-inner w-100">
-                        {/* <div className="carousel-item active">
+                        <div className="carousel-item active">
                             <img src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1080": "330"}`} className="d-block img-fluid" alt="..."/>
                         </div>
                         <div className="carousel-item">
@@ -116,8 +116,8 @@ const HomeCarousel = ({ carouselName, images }) => {
                         </div>
                         <div className="carousel-item">
                             <img src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1080": "332"}`} className="d-block img-fluid" alt="..."/>
-                        </div> */}
-                        <div className="carousel-item active">
+                        </div>
+                        {/* <div className="carousel-item active">
                             <img src={`/uploads/test1.jpg`} className="d-block img-fluid" alt="..."/>
                         </div>
                         <div className="carousel-item">
@@ -125,7 +125,7 @@ const HomeCarousel = ({ carouselName, images }) => {
                         </div>
                         <div className="carousel-item">
                             <img src={`/uploads/test3.jpg`} className="d-block img-fluid" alt="..."/>
-                        </div>
+                        </div> */}
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target={`#${carouselName}`} data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>

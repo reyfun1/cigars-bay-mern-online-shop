@@ -45,6 +45,8 @@ function App() {
   const { vendors } = vendorList 
 
   const [showLittleCart, setShowLittleCart] = useState(false)
+  const [showNavBar, setShowNavBar] = useState(true)
+  const [showFooter, setShowFooter] = useState(true)
   
    const transitions = useTransition(location, {
     from: { opacity: 0, position: 'initial', top: '5rem', width: '100%'},
@@ -70,10 +72,9 @@ function App() {
         <Navbar/>
         <LatestProductLittleCart showLittleCart={showLittleCart} setShowLittleCart={setShowLittleCart}/>
         {transitions( (props, item) => (
-          <animated.div style={props}>
+          <animated.div style={props} className="main-app-container">
             <ScrollToTop/>
             <Switch location={item}>
-              
               <Route exact path='/signup' component={SignUpPage} />
               <Route exact path='/login' component={LoginPage} />
               <Route exact path='/myaccount' component={AccountPage} />
@@ -86,12 +87,10 @@ function App() {
               <Route exact path='/product/:id' component={ProductPage} />
               <Route exact path='/admin/product/view/:id' component={AdminEditProduct} />
               <Route exact path='/admin/product/new/' component={AdminEditProduct} />
-
               <Route exact path='/search' component={SearchResults} />
               <Route exact path='/search/:keyword' component={SearchResults} />
               <Route exact path='/search/page/:pageNumber' component={SearchResults} />
               <Route exact path='/search/:keyword/page/:pageNumber' component={SearchResults} />
-
               <Route exact path='/' component={Home} />
               <Route component={NotFound}/>
             </Switch>
@@ -123,4 +122,13 @@ button{
   vertical-align: .225em;
 }
 
+.main-app-container{
+  padding-top: 74px;
+}
+
+@media only screen and (max-width: 991px) {
+  .main-app-container{
+    padding-top: 90px;
+  }
+}
 `

@@ -292,8 +292,8 @@ const CheckoutPage = () => {
 
               <hr className="mb-4" />
               <div>
-                <button className="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-                <button className="btn fw-light text-primary" type="submit" onClick={handleReturnToCart}>Return to Cart</button>
+                <button className="btn btn-primary btn-block me-1" type="submit">Continue to checkout</button>
+                <button className="btn fw-light btn-light" type="submit" onClick={handleReturnToCart}>Return to Cart</button>
               </div>
             </form>
           </div>

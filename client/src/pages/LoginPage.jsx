@@ -60,9 +60,11 @@ const LoginPage = () => {
           <div className="card p-5"> <span className="circle"><i className="fa fa-check" /></span>
             <h5>Login </h5> <small className="mt-2 text-muted">Join the latest and greatest online cigar store!</small>
             <div className="form-input my-3"> <i className="fa fa-envelope" /> 
+              <label className="mb-1" htmlFor="">Email address</label>
               <input type="email" className="form-control" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)}/>
             </div>
             <div className="form-input mb-3"> <i className="fa fa-lock" /> 
+            <label className="mb-1" htmlFor="">Password</label>
               <input type="password" className="form-control" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/> 
             </div>
             
@@ -75,7 +77,7 @@ const LoginPage = () => {
               ) : (
                 <>
                 <button className="btn btn-primary mt-4 signup" onClick={handleLoginClick}>Login</button>
-                <div className="text-center mt-3"> <span>Or login with these social profile</span> </div>
+                {/* <div className="text-center mt-3"> <span>Or login with these social profile</span> </div>
                 <div className="d-flex justify-content-center mt-4"> 
                 <button type="button" className="btn btn-outline-danger">
                   <span className="bi bi-google"></span> Google
@@ -83,7 +85,7 @@ const LoginPage = () => {
                   <span className="social"><i className="fa fa-facebook" /></span>
                   <span className="social"><i className="fa fa-twitter" /></span>
                     <span className="social"><i className="fa fa-linkedin" /></span> 
-                </div>
+                </div> */}
                 <div className="text-center mt-4"> <span>Not a member?</span> <a href="#" className="text-decoration-none" onClick={handleGoToRegiserClick}>Register</a> 
                 </div>
                 </>
