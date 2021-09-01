@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 
 import styled from 'styled-components'
 
+import banner1 from '../img/banner/plasencia-banner-1728x.jpg'
+import banner2 from '../img/banner/oliva-banner-1728x.jpg'
+import banner3 from '../img/banner/ajfernandez-banner-1728x.jpg'
+
 const Carousel = ({ carouselName, images }) => {
     const [imagesArr, setImagesArr] = useState([])
 
@@ -97,6 +101,7 @@ const HomeCarousel = ({ carouselName, images }) => {
         height: auto;
         min-height: 230px;
         max-height: 330px;
+        mix-blend-mode: multiply;
     }
 `
 
@@ -108,24 +113,15 @@ const HomeCarousel = ({ carouselName, images }) => {
                 <button type="button" data-bs-target={`#${carouselName}`} data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div className="carousel-inner w-100">
-                        <div className="carousel-item active">
-                            <img src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1080": "330"}`} className="d-block img-fluid" alt="..."/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1080": "331"}`} className="d-block img-fluid" alt="..."/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src={`https://source.unsplash.com/1920x${carouselName == "productImages" ? "1080": "332"}`} className="d-block img-fluid" alt="..."/>
-                        </div>
-                        {/* <div className="carousel-item active">
-                            <img src={`/uploads/test1.jpg`} className="d-block img-fluid" alt="..."/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src={`/uploads/test2.jpg`} className="d-block img-fluid" alt="..."/>
-                        </div>
-                        <div className="carousel-item">
-                            <img src={`/uploads/test3.jpg`} className="d-block img-fluid" alt="..."/>
-                        </div> */}
+                    <div className="carousel-item active">
+                        <img src={banner1} alt="..." />
+                    </div>
+                    <div className="carousel-item">
+                        <img src={banner2} alt="..." />
+                    </div>
+                    <div className="carousel-item">
+                        <img src={banner3} alt="..." />
+                    </div>
             </div>
             <button className="carousel-control-prev" type="button" data-bs-target={`#${carouselName}`} data-bs-slide="prev">
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>

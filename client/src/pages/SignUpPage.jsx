@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 // import actions
 import { registerUser } from '../actions/userActions'
+import { Link } from 'react-router-dom'
 
 const SignUpPage = () => {
   const history = useHistory()
@@ -36,10 +37,6 @@ const SignUpPage = () => {
     if(validData){
       dispatch(registerUser(name,email,pass1))
     }
-  }
-
-  const handleGoToLoginClick = () => {
-    history.push('/login/')
   }
 
   return (
@@ -96,7 +93,11 @@ const SignUpPage = () => {
                         <span className="social"><i className="fa fa-twitter" /></span>
                           <span className="social"><i className="fa fa-linkedin" /></span> 
                       </div> */}
-                      <div className="text-center mt-4"> <span>Already a member?</span> <a href="#" className="text-decoration-none" onClick={handleGoToLoginClick}>Login</a> </div>
+                      <div className="text-center mt-4"> 
+                        <span>Already a member? </span> 
+                        <Link to="/signup" className="text-decoration-none fw-bold text-uppercase">Login</Link>
+                      </div>
+                       
 
                         </>
                       )}

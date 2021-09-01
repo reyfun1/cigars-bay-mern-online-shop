@@ -6,6 +6,7 @@ import { loginUser } from '../actions/userActions'
 
 import styled from 'styled-components'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { Link } from 'react-router-dom'
 
 const LoginPage = () => {
 
@@ -39,11 +40,6 @@ const LoginPage = () => {
       }, 1500)
     }
   }, [success])
-
-
-  const handleGoToRegiserClick = () => {
-    history.push('/signup/')
-  }
 
   
   return (
@@ -86,7 +82,7 @@ const LoginPage = () => {
                   <span className="social"><i className="fa fa-twitter" /></span>
                     <span className="social"><i className="fa fa-linkedin" /></span> 
                 </div> */}
-                <div className="text-center mt-4"> <span>Not a member?</span> <a href="#" className="text-decoration-none" onClick={handleGoToRegiserClick}>Register</a> 
+                <div className="text-center mt-4"> <span>Not a member?</span> <Link to="/signup" className="text-decoration-none fw-bold text-uppercase">Register</Link> 
                 </div>
                 </>
               )}

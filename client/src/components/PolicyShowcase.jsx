@@ -1,5 +1,5 @@
 import React from 'react'
-import cigarBackground from '../img/cigars-bg.jpg'
+import cigarBackground from '../img/cigars-bg-clear.jpg'
 import free from '../img/free.png'
 import refund from '../img/refund.png'
 import sale from '../img/sale.png'
@@ -9,6 +9,9 @@ const PolicyShowcase = () => {
     
     const PolicyShowcaseContainer = styled.div`
         background-image: url(${cigarBackground});
+        background-color : #1b1f22;
+        background-size: 100%;
+        background-repeat: no-repeat;
         padding: 6rem 4rem;
         img{
             width: 80px;
