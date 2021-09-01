@@ -7,8 +7,7 @@ const Router = express.Router()
 // api/products/
 Router.route('/')
       .get(getProducts)
-      // .post(protect,isAdmin,createProduct)
-      .post(createProduct)
+      .post(protect,isAdmin,createProduct)
 
 Router.route('/tags/:tag')
       .get(getProductsByTag)

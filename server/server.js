@@ -5,7 +5,6 @@ import path from 'path'
 
 // Import src files 
 import connectDB from './config/db.js'
-import products from './data/products.js'
 import { errorHandler, notFound } from './middleware/errorMiddleWare.js';
 
 // Import route files 
@@ -23,12 +22,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 app.use(express.json())
 
-
-// Testing API 
-app.get('/', (req,res) => {
-    res.send('API is working')
-})
-
 // Routes
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
@@ -37,9 +30,29 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/vendors', vendorRoutes)
 app.use('/api/msg',messageRoutes)
 
-// make the upload folder accessible from the front end 
+
+// TODO : Configure PpayPal 
+
+// make path accessible
 const __dirname = path.resolve()
+
+// make the upload folder accessible from the front end 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+// if app is running on 'production'
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, '/client/build')))
+
+    // **any route that is not one of the other ones redirect to index.html
+    app.get("*", (req,res)=> res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')))
+
+} else{
+    app.get('/', (req,res) => {
+        res.send('Api is running...')
+    })
+}
+
+
 
 
 // Handle Errors Middlewaraes to handle errors 
