@@ -25,8 +25,8 @@ const PolicyShowcase = () => {
     return (
         <PolicyShowcaseContainer>
             {/* <img src={cigarBackground} className="img-fluid" alt="..." /> */}
-            <div className="row policy-cards gy-4 text-light text-center">
-                <div className="col-md">
+            <div className="row policy-cards gy-4 text-light text-center container mx-auto">
+                <div className="col-md ps-md-0">
                     <div className="policy-card p-3 bg-light text-dark">
                         <img className="mb-1" src={free} alt="..." />
                         <p className="fs-5 m-0 text-uppercase">Free Shipping</p>
@@ -36,11 +36,11 @@ const PolicyShowcase = () => {
                 <div className="col-md">
                     <div className="policy-card p-3 bg-light text-dark">
                         <img className="mb-1" src={refund} alt="..." />
-                        <p className="fs-5 m-0 text-uppercase">30 Days Return</p>
+                        <p className="fs-5 m-0 text-uppercase text-nowrap">7 Days Return</p>
                         <p className="m-0"> Buy with confidence</p>
                     </div>
                 </div>
-                <div className="col-md">
+                <div className="col-md pe-md-0">
                     <div className="policy-card p-3 bg-light text-dark">
                         <img className="mb-1" src={sale} alt="..." />
                         <p className="fs-5 m-0 text-uppercase">Big Sales</p>

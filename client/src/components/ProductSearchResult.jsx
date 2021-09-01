@@ -36,7 +36,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                     <div key={sku.sku} className="d-flex flex-column justify-content-between">
                         <div className="img-container position-relative">
                             <img src={images[0]} className="" alt="..." onClick={() => clickMethod(productInfo)}/>
-                            <button className="btn btn-primary btn-sm addtocart-btn text-uppercase" onClick={handleAddToCartClick}>Add to Cart <i className="bi bi-cart"></i></button>
+                            <button className="btn btn-primary btn-sm addtocart-btn text-uppercase fw-bold" onClick={handleAddToCartClick}>Add to Cart</button>
                         </div>
                         
                         <div className="card-body bg-light" onClick={() => clickMethod(productInfo)}>
@@ -44,7 +44,7 @@ const ProductSearchResult = ({productInfo, bigCard, clickMethod}) => {
                                 ? <LoadingSpinner/> 
                                 : (<>
                                 {/* {discount > 0 && <span className="badge bg-danger">{discount * 100}% OFF</span>} */}
-                                {productInfo.tags.includes('freatured') && <span className="badge bg-dark text-primary fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
+                                {productInfo.tags.includes('freatured') && <span className="badge py-1 bg-dark text-primary fw-light"><span className="bi bi-star-fill"></span> Freatured</span>}
 
                                 <p className="card-title mb-3 display-inline-block">
                                     <small className="text-uppercase text-muted text-nowrap">{vendorFound && vendorFound.name}</small> <br />

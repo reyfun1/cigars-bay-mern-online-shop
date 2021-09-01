@@ -1,11 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react'
-import logo from '../img/logo.png'
+// import logo from '../img/logo.png'
 import { useSelector } from 'react-redux'
 
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import SearchBox from './SearchBox'
+
+import logo from '../img/svg/logo-yellow.svg'
 
 
 const Navbar = () => {
@@ -50,7 +52,11 @@ const Navbar = () => {
     }
 
     // Close nav when links are clicked
-    const handleLinkClicked = () => {
+    const handleLinkClicked = e => {
+        // if clicked is logo, then go home
+        if(e?.target?.classList?.value){
+            if(e.target.classList.value === "logo-container") history.push("/")
+        }
         if(window.innerWidth >= 992 ) return
         const isShowingCollapsable = navBarCollapsable.current.classList.contains('show')
         if(isShowingCollapsable) togglerBtn.current.click()
@@ -70,7 +76,10 @@ const Navbar = () => {
             <button ref={togglerBtn} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                 <span className="navbar-toggler-icon border-dark"></span>
             </button>
-            <Link to="/" className="navbar-brand" onClick={handleLinkClicked}>CigarsBay</Link>
+            
+            <div className="logo-container" onClick={handleLinkClicked}>
+                <img src={logo} alt="" />
+            </div>
 
             <button type="button" className="btn btn-outline-primary position-relative my-2 my-lg-0 order-lg-last" onClick={()=>{handleLinkClicked();handleCartClick()}}>
                 <i className="bi bi-cart"></i>
@@ -126,6 +135,18 @@ const Navbar = () => {
 export default Navbar
 
 const NavBarStyled = styled.nav`
+
+    .logo-container{
+        width: 150px;
+        padding: 1rem 0;
+        cursor: pointer;
+        &:hover{
+            opacity: .85;
+        }
+        img{
+            pointer-events: none;
+        }
+    }
     .bi{
         vertical-align: .250em;
     }

@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from './Carousel'
-import logo from '../img/logo.png'
+// import logo from '../img/logo.png'
+import logo from '../img/svg/logo-dark-blue.svg'
 import InstagramPost from './InstagramPost'
 
 import styled from 'styled-components'
@@ -29,19 +30,20 @@ const AboutComponent = () => {
                         <span className="text-muted">We post daily</span>
                     </div>
                     <div className="d-flex justify-content-between flex-column flex-md-row">
-                    <figure className="figure text-center" onClick={handleClickedImage}>
-                        <img src="https://source.unsplash.com/250x250" className="figure-img img-fluid rounded" alt="..."/>
-                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
-                    <figure className="figure text-center" onClick={handleClickedImage}>
-                        <img src="https://source.unsplash.com/250x251" className="figure-img img-fluid rounded" alt="..."/>
-                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
-                    <figure className="figure text-center" onClick={handleClickedImage}>
-                        <img src="https://source.unsplash.com/250x252" className="figure-img img-fluid rounded" alt="..."/>
-                        <figcaption className="figure-caption">A caption for the above image.</figcaption>
-                    </figure>
+                        <figure className="figure text-center" onClick={handleClickedImage}>
+                            <img src="https://source.unsplash.com/250x250" className="figure-img img-fluid rounded" alt="..."/>
+                            <figcaption className="figure-caption">A caption for the above image.</figcaption>
+                        </figure>
 
+                        <figure className="figure text-center" onClick={handleClickedImage}>
+                            <img src="https://source.unsplash.com/250x251" className="figure-img img-fluid rounded" alt="..."/>
+                            <figcaption className="figure-caption">A caption for the above image.</figcaption>
+                        </figure>
+
+                        <figure className="figure text-center" onClick={handleClickedImage}>
+                            <img src="https://source.unsplash.com/250x252" className="figure-img img-fluid rounded" alt="..."/>
+                            <figcaption className="figure-caption">A caption for the above image.</figcaption>
+                        </figure>
                     </div>
                     {/* <Carousel carouselName="ig-social"/> */}
                 </div>

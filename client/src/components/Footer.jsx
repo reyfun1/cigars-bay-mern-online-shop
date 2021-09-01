@@ -53,9 +53,8 @@ const Footer = () => {
                     <div className="row ">
                         <div className="col">
                             <span className="d-inline-block mx-2"> Follow us :</span>
-                            <a href="" className='bi bi-instagram icon'></a>
-                            <a href=""className='bi bi-twitter icon'></a>
-                            <a href="" className='bi bi-facebook icon'></a>
+                            <Link to="/" className='bi bi-instagram icon'></Link>
+                            <Link to="/" className='bi bi-facebook icon'></Link>
                         </div>
                         {/* <div className="col fs-6">
                             <span>Copyright © 2021 By <a href="">Fundora Technologies</a></span>
@@ -69,9 +68,9 @@ const Footer = () => {
                             <i className="bi bi-arrow-up-circle h1"></i>
                         </a> */}
                         <div className="col">
-                            <a href="#" className="d-block">
+                            <Link to="#" className="d-block">
                                 <i className="bi bi-arrow-up-circle fs-1"></i>
-                            </a>
+                            </Link>
                         </div>
                         
 

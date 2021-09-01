@@ -62,7 +62,7 @@ const ContactUsPage = () => {
             <BreadCrumb/>
             {!success ? (
                 <>
-                <h4 className="mb-3">Contact Us</h4>
+                <p className="mb-3 fs-3">Contact Us</p>
                     <form className="needs-validation" noValidate onSubmit={onSubmit}>
                         <div className="row">
                             <div className="col-md-6">

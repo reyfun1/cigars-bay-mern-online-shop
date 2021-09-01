@@ -113,7 +113,7 @@ const ProductPage = ({match}) => {
                                     {product.name} - {selectedSku && selectedSku.option}
                                     </p>
 
-                                    <p className="text-muted text-muted text-uppercase">
+                                    <p className="text-muted text-muted text-uppercase fw-bold">
                                         {vendorFound && vendorFound.name && <>By: <Link to={`/search/${vendorFound.name.toLowerCase()}`}>{vendorFound.name}</Link></>}
                                     </p>
                                     <span className="fs-6">Item # : {product._id}</span>
@@ -153,7 +153,7 @@ const ProductPage = ({match}) => {
                                                     <h3 className="m-0 price-amount">{formatMoney(selectedSku.price)}</h3>
                                                 </animated.div>
                                             ))}
-                                            <p className="text-muted m-0 font-weight-light text-decoration-line-through"> $89.99 MSRP</p>
+                                            <p className="text-muted m-0 font-weight-light text-decoration-line-through"> $240.99 MSRP</p>
                                         </div>
                                     </div>
                                 </div>
@@ -176,9 +176,9 @@ const ProductPage = ({match}) => {
                                         className="form-control w-25 border-radius me-2" placeholder="0" onChange={e => setQty(e.target.value)} value={qty} />
                                         <button 
                                             disabled={selectedSku && selectedSku.stock_qty < 3 ? true: false} 
-                                            className="btn btn-primary flex-grow-1 text-uppercase text-dark py-2" 
+                                            className="btn btn-primary fw-bold flex-grow-1 text-uppercase text-dark py-2" 
                                             type="button" onClick={handleAddToCart}>
-                                                Add to Cart &nbsp; {selectedSku && selectedSku.stock_qty < 3 ? <small>(Out of Stock)</small>: ''}<i className="bi bi-cart"></i>
+                                                Add to Cart &nbsp; {selectedSku && selectedSku.stock_qty < 3 ? <small>(Out of Stock)</small>: ''}<i className="bi bi-plus-lg"></i>
                                         </button>
                                     </div>
                                 </div>
